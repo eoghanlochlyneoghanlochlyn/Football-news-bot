@@ -1,0 +1,25 @@
+name: Football News Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-news-bot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: دریافت پروژه
+        uses: actions/checkout@v6
+
+      - name: نصب Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: نصب کتابخانه‌ها
+        run: pip install -r requirements.txt
+
+      - name: اجرای ربات
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: python main.py
