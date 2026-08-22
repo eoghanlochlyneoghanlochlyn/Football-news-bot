@@ -5,7 +5,6 @@ from config import FEEDS_FILE, MAX_NEWS
 
 
 def load_feeds():
-    """خواندن فهرست RSSها از feeds.json"""
     with open(FEEDS_FILE, "r", encoding="utf-8") as file:
         data = json.load(file)
 
@@ -13,7 +12,6 @@ def load_feeds():
 
 
 def get_news():
-    """دریافت خبرها از تمام RSSهای موجود"""
     feeds = load_feeds()
     news = []
 
@@ -29,14 +27,19 @@ def get_news():
                 if not title or not link:
                     continue
 
+                published = entry.get(
+                    "published",
+                    entry.get("updated", "")
+                )
+
                 news.append({
                     "title": title,
                     "link": link,
                     "summary": summary,
+                    "published": published,
                 })
 
         except Exception as error:
             print(f"RSS error: {error}")
 
-    # محدود کردن تعداد خبرها
     return news[:MAX_NEWS]
