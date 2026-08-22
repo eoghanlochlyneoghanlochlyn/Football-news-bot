@@ -1,5 +1,6 @@
 import json
 import feedparser
+from datetime import datetime, timezone
 
 from config import FEEDS_FILE, MAX_NEWS
 
@@ -9,6 +10,32 @@ def load_feeds():
         data = json.load(file)
 
     return data.get("feeds", [])
+
+
+def get_published_time(entry):
+    """
+    زمان انتشار خبر را از RSS به قالب استاندارد ISO تبدیل می‌کند.
+    """
+
+    parsed_time = entry.get("published_parsed")
+
+    if not parsed_time:
+        parsed_time = entry.get("updated_parsed")
+
+    if parsed_time:
+        dt = datetime(
+            parsed_time.tm_year,
+            parsed_time.tm_mon,
+            parsed_time.tm_mday,
+            parsed_time.tm_hour,
+            parsed_time.tm_min,
+            parsed_time.tm_sec,
+            tzinfo=timezone.utc
+        )
+
+        return dt.isoformat()
+
+    return ""
 
 
 def get_news():
@@ -27,10 +54,7 @@ def get_news():
                 if not title or not link:
                     continue
 
-                published = entry.get(
-                    "published",
-                    entry.get("updated", "")
-                )
+                published = get_published_time(entry)
 
                 news.append({
                     "title": title,
