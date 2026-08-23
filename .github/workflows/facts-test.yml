@@ -1,0 +1,25 @@
+name: Gemini Facts Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-facts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: دریافت پروژه
+        uses: actions/checkout@v6
+
+      - name: نصب Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: نصب کتابخانه‌ها
+        run: pip install -r requirements.txt
+
+      - name: استخراج واقعیت‌های خبر
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python test_facts_gemini.py
