@@ -1,13 +1,10 @@
-name: Football News Test
+name: ZAI Test
 
 on:
   workflow_dispatch:
 
-permissions:
-  contents: write
-
 jobs:
-  run-news-bot:
+  test-zai:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,21 +19,7 @@ jobs:
       - name: نصب کتابخانه‌ها
         run: pip install -r requirements.txt
 
-      - name: تست هوش مصنوعی
+      - name: تست Z.AI
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python test_ai.py
-
-      - name: اجرای ربات
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python main.py
-
-      - name: ذخیره حافظه خبرها
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add cache.json
-          git diff --cached --quiet || git commit -m "Update news cache"
-          git push
+          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
+        run: python test_zai.py
