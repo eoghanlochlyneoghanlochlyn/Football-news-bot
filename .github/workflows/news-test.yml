@@ -1,10 +1,10 @@
-name: ZAI News Test
+name: Gemini News Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-zai-news:
+  test-gemini-news:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: نصب کتابخانه‌ها
         run: pip install -r requirements.txt
 
-      - name: تست بازنویسی خبر
+      - name: تست بازنویسی خبر با Gemini
         env:
-          ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
-        run: python test_news_zai.py
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python test_news_gemini.py
