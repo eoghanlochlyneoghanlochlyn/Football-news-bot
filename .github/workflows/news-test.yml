@@ -1,10 +1,10 @@
-name: ZAI Test
+name: ZAI News Test
 
 on:
   workflow_dispatch:
 
 jobs:
-  test-zai:
+  test-zai-news:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,7 @@ jobs:
       - name: نصب کتابخانه‌ها
         run: pip install -r requirements.txt
 
-      - name: تست Z.AI
+      - name: تست بازنویسی خبر
         env:
           ZAI_API_KEY: ${{ secrets.ZAI_API_KEY }}
-        run: python test_zai.py
+        run: python test_news_zai.py
