@@ -21,6 +21,8 @@ jobs:
 
       - name: نصب کتابخانه‌ها
         run: pip install -r requirements.txt
+      - name: تست هوش مصنوعی
+        run: python test_ai.py
 
       - name: اجرای ربات
         env:
