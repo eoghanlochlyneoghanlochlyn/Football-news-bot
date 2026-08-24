@@ -23,12 +23,41 @@ response = requests.get(
     headers={"User-Agent": "Mozilla/5.0"},
     timeout=30
 )
+
 response.raise_for_status()
 
 soup = BeautifulSoup(response.text, "html.parser")
 
+
+# ==========================================
+# استخراج عکس اصلی خبر
+# ==========================================
+
+image_url = None
+
+og_image = soup.find("meta", property="og:image")
+
+if og_image and og_image.get("content"):
+    image_url = og_image["content"]
+
+if image_url:
+    print("عکس اصلی خبر پیدا شد:")
+    print(image_url)
+else:
+    print("عکس اصلی خبر پیدا نشد.")
+
+
+# ==========================================
+# پاک‌سازی صفحه
+# ==========================================
+
 for tag in soup(["script", "style", "nav", "footer", "header", "aside"]):
     tag.decompose()
+
+
+# ==========================================
+# استخراج پاراگراف‌ها
+# ==========================================
 
 paragraphs = []
 
@@ -48,13 +77,16 @@ print(f"تعداد پاراگراف‌ها: {len(paragraphs)}")
 sentences = []
 
 for paragraph in paragraphs:
+
     parts = re.split(r'(?<=[.!?])\s+', paragraph)
 
     for part in parts:
+
         part = part.strip()
 
         if len(part) >= 20:
             sentences.append(part)
+
 
 news_text = "\n".join(
     f"[{i}] {sentence}"
@@ -83,14 +115,13 @@ prompt = f"""
 
 متن زیر یک خبر کامل است و جمله‌های آن شماره‌گذاری شده‌اند.
 
-وظیفه تو:
-از میان جمله‌های خبر، مهم‌ترین جمله‌ها را انتخاب کن و همان اطلاعات را
-به فارسی روان ترجمه کن.
+وظیفه تو این است که مهم‌ترین بخش‌های خبر را انتخاب کنی و همان اطلاعات را
+به فارسی روان ترجمه کنی.
 
 این کار خلاصه‌سازی آزاد نیست.
 تو نباید خبر را از خودت بازنویسی کنی.
 
-قوانین:
+قوانین بسیار مهم:
 
 1. بین 3 تا 6 جمله مهم را انتخاب کن.
 2. فقط اطلاعات موجود در متن را منتقل کن.
@@ -152,20 +183,56 @@ print("در حال ارسال خبر به تلگرام...")
 telegram_token = os.environ["TELEGRAM_BOT_TOKEN"]
 telegram_chat_id = os.environ["TELEGRAM_CHAT_ID"]
 
-telegram_url = (
-    f"https://api.telegram.org/bot{telegram_token}/sendMessage"
-)
 
-telegram_data = {
-    "chat_id": telegram_chat_id,
-    "text": final_news
-}
+# ------------------------------------------
+# اگر عکس پیدا شده باشد:
+# ارسال عکس + متن به عنوان کپشن
+# ------------------------------------------
 
-telegram_response = requests.post(
-    telegram_url,
-    data=telegram_data,
-    timeout=30
-)
+if image_url:
+
+    telegram_url = (
+        f"https://api.telegram.org/bot{telegram_token}/sendPhoto"
+    )
+
+    telegram_data = {
+        "chat_id": telegram_chat_id,
+        "photo": image_url,
+        "caption": final_news
+    }
+
+    telegram_response = requests.post(
+        telegram_url,
+        data=telegram_data,
+        timeout=30
+    )
+
+# ------------------------------------------
+# اگر عکس پیدا نشده باشد:
+# ارسال متن معمولی
+# ------------------------------------------
+
+else:
+
+    telegram_url = (
+        f"https://api.telegram.org/bot{telegram_token}/sendMessage"
+    )
+
+    telegram_data = {
+        "chat_id": telegram_chat_id,
+        "text": final_news
+    }
+
+    telegram_response = requests.post(
+        telegram_url,
+        data=telegram_data,
+        timeout=30
+    )
+
+
+# ==========================================
+# بررسی نتیجه
+# ==========================================
 
 telegram_response.raise_for_status()
 
