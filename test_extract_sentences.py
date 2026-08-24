@@ -4,7 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from google import genai
 
-NEWS_URL = "لینک خبر جدید را اینجا بگذار"
+NEWS_URL = "https://www.bbc.co.uk/sport/football/articles/cdrvr73egnlo?at_medium=RSS&at_campaign=rss"
 
 print("در حال دریافت خبر...")
 
