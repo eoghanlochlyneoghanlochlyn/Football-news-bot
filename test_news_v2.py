@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from google import genai
 
-NEWS_URL = "https://www.bbc.co.uk/sport/football/articles/cdx7x90dxywo?at_medium=RSS&at_campaign=rss"
+NEWS_URL = "https://www.bbc.co.uk/sport/football/articles/cygj01pr0p0o?at_medium=RSS&at_campaign=rss"
 
 print("در حال دریافت خبر...")
 
