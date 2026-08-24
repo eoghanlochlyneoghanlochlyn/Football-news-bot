@@ -31,7 +31,7 @@ for p in soup.find_all("p"):
 news_text = "\n\n".join(paragraphs)
 
 print(f"تعداد پاراگراف‌ها: {len(paragraphs)}")
-print(f"تعداد کاراکترها: {len(news_text)}")
+print(f"تعداد کاراکترهای متن دریافت‌شده: {len(news_text)}")
 
 client = genai.Client(
     api_key=os.environ["GEMINI_API_KEY"]
@@ -45,7 +45,7 @@ prompt = f"""
 وظیفه تو فقط انتخاب جمله‌های موجود در متن است.
 
 هدف:
-انتخاب 5 تا 8 جمله که در کنار یکدیگر بتوانند مهم‌ترین اطلاعات خبر اصلی را منتقل کنند.
+انتخاب 5 تا 8 جمله که در کنار یکدیگر مهم‌ترین اطلاعات خبر اصلی را منتقل کنند.
 
 قوانین بسیار مهم:
 
