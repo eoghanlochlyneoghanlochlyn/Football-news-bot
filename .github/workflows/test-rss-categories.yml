@@ -1,0 +1,25 @@
+name: Test RSS Categories
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-rss-categories:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: دریافت کد پروژه
+        uses: actions/checkout@v4
+
+      - name: نصب Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: نصب وابستگی‌ها
+        run: |
+          pip install -r requirements.txt
+
+      - name: اجرای تحلیل RSS
+        run: |
+          python test_rss_categories.py
