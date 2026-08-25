@@ -2,6 +2,7 @@ import json
 import re
 import html
 import os
+import time
 import requests
 import feedparser
 
@@ -11,51 +12,57 @@ from zoneinfo import ZoneInfo
 from config import FEEDS_FILE
 
 
-# ==========================================
+# ============================================================
 # تنظیمات
-# ==========================================
+# ============================================================
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 
 TELEGRAM_CHAT_ID = "@footballiiiiiiiiiiiiiiiiiiiiii"
 
-# منطقه زمانی ایران
 IRAN_TZ = ZoneInfo("Asia/Tehran")
 
-# فقط اخبار منتشرشده از این ساعت به بعد
+# فقط خبرهای منتشرشده از این ساعت به بعد
 START_HOUR = 19
 START_MINUTE = 0
+
+# فاصله بین هر بررسی RSS
+CHECK_INTERVAL = 5 * 60
 
 # فایل ثبت خبرهای ارسال‌شده
 SEEN_FILE = "seen_news.json"
 
-# حداکثر طول خلاصه
+# حداکثر طول خلاصه RSS
 MAX_SUMMARY_LENGTH = 700
 
 
-# ==========================================
-# دریافت فهرست RSSها
-# ==========================================
+# ============================================================
+# دریافت RSS ها
+# ============================================================
 
 def load_feeds():
 
     with open(FEEDS_FILE, "r", encoding="utf-8") as file:
         data = json.load(file)
 
-    # اگر feeds.json یک آرایه مستقیم باشد
+    # ساختار:
+    # [
+    #   {"name": "...", "url": "..."}
+    # ]
     if isinstance(data, list):
         return data
 
-    # اگر ساختار {"feeds": [...]} باشد
+    # ساختار:
+    # {"feeds": [...]}
     if isinstance(data, dict):
         return data.get("feeds", [])
 
     return []
 
 
-# ==========================================
-# خواندن خبرهای قبلاً ارسال‌شده
-# ==========================================
+# ============================================================
+# خواندن خبرهای ارسال‌شده
+# ============================================================
 
 def load_seen_news():
 
@@ -75,18 +82,24 @@ def load_seen_news():
 
     except json.JSONDecodeError:
 
-        print("هشدار: seen_news.json خراب است. فایل جدید ساخته می‌شود.")
+        print(
+            "هشدار: seen_news.json خراب است."
+        )
 
         return {}
 
 
-# ==========================================
+# ============================================================
 # ذخیره خبرهای ارسال‌شده
-# ==========================================
+# ============================================================
 
 def save_seen_news(seen):
 
-    with open(SEEN_FILE, "w", encoding="utf-8") as file:
+    with open(
+        SEEN_FILE,
+        "w",
+        encoding="utf-8"
+    ) as file:
 
         json.dump(
             seen,
@@ -96,23 +109,28 @@ def save_seen_news(seen):
         )
 
 
-# ==========================================
-# تبدیل زمان RSS به datetime
-# ==========================================
+# ============================================================
+# تبدیل زمان RSS
+# ============================================================
 
 def get_published_datetime(entry):
 
-    parsed_time = entry.get("published_parsed")
+    parsed_time = entry.get(
+        "published_parsed"
+    )
 
     if not parsed_time:
-        parsed_time = entry.get("updated_parsed")
+
+        parsed_time = entry.get(
+            "updated_parsed"
+        )
 
     if not parsed_time:
         return None
 
     try:
 
-        dt = datetime(
+        return datetime(
             parsed_time.tm_year,
             parsed_time.tm_mon,
             parsed_time.tm_mday,
@@ -122,16 +140,14 @@ def get_published_datetime(entry):
             tzinfo=timezone.utc
         )
 
-        return dt
-
     except Exception:
 
         return None
 
 
-# ==========================================
+# ============================================================
 # پاک‌سازی HTML
-# ==========================================
+# ============================================================
 
 def clean_html(text):
 
@@ -155,9 +171,9 @@ def clean_html(text):
     return text.strip()
 
 
-# ==========================================
+# ============================================================
 # ساخت خلاصه کوتاه
-# ==========================================
+# ============================================================
 
 def make_short_summary(text):
 
@@ -166,7 +182,6 @@ def make_short_summary(text):
     if not text:
         return ""
 
-    # حذف بعضی متن‌های تبلیغاتی رایج
     text = re.sub(
         r"(read more|click here|find out more|sign up).*",
         "",
@@ -177,9 +192,10 @@ def make_short_summary(text):
     if len(text) <= MAX_SUMMARY_LENGTH:
         return text
 
-    shortened = text[:MAX_SUMMARY_LENGTH]
+    shortened = text[
+        :MAX_SUMMARY_LENGTH
+    ]
 
-    # تلاش برای قطع کردن در پایان جمله
     last_dot = max(
         shortened.rfind("."),
         shortened.rfind("!"),
@@ -202,13 +218,12 @@ def make_short_summary(text):
     return shortened
 
 
-# ==========================================
-# ساخت شناسه خبر
-# ==========================================
+# ============================================================
+# شناسه خبر
+# ============================================================
 
 def get_news_id(entry):
 
-    # لینک بهترین شناسه است
     link = entry.get(
         "link",
         ""
@@ -217,7 +232,6 @@ def get_news_id(entry):
     if link:
         return link
 
-    # اگر لینک وجود نداشت
     guid = entry.get(
         "id",
         ""
@@ -226,34 +240,33 @@ def get_news_id(entry):
     if guid:
         return guid
 
-    # آخرین راه: عنوان
     return entry.get(
         "title",
         ""
     ).strip()
 
 
-# ==========================================
+# ============================================================
 # زمان شروع انتشار
-# ==========================================
+# ============================================================
 
 def get_cutoff_time():
 
-    now = datetime.now(IRAN_TZ)
+    now = datetime.now(
+        IRAN_TZ
+    )
 
-    cutoff = now.replace(
+    return now.replace(
         hour=START_HOUR,
         minute=START_MINUTE,
         second=0,
         microsecond=0
     )
 
-    return cutoff
 
-
-# ==========================================
-# ارسال پیام به تلگرام
-# ==========================================
+# ============================================================
+# ارسال به تلگرام
+# ============================================================
 
 def send_to_telegram(
     title,
@@ -315,41 +328,36 @@ def send_to_telegram(
         )
 
 
-# ==========================================
-# برنامه اصلی
-# ==========================================
+# ============================================================
+# یک دور کامل بررسی RSS ها
+# ============================================================
 
-def main():
+def check_feeds(seen):
 
+    print()
     print("=" * 70)
 
     print(
-        "شروع بررسی RSS"
+        "شروع یک دور بررسی RSS ها"
     )
 
-    print("=" * 70)
-
-    # بررسی توکن
-    if not TELEGRAM_TOKEN:
-
-        print(
-            "خطا: TELEGRAM_BOT_TOKEN در Secrets وجود ندارد."
-        )
-
-        return
-
-    # زمان فعلی ایران
-    now = datetime.now(IRAN_TZ)
-
-    # زمان شروع
-    cutoff = get_cutoff_time()
-
     print(
-        "زمان فعلی ایران:",
-        now.strftime(
+        "زمان ایران:",
+        datetime.now(
+            IRAN_TZ
+        ).strftime(
             "%Y-%m-%d %H:%M:%S"
         )
     )
+
+    print("=" * 70)
+
+    feeds = load_feeds()
+
+    new_count = 0
+
+    # زمان شروع انتشار
+    cutoff = get_cutoff_time()
 
     print(
         "شروع انتشار اخبار:",
@@ -358,57 +366,47 @@ def main():
         )
     )
 
-    # اگر هنوز ساعت 18 نشده
+    # اگر هنوز ساعت تعیین‌شده نرسیده
+    now = datetime.now(
+        IRAN_TZ
+    )
+
     if now < cutoff:
 
         print(
-            "هنوز به ساعت 18:00 نرسیده‌ایم."
+            "هنوز به ساعت شروع انتشار نرسیده‌ایم."
         )
 
-        return
-
-    # دریافت RSSها
-    feeds = load_feeds()
+        return 0
 
     print(
-        f"تعداد RSSها: {len(feeds)}"
+        f"تعداد RSS ها: {len(feeds)}"
     )
 
-    # دریافت خبرهای قبلی
-    seen = load_seen_news()
-
-    new_count = 0
-
-    # ======================================
-    # بررسی تک‌تک RSSها
-    # ======================================
+    # ========================================================
+    # بررسی تک‌تک فیدها
+    # ========================================================
 
     for feed_info in feeds:
 
-        # پشتیبانی از ساختار فعلی feeds.json
-        if isinstance(feed_info, dict):
-
-            name = feed_info.get(
-                "name",
-                "Unknown"
-            )
-
-            url = feed_info.get(
-                "url",
-                ""
-            )
-
-        else:
-
-            print(
-                "RSS نامعتبر:",
-                feed_info
-            )
+        if not isinstance(
+            feed_info,
+            dict
+        ):
 
             continue
 
-        if not url:
+        name = feed_info.get(
+            "name",
+            "Unknown"
+        )
 
+        url = feed_info.get(
+            "url",
+            ""
+        )
+
+        if not url:
             continue
 
         print()
@@ -427,9 +425,9 @@ def main():
                 f"{len(feed.entries)}"
             )
 
-            # ==================================
-            # بررسی خبرهای RSS
-            # ==================================
+            # =================================================
+            # بررسی خبرهای فید
+            # =================================================
 
             for entry in feed.entries:
 
@@ -443,19 +441,15 @@ def main():
                     ""
                 ).strip()
 
-                # خبر ناقص
                 if not title or not link:
-
                     continue
 
-                # شناسه خبر
                 news_id = get_news_id(
                     entry
                 )
 
                 # قبلاً ارسال شده؟
                 if news_id in seen:
-
                     continue
 
                 # زمان انتشار
@@ -465,33 +459,29 @@ def main():
                     )
                 )
 
-                # بدون زمان انتشار
-                # منتشر نمی‌کنیم تا خبر قدیمی
-                # اشتباهی وارد کانال نشود.
+                # اگر زمان ندارد، فعلاً رد می‌کنیم
                 if not published_utc:
-
-                    print(
-                        "بدون زمان انتشار:",
-                        title
-                    )
 
                     continue
 
-                # تبدیل UTC به وقت ایران
+                # تبدیل UTC به ایران
                 published_iran = (
                     published_utc.astimezone(
                         IRAN_TZ
                     )
                 )
 
-                # فقط اخبار بعد از ساعت 18
+                # =================================================
+                # فیلتر زمانی
+                # =================================================
+
                 if published_iran < cutoff:
 
                     continue
 
-                # ==================================
-                # خبر جدید پیدا شد
-                # ==================================
+                # =================================================
+                # خبر جدید
+                # =================================================
 
                 print()
                 print(
@@ -509,7 +499,6 @@ def main():
                     )
                 )
 
-                # خلاصه RSS
                 summary = entry.get(
                     "summary",
                     ""
@@ -519,9 +508,9 @@ def main():
                     summary
                 )
 
-                # ==================================
+                # =================================================
                 # ارسال تلگرام
-                # ==================================
+                # =================================================
 
                 try:
 
@@ -541,8 +530,9 @@ def main():
                         "در تلگرام منتشر شد."
                     )
 
-                    # ثبت خبر فقط بعد از
-                    # ارسال موفق
+                    # فقط بعد از ارسال موفق
+                    # خبر را ثبت می‌کنیم
+
                     seen[news_id] = {
 
                         "title": title,
@@ -560,12 +550,16 @@ def main():
                         )
                     }
 
+                    save_seen_news(
+                        seen
+                    )
+
                     new_count += 1
 
                 except Exception as error:
 
                     print(
-                        "✗ خطا در ارسال:",
+                        "✗ خطا در ارسال تلگرام:",
                         error
                     )
 
@@ -576,28 +570,93 @@ def main():
                 error
             )
 
-    # ==========================================
-    # ذخیره فهرست خبرهای ارسال‌شده
-    # ==========================================
-
-    save_seen_news(
-        seen
+    print()
+    print(
+        f"این دور تمام شد. "
+        f"تعداد خبرهای جدید: {new_count}"
     )
 
-    print()
+    return new_count
+
+
+# ============================================================
+# برنامه اصلی
+# ============================================================
+
+def main():
+
     print("=" * 70)
 
     print(
-        "تعداد خبرهای جدید ارسال‌شده:",
-        new_count
+        "سیستم تست زنده RSS"
+    )
+
+    print(
+        "بررسی خودکار هر ۵ دقیقه"
     )
 
     print("=" * 70)
 
+    if not TELEGRAM_TOKEN:
 
-# ==========================================
-# اجرای برنامه
-# ==========================================
+        print(
+            "خطا: TELEGRAM_BOT_TOKEN "
+            "در Secrets وجود ندارد."
+        )
+
+        return
+
+    seen = load_seen_news()
+
+    print(
+        f"تعداد خبرهای ثبت‌شده قبلی: "
+        f"{len(seen)}"
+    )
+
+    print(
+        "سیستم شروع شد."
+    )
+
+    print(
+        "برای توقف، اجرای GitHub Action را لغو کنید."
+    )
+
+    # ========================================================
+    # حلقه دائمی
+    # ========================================================
+
+    while True:
+
+        try:
+
+            check_feeds(
+                seen
+            )
+
+        except Exception as error:
+
+            print()
+            print(
+                "خطای کلی در بررسی:"
+            )
+
+            print(
+                error
+            )
+
+        print()
+        print(
+            "۵ دقیقه تا بررسی بعدی..."
+        )
+
+        time.sleep(
+            CHECK_INTERVAL
+        )
+
+
+# ============================================================
+# اجرا
+# ============================================================
 
 if __name__ == "__main__":
 
