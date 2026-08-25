@@ -1,4 +1,4 @@
-name: Live RSS Test
+name: Live RSS News
 
 on:
   workflow_dispatch:
@@ -9,42 +9,49 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: live-rss-news
+  cancel-in-progress: false
+
 jobs:
   check-rss:
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: دریافت آخرین نسخه پروژه
+      # ------------------------------------------------------
+      # دریافت آخرین نسخه پروژه
+      # ------------------------------------------------------
+
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          fetch-depth: 0
 
-      - name: نصب Python
+      # ------------------------------------------------------
+      # نصب Python
+      # ------------------------------------------------------
+
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
-      - name: نصب وابستگی‌ها
+      # ------------------------------------------------------
+      # نصب کتابخانه‌ها
+      # ------------------------------------------------------
+
+      - name: Install dependencies
         run: |
-          pip install -r requirements.txt
+          pip install feedparser requests
 
-      - name: بررسی RSS و ارسال خبرهای جدید
+      # ------------------------------------------------------
+      # اجرای بررسی RSS
+      # ------------------------------------------------------
+
+      - name: Check RSS feeds
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
         run: |
           python test_live_rss.py
-
-      - name: ذخیره فهرست خبرهای ارسال‌شده
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add seen_news.json
-
-          if git diff --cached --quiet; then
-            echo "تغییری در seen_news.json وجود ندارد."
-          else
-            git commit -m "Update seen news"
-            git push
-          fi
