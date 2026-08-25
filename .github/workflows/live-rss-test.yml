@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "3,8,13,18,23,28,33,38,43,48,53,58 * * * *"
 
 permissions:
   contents: write
@@ -19,36 +19,24 @@ jobs:
 
     steps:
 
-      # ------------------------------------------------------
       # دریافت آخرین نسخه پروژه
-      # ------------------------------------------------------
-
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      # ------------------------------------------------------
       # نصب Python
-      # ------------------------------------------------------
-
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      # ------------------------------------------------------
       # نصب کتابخانه‌ها
-      # ------------------------------------------------------
-
       - name: Install dependencies
         run: |
           pip install feedparser requests
 
-      # ------------------------------------------------------
-      # اجرای بررسی RSS
-      # ------------------------------------------------------
-
+      # اجرای یک‌باره بررسی RSS
       - name: Check RSS feeds
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
