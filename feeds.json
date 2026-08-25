@@ -1,5 +1,50 @@
-{
-  "feeds": [
-    "https://feeds.bbci.co.uk/sport/football/premier-league/rss.xml"
-  ]
-}
+RSS_FEEDS = [
+    {
+        "name": "BBC Sport",
+        "url": "https://feeds.bbci.co.uk/sport/football/premier-league/rss.xml",
+    },
+    {
+        "name": "ESPN",
+        "url": "https://www.espn.com/espn/rss/soccer/news",
+    },
+    {
+        "name": "The Guardian",
+        "url": "https://www.theguardian.com/football/rss",
+    },
+    {
+        "name": "The Hard Tackle",
+        "url": "https://thehardtackle.com/category/english-premier-league/feed/",
+    },
+    {
+        "name": "90min",
+        "url": "https://www.90min.com/posts.rss",
+    },
+    {
+        "name": "Football365",
+        "url": "https://www.football365.com/rss",
+    },
+    {
+        "name": "FourFourTwo",
+        "url": "https://www.fourfourtwo.com/feeds.xml",
+    },
+    {
+        "name": "CBS Sports",
+        "url": "https://www.cbssports.com/rss/headlines/soccer/",
+    },
+    {
+        "name": "CaughtOffside",
+        "url": "https://www.caughtoffside.com/feed/",
+    },
+    {
+        "name": "FootballFanCast",
+        "url": "https://www.footballfancast.com/feed/",
+    },
+    {
+        "name": "World Soccer",
+        "url": "https://www.worldsoccer.com/feed",
+    },
+    {
+        "name": "101 Great Goals",
+        "url": "https://www.101greatgoals.com/feed/",
+    },
+]
