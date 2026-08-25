@@ -1,43 +1,46 @@
 import json
-import re
-import html
 import os
+import re
 import time
-import requests
+import subprocess
+import html
+from datetime import datetime, timezone, timedelta
+from urllib.parse import urlsplit, urlunsplit
+
 import feedparser
-
-from datetime import datetime, timezone
-from zoneinfo import ZoneInfo
-
-from config import FEEDS_FILE
+import requests
 
 
 # ============================================================
 # تنظیمات
 # ============================================================
 
-TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-
-TELEGRAM_CHAT_ID = "@footballiiiiiiiiiiiiiiiiiiiiii"
-
-IRAN_TZ = ZoneInfo("Asia/Tehran")
-
-# فقط خبرهای منتشرشده از این ساعت به بعد
-START_HOUR = 19
-START_MINUTE = 0
-
-# فاصله بین هر بررسی RSS
-CHECK_INTERVAL = 5 * 60
-
-# فایل ثبت خبرهای ارسال‌شده
+FEEDS_FILE = "feeds.json"
 SEEN_FILE = "seen_news.json"
 
-# حداکثر طول خلاصه RSS
-MAX_SUMMARY_LENGTH = 700
+CHECK_INTERVAL = 5 * 60  # هر 5 دقیقه
+
+# ساعت شروع انتشار به وقت ایران
+START_HOUR = 21
+START_MINUTE = 30
+
+TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
+TELEGRAM_CHANNEL = os.environ["TELEGRAM_CHANNEL"]
 
 
 # ============================================================
-# دریافت RSS ها
+# زمان ایران
+# ============================================================
+
+IRAN_TZ = timezone(timedelta(hours=3, minutes=30))
+
+
+def iran_now():
+    return datetime.now(IRAN_TZ)
+
+
+# ============================================================
+# خواندن RSS ها
 # ============================================================
 
 def load_feeds():
@@ -45,15 +48,11 @@ def load_feeds():
     with open(FEEDS_FILE, "r", encoding="utf-8") as file:
         data = json.load(file)
 
-    # ساختار:
-    # [
-    #   {"name": "...", "url": "..."}
-    # ]
+    # feeds.json ممکن است به شکل لیست باشد
     if isinstance(data, list):
         return data
 
-    # ساختار:
-    # {"feeds": [...]}
+    # یا به شکل {"feeds": [...]}
     if isinstance(data, dict):
         return data.get("feeds", [])
 
@@ -61,13 +60,15 @@ def load_feeds():
 
 
 # ============================================================
-# خواندن خبرهای ارسال‌شده
+# خواندن seen_news
 # ============================================================
 
-def load_seen_news():
+def load_seen():
+
+    if not os.path.exists(SEEN_FILE):
+        return {}
 
     try:
-
         with open(SEEN_FILE, "r", encoding="utf-8") as file:
             data = json.load(file)
 
@@ -76,31 +77,18 @@ def load_seen_news():
 
         return {}
 
-    except FileNotFoundError:
-
-        return {}
-
-    except json.JSONDecodeError:
-
-        print(
-            "هشدار: seen_news.json خراب است."
-        )
-
+    except Exception as error:
+        print(f"خطا در خواندن {SEEN_FILE}: {error}")
         return {}
 
 
 # ============================================================
-# ذخیره خبرهای ارسال‌شده
+# ذخیره seen_news
 # ============================================================
 
-def save_seen_news(seen):
+def save_seen(seen):
 
-    with open(
-        SEEN_FILE,
-        "w",
-        encoding="utf-8"
-    ) as file:
-
+    with open(SEEN_FILE, "w", encoding="utf-8") as file:
         json.dump(
             seen,
             file,
@@ -110,27 +98,80 @@ def save_seen_news(seen):
 
 
 # ============================================================
-# تبدیل زمان RSS
+# نرمال‌سازی لینک
 # ============================================================
 
-def get_published_datetime(entry):
+def normalize_url(url):
 
-    parsed_time = entry.get(
-        "published_parsed"
-    )
+    if not url:
+        return ""
 
-    if not parsed_time:
-
-        parsed_time = entry.get(
-            "updated_parsed"
-        )
-
-    if not parsed_time:
-        return None
+    url = html.unescape(url.strip())
 
     try:
 
-        return datetime(
+        parts = urlsplit(url)
+
+        # پارامترهای اضافی RSS و تبلیغاتی حذف می‌شوند
+        clean_query = ""
+
+        clean_url = urlunsplit((
+            parts.scheme.lower(),
+            parts.netloc.lower(),
+            parts.path.rstrip("/"),
+            clean_query,
+            ""
+        ))
+
+        return clean_url
+
+    except Exception:
+        return url.strip()
+
+
+# ============================================================
+# نرمال‌سازی عنوان
+# ============================================================
+
+def normalize_title(title):
+
+    if not title:
+        return ""
+
+    # تبدیل کدهای HTML مثل &#8217; به کاراکتر واقعی
+    title = html.unescape(title)
+
+    # حذف تگ‌های HTML
+    title = re.sub(r"<[^>]+>", " ", title)
+
+    # تبدیل فاصله‌های متعدد به یک فاصله
+    title = re.sub(r"\s+", " ", title)
+
+    # حذف علائم ابتدایی و انتهایی
+    title = title.strip().lower()
+
+    # حذف بعضی علائم نگارشی برای تشخیص بهتر تکراری‌ها
+    title = re.sub(r"[\"'“”‘’`]", "", title)
+
+    title = re.sub(r"[.,!?;:()\[\]{}]", "", title)
+
+    return title.strip()
+
+
+# ============================================================
+# زمان انتشار خبر
+# ============================================================
+
+def get_published_time(entry):
+
+    parsed_time = entry.get("published_parsed")
+
+    if not parsed_time:
+        parsed_time = entry.get("updated_parsed")
+
+    if parsed_time:
+
+        dt = datetime(
             parsed_time.tm_year,
             parsed_time.tm_mon,
             parsed_time.tm_mday,
@@ -140,121 +181,279 @@ def get_published_datetime(entry):
             tzinfo=timezone.utc
         )
 
-    except Exception:
+        return dt
 
-        return None
-
-
-# ============================================================
-# پاک‌سازی HTML
-# ============================================================
-
-def clean_html(text):
-
-    if not text:
-        return ""
-
-    text = html.unescape(text)
-
-    text = re.sub(
-        r"<[^>]+>",
-        " ",
-        text
-    )
-
-    text = re.sub(
-        r"\s+",
-        " ",
-        text
-    )
-
-    return text.strip()
+    return None
 
 
 # ============================================================
-# ساخت خلاصه کوتاه
+# آیا خبر قبلاً دیده شده؟
 # ============================================================
 
-def make_short_summary(text):
+def is_duplicate(news, seen):
 
-    text = clean_html(text)
+    normalized_link = normalize_url(news["link"])
+    normalized_title = normalize_title(news["title"])
 
-    if not text:
-        return ""
+    # --------------------------------------------------------
+    # بررسی لینک
+    # --------------------------------------------------------
 
-    text = re.sub(
-        r"(read more|click here|find out more|sign up).*",
-        "",
-        text,
-        flags=re.IGNORECASE
-    ).strip()
+    if normalized_link:
 
-    if len(text) <= MAX_SUMMARY_LENGTH:
-        return text
+        if normalized_link in seen:
+            return True
 
-    shortened = text[
-        :MAX_SUMMARY_LENGTH
-    ]
+    # --------------------------------------------------------
+    # بررسی عنوان
+    # --------------------------------------------------------
 
-    last_dot = max(
-        shortened.rfind("."),
-        shortened.rfind("!"),
-        shortened.rfind("?")
-    )
+    for old_link, old_data in seen.items():
 
-    if last_dot > 250:
+        old_title = normalize_title(
+            old_data.get("title", "")
+        )
 
-        shortened = shortened[
-            :last_dot + 1
-        ]
+        old_source = old_data.get("source", "").strip().lower()
+        new_source = news["source"].strip().lower()
+
+        if (
+            normalized_title
+            and old_title == normalized_title
+            and old_source == new_source
+        ):
+            return True
+
+    return False
+
+
+# ============================================================
+# ثبت خبر در seen
+# ============================================================
+
+def mark_as_seen(news, seen):
+
+    normalized_link = normalize_url(news["link"])
+
+    if not normalized_link:
+        return
+
+    seen[normalized_link] = {
+        "title": news["title"],
+        "normalized_title": normalize_title(news["title"]),
+        "source": news["source"],
+        "published": news["published"].isoformat()
+        if news["published"]
+        else "",
+        "sent_at": datetime.now(timezone.utc).isoformat()
+    }
+
+
+# ============================================================
+# ارسال به تلگرام
+# ============================================================
+
+def send_to_telegram(news):
+
+    title = html.unescape(news["title"])
+
+    published = news["published"]
+
+    if published:
+
+        iran_time = published.astimezone(IRAN_TZ)
+
+        time_text = iran_time.strftime("%H:%M")
 
     else:
 
-        shortened = (
-            shortened.rsplit(" ", 1)[0]
-            + "..."
+        time_text = "--:--"
+
+    message = (
+        f"📰 {title}\n\n"
+        f"📌 {news['source']}\n"
+        f"🕐 {time_text}"
+    )
+
+    url = (
+        f"https://api.telegram.org/bot"
+        f"{TELEGRAM_BOT_TOKEN}/sendMessage"
+    )
+
+    payload = {
+        "chat_id": TELEGRAM_CHANNEL,
+        "text": message,
+        "disable_web_page_preview": False
+    }
+
+    try:
+
+        response = requests.post(
+            url,
+            data=payload,
+            timeout=30
         )
 
-    return shortened
+        if response.ok:
+
+            print("✓ خبر با موفقیت در تلگرام منتشر شد.")
+
+            return True
+
+        print(
+            "خطا در ارسال تلگرام:",
+            response.text
+        )
+
+        return False
+
+    except Exception as error:
+
+        print(
+            f"خطا در ارتباط با تلگرام: {error}"
+        )
+
+        return False
 
 
 # ============================================================
-# شناسه خبر
+# ذخیره در GitHub
 # ============================================================
 
-def get_news_id(entry):
+def commit_seen_file():
 
-    link = entry.get(
-        "link",
-        ""
-    ).strip()
+    try:
 
-    if link:
-        return link
+        # بررسی اینکه واقعاً تغییری ایجاد شده
+        result = subprocess.run(
+            [
+                "git",
+                "status",
+                "--porcelain",
+                SEEN_FILE
+            ],
+            capture_output=True,
+            text=True
+        )
 
-    guid = entry.get(
-        "id",
-        ""
-    ).strip()
+        if not result.stdout.strip():
 
-    if guid:
-        return guid
+            print("تغییری در seen_news.json وجود ندارد.")
 
-    return entry.get(
-        "title",
-        ""
-    ).strip()
+            return
+
+        subprocess.run(
+            ["git", "config", "user.name", "github-actions[bot]"],
+            check=True
+        )
+
+        subprocess.run(
+            [
+                "git",
+                "config",
+                "user.email",
+                "41898282+github-actions[bot]@users.noreply.github.com"
+            ],
+            check=True
+        )
+
+        subprocess.run(
+            ["git", "add", SEEN_FILE],
+            check=True
+        )
+
+        subprocess.run(
+            [
+                "git",
+                "commit",
+                "-m",
+                "Update seen news"
+            ],
+            check=True
+        )
+
+        subprocess.run(
+            ["git", "push"],
+            check=True
+        )
+
+        print("✓ seen_news.json در GitHub ذخیره شد.")
+
+    except subprocess.CalledProcessError as error:
+
+        print(
+            f"خطا در ذخیره seen_news در GitHub: {error}"
+        )
+
+    except Exception as error:
+
+        print(
+            f"خطای غیرمنتظره در GitHub: {error}"
+        )
+
+
+# ============================================================
+# دریافت خبرهای RSS
+# ============================================================
+
+def get_news_from_feed(feed_info):
+
+    source = feed_info["name"]
+    feed_url = feed_info["url"]
+
+    print(f"\nدر حال بررسی: {source}")
+
+    try:
+
+        feed = feedparser.parse(feed_url)
+
+        print(
+            f"تعداد خبرهای RSS: {len(feed.entries)}"
+        )
+
+        news_list = []
+
+        for entry in feed.entries:
+
+            title = html.unescape(
+                entry.get("title", "")
+            ).strip()
+
+            link = entry.get("link", "").strip()
+
+            if not title or not link:
+                continue
+
+            published = get_published_time(entry)
+
+            if not published:
+                continue
+
+            news_list.append({
+                "title": title,
+                "link": link,
+                "published": published,
+                "source": source
+            })
+
+        return news_list
+
+    except Exception as error:
+
+        print(
+            f"خطا در RSS {source}: {error}"
+        )
+
+        return []
 
 
 # ============================================================
 # زمان شروع انتشار
 # ============================================================
 
-def get_cutoff_time():
+def get_start_time():
 
-    now = datetime.now(
-        IRAN_TZ
-    )
+    now = iran_now()
 
     return now.replace(
         hour=START_HOUR,
@@ -265,318 +464,111 @@ def get_cutoff_time():
 
 
 # ============================================================
-# ارسال به تلگرام
-# ============================================================
-
-def send_to_telegram(
-    title,
-    summary,
-    source,
-    published
-):
-
-    if not TELEGRAM_TOKEN:
-
-        raise RuntimeError(
-            "TELEGRAM_BOT_TOKEN تنظیم نشده است."
-        )
-
-    message = (
-        f"📰 <b>{html.escape(title)}</b>\n\n"
-    )
-
-    if summary:
-
-        message += (
-            f"{html.escape(summary)}\n\n"
-        )
-
-    message += (
-        f"📌 {html.escape(source)}\n"
-    )
-
-    message += (
-        f"🕐 {published.strftime('%H:%M')}"
-    )
-
-    url = (
-        "https://api.telegram.org/bot"
-        f"{TELEGRAM_TOKEN}/sendMessage"
-    )
-
-    payload = {
-
-        "chat_id": TELEGRAM_CHAT_ID,
-
-        "text": message,
-
-        "parse_mode": "HTML",
-
-        "disable_web_page_preview": False
-    }
-
-    response = requests.post(
-        url,
-        json=payload,
-        timeout=30
-    )
-
-    if not response.ok:
-
-        raise RuntimeError(
-            f"Telegram error: {response.text}"
-        )
-
-
-# ============================================================
-# یک دور کامل بررسی RSS ها
+# یک دور بررسی RSS ها
 # ============================================================
 
 def check_feeds(seen):
 
-    print()
-    print("=" * 70)
+    total_sent = 0
+    changed = False
 
-    print(
-        "شروع یک دور بررسی RSS ها"
+    now = datetime.now(timezone.utc)
+
+    start_time_iran = get_start_time()
+
+    start_time_utc = start_time_iran.astimezone(
+        timezone.utc
     )
 
-    print(
-        "زمان ایران:",
-        datetime.now(
-            IRAN_TZ
-        ).strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
-    )
+    for feed_info in load_feeds():
 
-    print("=" * 70)
+        news_list = get_news_from_feed(feed_info)
 
-    feeds = load_feeds()
+        for news in news_list:
 
-    new_count = 0
+            # ------------------------------------------------
+            # خبرهای قبل از ساعت شروع انتشار
+            # ------------------------------------------------
 
-    # زمان شروع انتشار
-    cutoff = get_cutoff_time()
+            if news["published"] < start_time_utc:
 
-    print(
-        "شروع انتشار اخبار:",
-        cutoff.strftime(
-            "%Y-%m-%d %H:%M:%S"
-        )
-    )
+                continue
 
-    # اگر هنوز ساعت تعیین‌شده نرسیده
-    now = datetime.now(
-        IRAN_TZ
-    )
+            # ------------------------------------------------
+            # خبرهای آینده
+            # ------------------------------------------------
 
-    if now < cutoff:
+            if news["published"] > now:
 
-        print(
-            "هنوز به ساعت شروع انتشار نرسیده‌ایم."
-        )
+                continue
 
-        return 0
+            # ------------------------------------------------
+            # بررسی تکراری
+            # ------------------------------------------------
 
-    print(
-        f"تعداد RSS ها: {len(feeds)}"
-    )
+            if is_duplicate(news, seen):
 
-    # ========================================================
-    # بررسی تک‌تک فیدها
-    # ========================================================
+                continue
 
-    for feed_info in feeds:
+            print("\nخبر جدید پیدا شد:")
 
-        if not isinstance(
-            feed_info,
-            dict
-        ):
+            print(
+                f"عنوان: {news['title']}"
+            )
 
-            continue
-
-        name = feed_info.get(
-            "name",
-            "Unknown"
-        )
-
-        url = feed_info.get(
-            "url",
-            ""
-        )
-
-        if not url:
-            continue
-
-        print()
-        print(
-            f"در حال بررسی: {name}"
-        )
-
-        try:
-
-            feed = feedparser.parse(
-                url
+            iran_published = news["published"].astimezone(
+                IRAN_TZ
             )
 
             print(
-                f"تعداد خبرهای RSS: "
-                f"{len(feed.entries)}"
+                "زمان:",
+                iran_published.strftime(
+                    "%Y-%m-%d %H:%M:%S"
+                )
             )
 
-            # =================================================
-            # بررسی خبرهای فید
-            # =================================================
+            # ------------------------------------------------
+            # ارسال
+            # ------------------------------------------------
 
-            for entry in feed.entries:
+            success = send_to_telegram(news)
 
-                title = entry.get(
-                    "title",
-                    ""
-                ).strip()
+            if success:
 
-                link = entry.get(
-                    "link",
-                    ""
-                ).strip()
+                # خیلی مهم:
+                # بلافاصله بعد از ارسال ثبت شود
+                mark_as_seen(news, seen)
 
-                if not title or not link:
-                    continue
+                save_seen(seen)
 
-                news_id = get_news_id(
-                    entry
-                )
+                changed = True
+                total_sent += 1
 
-                # قبلاً ارسال شده؟
-                if news_id in seen:
-                    continue
-
-                # زمان انتشار
-                published_utc = (
-                    get_published_datetime(
-                        entry
-                    )
-                )
-
-                # اگر زمان ندارد، فعلاً رد می‌کنیم
-                if not published_utc:
-
-                    continue
-
-                # تبدیل UTC به ایران
-                published_iran = (
-                    published_utc.astimezone(
-                        IRAN_TZ
-                    )
-                )
-
-                # =================================================
-                # فیلتر زمانی
-                # =================================================
-
-                if published_iran < cutoff:
-
-                    continue
-
-                # =================================================
-                # خبر جدید
-                # =================================================
-
-                print()
                 print(
-                    "خبر جدید پیدا شد:"
+                    f"✓ در seen_news ثبت شد."
                 )
 
                 print(
-                    f"عنوان: {title}"
+                    f"تعداد خبرهای ثبت‌شده: {len(seen)}"
                 )
 
-                print(
-                    "زمان:",
-                    published_iran.strftime(
-                        "%Y-%m-%d %H:%M:%S"
-                    )
-                )
+                # ------------------------------------------------
+                # جلوگیری از ارسال دوباره در همان اجرا
+                # ------------------------------------------------
 
-                summary = entry.get(
-                    "summary",
-                    ""
-                )
+                time.sleep(1)
 
-                summary = make_short_summary(
-                    summary
-                )
+    # --------------------------------------------------------
+    # ذخیره در GitHub
+    # --------------------------------------------------------
 
-                # =================================================
-                # ارسال تلگرام
-                # =================================================
+    if changed:
 
-                try:
+        print("\nدر حال ذخیره seen_news.json در GitHub...")
 
-                    send_to_telegram(
+        commit_seen_file()
 
-                        title,
-
-                        summary,
-
-                        name,
-
-                        published_iran
-                    )
-
-                    print(
-                        "✓ خبر با موفقیت "
-                        "در تلگرام منتشر شد."
-                    )
-
-                    # فقط بعد از ارسال موفق
-                    # خبر را ثبت می‌کنیم
-
-                    seen[news_id] = {
-
-                        "title": title,
-
-                        "source": name,
-
-                        "published": (
-                            published_utc.isoformat()
-                        ),
-
-                        "sent_at": (
-                            datetime.now(
-                                timezone.utc
-                            ).isoformat()
-                        )
-                    }
-
-                    save_seen_news(
-                        seen
-                    )
-
-                    new_count += 1
-
-                except Exception as error:
-
-                    print(
-                        "✗ خطا در ارسال تلگرام:",
-                        error
-                    )
-
-        except Exception as error:
-
-            print(
-                f"✗ خطا در RSS {name}:",
-                error
-            )
-
-    print()
-    print(
-        f"این دور تمام شد. "
-        f"تعداد خبرهای جدید: {new_count}"
-    )
-
-    return new_count
+    return total_sent
 
 
 # ============================================================
@@ -586,72 +578,80 @@ def check_feeds(seen):
 def main():
 
     print("=" * 70)
+    print("شروع بررسی RSS")
+    print("=" * 70)
+
+    now = iran_now()
+
+    start_time = get_start_time()
 
     print(
-        "سیستم تست زنده RSS"
+        "زمان فعلی ایران:",
+        now.strftime("%Y-%m-%d %H:%M:%S")
     )
 
     print(
-        "بررسی خودکار هر ۵ دقیقه"
+        "شروع انتشار اخبار:",
+        start_time.strftime("%Y-%m-%d %H:%M:%S")
+    )
+
+    feeds = load_feeds()
+
+    print(
+        f"تعداد RSSها: {len(feeds)}"
+    )
+
+    seen = load_seen()
+
+    print(
+        f"تعداد خبرهای قبلاً ثبت‌شده: {len(seen)}"
     )
 
     print("=" * 70)
 
-    if not TELEGRAM_TOKEN:
-
-        print(
-            "خطا: TELEGRAM_BOT_TOKEN "
-            "در Secrets وجود ندارد."
-        )
-
-        return
-
-    seen = load_seen_news()
-
-    print(
-        f"تعداد خبرهای ثبت‌شده قبلی: "
-        f"{len(seen)}"
-    )
-
-    print(
-        "سیستم شروع شد."
-    )
-
-    print(
-        "برای توقف، اجرای GitHub Action را لغو کنید."
-    )
-
-    # ========================================================
+    # --------------------------------------------------------
     # حلقه دائمی
-    # ========================================================
+    # --------------------------------------------------------
 
     while True:
 
-        try:
-
-            check_feeds(
-                seen
-            )
-
-        except Exception as error:
-
-            print()
-            print(
-                "خطای کلی در بررسی:"
-            )
-
-            print(
-                error
-            )
-
-        print()
         print(
-            "۵ دقیقه تا بررسی بعدی..."
+            "\n"
+            + "=" * 70
         )
 
-        time.sleep(
-            CHECK_INTERVAL
+        print(
+            "شروع یک دور جدید بررسی RSS"
         )
+
+        print(
+            "زمان:",
+            iran_now().strftime(
+                "%Y-%m-%d %H:%M:%S"
+            )
+        )
+
+        print(
+            "=" * 70
+        )
+
+        sent = check_feeds(seen)
+
+        print(
+            "\nتعداد خبرهای جدید ارسال‌شده:",
+            sent
+        )
+
+        print(
+            "تعداد کل خبرهای ثبت‌شده:",
+            len(seen)
+        )
+
+        print(
+            f"\nبررسی بعدی حدود {CHECK_INTERVAL // 60} دقیقه دیگر."
+        )
+
+        time.sleep(CHECK_INTERVAL)
 
 
 # ============================================================
@@ -659,5 +659,4 @@ def main():
 # ============================================================
 
 if __name__ == "__main__":
-
     main()
