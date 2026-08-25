@@ -7,9 +7,7 @@ from config import FEEDS_FILE, MAX_NEWS
 
 def load_feeds():
     with open(FEEDS_FILE, "r", encoding="utf-8") as file:
-        data = json.load(file)
-
-    return data.get("feeds", [])
+        return json.load(file)
 
 
 def get_published_time(entry):
@@ -42,8 +40,17 @@ def get_news():
     feeds = load_feeds()
     news = []
 
-    for feed_url in feeds:
+    for feed_info in feeds:
+
+        feed_name = feed_info.get("name", "Unknown")
+        feed_url = feed_info.get("url", "")
+
+        if not feed_url:
+            continue
+
         try:
+            print(f"در حال دریافت: {feed_name}")
+
             feed = feedparser.parse(feed_url)
 
             for entry in feed.entries:
@@ -57,6 +64,7 @@ def get_news():
                 published = get_published_time(entry)
 
                 news.append({
+                    "source": feed_name,
                     "title": title,
                     "link": link,
                     "summary": summary,
@@ -64,6 +72,6 @@ def get_news():
                 })
 
         except Exception as error:
-            print(f"RSS error: {error}")
+            print(f"RSS error ({feed_name}): {error}")
 
     return news[:MAX_NEWS]
