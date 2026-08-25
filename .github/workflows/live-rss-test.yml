@@ -1,0 +1,50 @@
+name: Live RSS Test
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: "*/5 * * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  check-rss:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: دریافت آخرین نسخه پروژه
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: نصب Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: نصب وابستگی‌ها
+        run: |
+          pip install -r requirements.txt
+
+      - name: بررسی RSS و ارسال خبرهای جدید
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        run: |
+          python test_live_rss.py
+
+      - name: ذخیره فهرست خبرهای ارسال‌شده
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add seen_news.json
+
+          if git diff --cached --quiet; then
+            echo "تغییری در seen_news.json وجود ندارد."
+          else
+            git commit -m "Update seen news"
+            git push
+          fi
