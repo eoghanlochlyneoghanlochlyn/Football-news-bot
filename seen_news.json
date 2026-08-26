@@ -458,5 +458,26 @@
     "source": "FourFourTwo",
     "published": "2026-08-26T08:32:07+00:00",
     "sent_at": "2026-08-26T08:35:32.135561+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/raheem-sterling-charged-with-dangerous-driving-and-nitrous-oxide-possession": {
+    "title": "Raheem Sterling charged with dangerous driving and nitrous oxide possession",
+    "normalized_title": "raheem sterling charged with dangerous driving and nitrous oxide possession",
+    "source": "The Guardian",
+    "published": "2026-08-26T08:34:29+00:00",
+    "sent_at": "2026-08-26T08:45:41.399669+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/arsenal-stars-agent-in-direct-contact-with-club": {
+    "title": "Arsenal star’s agent in direct contact with club to seal €65m exit soon",
+    "normalized_title": "arsenal stars agent in direct contact with club to seal €65m exit soon",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T08:43:14+00:00",
+    "sent_at": "2026-08-26T08:45:41.918838+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/liverpool-want-alex-scott-transfer-but-chelsea-could-also-bid": {
+    "title": "Andoni Iraola wants to sign £90m star for Liverpool, but Chelsea are also considering a bid",
+    "normalized_title": "andoni iraola wants to sign £90m star for liverpool but chelsea are also considering a bid",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T08:43:54+00:00",
+    "sent_at": "2026-08-26T08:45:42.790582+00:00"
   }
 }
