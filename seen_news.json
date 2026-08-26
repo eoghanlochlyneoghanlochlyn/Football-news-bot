@@ -1011,5 +1011,19 @@
     "source": "Get Football News France",
     "published": "2026-08-26T12:28:58+00:00",
     "sent_at": "2026-08-26T12:30:53.554742+00:00"
+  },
+  "https://bulinews.com/leipzig-unveil-2026/27-champions-league-kit": {
+    "title": "RB Leipzig unveil 2026/27 Champions League kit",
+    "normalized_title": "rb leipzig unveil 2026/27 champions league kit",
+    "source": "Bulinews",
+    "published": "2026-08-26T12:40:00+00:00",
+    "sent_at": "2026-08-26T12:45:51.098390+00:00"
+  },
+  "https://www.footballfancast.com/chelsea-planning-concrete-transfer-approach-emiliano-martinez": {
+    "title": "Chelsea now planning concrete approach to sign £150,000-a-week Premier League star",
+    "normalized_title": "chelsea now planning concrete approach to sign £150000-a-week premier league star",
+    "source": "FootballFanCast",
+    "published": "2026-08-26T12:41:11+00:00",
+    "sent_at": "2026-08-26T12:45:52.248228+00:00"
   }
 }
