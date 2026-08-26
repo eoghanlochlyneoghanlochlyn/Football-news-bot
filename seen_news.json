@@ -962,5 +962,19 @@
     "source": "Get Football News France",
     "published": "2026-08-26T12:14:13+00:00",
     "sent_at": "2026-08-26T12:15:55.223923+00:00"
+  },
+  "https://www.football365.com/news/man-utd-legend-hints-100m-transfer-mistake-ole-gunnar-solskjaer-advice-ignored": {
+    "title": "Man Utd legend hints at £100m transfer mistake as Ole Gunnar Solskjaer advice ignored",
+    "normalized_title": "man utd legend hints at £100m transfer mistake as ole gunnar solskjaer advice ignored",
+    "source": "Football365",
+    "published": "2026-08-26T12:20:27+00:00",
+    "sent_at": "2026-08-26T12:25:37.565356+00:00"
+  },
+  "https://bulinews.com/ansah-undergoes-hull-medical-record-breaking-move-nears": {
+    "title": "Ansah undergoes Hull medical as record-breaking move nears",
+    "normalized_title": "ansah undergoes hull medical as record-breaking move nears",
+    "source": "Bulinews",
+    "published": "2026-08-26T12:22:00+00:00",
+    "sent_at": "2026-08-26T12:25:38.180482+00:00"
   }
 }
