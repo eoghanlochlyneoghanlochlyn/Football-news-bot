@@ -577,5 +577,75 @@
     "source": "CaughtOffside",
     "published": "2026-08-26T09:41:18+00:00",
     "sent_at": "2026-08-26T09:45:42.173423+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/cgewvygeq8vo": {
+    "title": "Man City to make offer for £120m-rated Fernandez",
+    "normalized_title": "man city to make offer for £120m-rated fernandez",
+    "source": "BBC Sport",
+    "published": "2026-08-26T09:55:42+00:00",
+    "sent_at": "2026-08-26T10:20:41.799054+00:00"
+  },
+  "https://www.football365.com/news/liverpool-agree-midfielder-transfer-fabrizio-romano-confirms-personal-terms-almost-sealed": {
+    "title": "Liverpool agree midfielder transfer and Romano confirms personal terms almost sealed",
+    "normalized_title": "liverpool agree midfielder transfer and romano confirms personal terms almost sealed",
+    "source": "Football365",
+    "published": "2026-08-26T09:58:07+00:00",
+    "sent_at": "2026-08-26T10:20:44.499978+00:00"
+  },
+  "https://www.football365.com/news/man-utd-transfer-news-eduardo-camavinga-bid-real-madrid-fourth-midfield-deal": {
+    "title": "Man Utd to launch bid for Real Madrid star as fourth midfield deal eyed",
+    "normalized_title": "man utd to launch bid for real madrid star as fourth midfield deal eyed",
+    "source": "Football365",
+    "published": "2026-08-26T10:03:13+00:00",
+    "sent_at": "2026-08-26T10:20:47.087602+00:00"
+  },
+  "https://www.101greatgoals.com/match-previews/la-liga-matches/real-madrid-v-sociedad-line-ups-stats-preview-tv-channel-live-online-stream": {
+    "title": "Real Madrid v Real Sociedad: Preview, line-ups and stats",
+    "normalized_title": "real madrid v real sociedad preview line-ups and stats",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T10:05:15+00:00",
+    "sent_at": "2026-08-26T10:20:48.909697+00:00"
+  },
+  "https://www.101greatgoals.com/match-previews/tottenham-v-charlton-efl-cup-line-ups-stats-preview-tv-channel-online-live-stream-carabao-cup": {
+    "title": "Tottenham v Charlton: Preview, expected line-ups and stats",
+    "normalized_title": "tottenham v charlton preview expected line-ups and stats",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T10:05:42+00:00",
+    "sent_at": "2026-08-26T10:20:50.298379+00:00"
+  },
+  "https://www.101greatgoals.com/football/conference-league/when-is-conference-league-draw-2026-date-time-tv-channel-live-online-stream-where-to-watch-fixtures-schedule-teams": {
+    "title": "When is the Conference League draw 2026/27? Date, time, league phase schedule, TV channel and live stream",
+    "normalized_title": "when is the conference league draw 2026/27 date time league phase schedule tv channel and live stream",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T10:06:05+00:00",
+    "sent_at": "2026-08-26T10:20:51.567533+00:00"
+  },
+  "https://www.101greatgoals.com/football/europa-league/when-is-europa-league-draw-2026-date-time-tv-channel-live-online-stream-where-to-watch-schedule-teams-results": {
+    "title": "When is the Europa League draw? Date, time, schedule, where to watch",
+    "normalized_title": "when is the europa league draw date time schedule where to watch",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T10:06:28+00:00",
+    "sent_at": "2026-08-26T10:20:52.910810+00:00"
+  },
+  "https://www.101greatgoals.com/news/transfers/transfer-window-2026-when-does-summer-close-end-date-new-signings-latest-news": {
+    "title": "When does the transfer window close? Deadline day dates, times, latest news",
+    "normalized_title": "when does the transfer window close deadline day dates times latest news",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T10:06:50+00:00",
+    "sent_at": "2026-08-26T10:20:54.525072+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/julian-alvarez-arsenal-transfer-stance-softening": {
+    "title": "£128m star warming to Arsenal transfer as deadline set by club",
+    "normalized_title": "£128m star warming to arsenal transfer as deadline set by club",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T10:07:05+00:00",
+    "sent_at": "2026-08-26T10:20:54.927992+00:00"
+  },
+  "https://www.101greatgoals.com/football/champions-league/when-is-champions-league-draw-2026-date-time-tv-channel-live-online-stream-where-to-watch-schedule-results": {
+    "title": "When is the Champions League draw? Date, time, schedule, where to watch",
+    "normalized_title": "when is the champions league draw date time schedule where to watch",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T10:07:25+00:00",
+    "sent_at": "2026-08-26T10:20:56.387467+00:00"
   }
 }
