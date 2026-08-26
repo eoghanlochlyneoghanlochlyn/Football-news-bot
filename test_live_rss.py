@@ -663,6 +663,192 @@ def get_best_image(entry, article_url):
             "⚠️ تصویر RSS کوچک است؛ صفحهٔ خبر بررسی می‌شود."
         )
 
+        # ============================================================
+# دریافت تصویر از API عمومی وردپرس
+# بدون حدس زدن URL تصویر
+# ============================================================
+
+def get_image_from_wordpress_api(article_url):
+
+    if not article_url:
+        return ""
+
+    try:
+
+        parts = urlsplit(article_url)
+
+        site_root = (
+            f"{parts.scheme}://{parts.netloc}"
+        )
+
+        slug = (
+            parts.path
+            .strip("/")
+            .split("/")
+            [-1]
+        )
+
+        if not slug:
+            return ""
+
+        api_url = (
+            f"{site_root}"
+            f"/wp-json/wp/v2/posts"
+        )
+
+        params = {
+            "slug": slug,
+            "_embed": "1",
+            "per_page": 1
+        }
+
+        print(
+            "در حال بررسی API عمومی سایت برای تصویر..."
+        )
+
+        response = requests.get(
+            api_url,
+            params=params,
+            headers=REQUEST_HEADERS,
+            timeout=20
+        )
+
+        if not response.ok:
+
+            print(
+                f"API وردپرس پاسخ مناسب نداد: "
+                f"{response.status_code}"
+            )
+
+            return ""
+
+        posts = response.json()
+
+        if not isinstance(posts, list):
+            return ""
+
+        if not posts:
+            return ""
+
+        post = posts[0]
+
+        # ----------------------------------------------------
+        # تصویر شاخص از طریق _embedded
+        # ----------------------------------------------------
+
+        embedded = post.get(
+            "_embedded",
+            {}
+        )
+
+        featured_media = embedded.get(
+            "wp:featuredmedia",
+            []
+        )
+
+        if isinstance(
+            featured_media,
+            list
+        ):
+
+            for media in featured_media:
+
+                if not isinstance(
+                    media,
+                    dict
+                ):
+                    continue
+
+                source_url = media.get(
+                    "source_url",
+                    ""
+                )
+
+                if not source_url:
+                    continue
+
+                source_url = html.unescape(
+                    str(source_url)
+                ).strip()
+
+                # بررسی کیفیت واقعی تصویر
+                width, height = (
+                    get_real_image_dimensions(
+                        source_url
+                    )
+                )
+
+                if width >= MIN_IMAGE_WIDTH:
+
+                    print(
+                        "✓ تصویر اصلی از API سایت پیدا شد."
+                    )
+
+                    print(
+                        f"عرض تصویر: {width}px"
+                    )
+
+                    print(
+                        f"آدرس تصویر: {source_url}"
+                    )
+
+                    return source_url
+
+                # اگر API ابعاد را نداشت یا کمتر از حد بود،
+                # بعداً روش‌های دیگر بررسی می‌شوند.
+
+        # ----------------------------------------------------
+        # بررسی خود دادهٔ پست
+        # ----------------------------------------------------
+
+        for key in [
+            "jetpack_featured_media_url",
+            "featured_image_url"
+        ]:
+
+            image_url = post.get(
+                key,
+                ""
+            )
+
+            if not image_url:
+                continue
+
+            image_url = html.unescape(
+                str(image_url)
+            ).strip()
+
+            width, height = (
+                get_real_image_dimensions(
+                    image_url
+                )
+            )
+
+            if width >= MIN_IMAGE_WIDTH:
+
+                print(
+                    "✓ تصویر شاخص از دادهٔ پست پیدا شد."
+                )
+
+                print(
+                    f"عرض تصویر: {width}px"
+                )
+
+                return image_url
+
+        print(
+            "⚠️ API سایت تصویر باکیفیتی برنگرداند."
+        )
+
+        return ""
+
+    except Exception as error:
+
+        print(
+            f"خطا در API سایت: {error}"
+        )
+
+        return ""
         article_image = get_best_article_image(
             article_url
         )
