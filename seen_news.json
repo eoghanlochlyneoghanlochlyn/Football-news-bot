@@ -563,5 +563,19 @@
     "source": "101 Great Goals",
     "published": "2026-08-26T09:39:07+00:00",
     "sent_at": "2026-08-26T09:40:52.817436+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/manchester-city-omar-marmoush-spurs-loan-obligation-buy-nico-gonzalez-newcastle": {
+    "title": "Manchester City agree Omar Marmoush loan to Spurs with initial £50m obligation to buy",
+    "normalized_title": "manchester city agree omar marmoush loan to spurs with initial £50m obligation to buy",
+    "source": "The Guardian",
+    "published": "2026-08-26T09:25:22+00:00",
+    "sent_at": "2026-08-26T09:45:41.749541+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/chelsea-to-stick-with-mike-penders-over-emi-martinez-transfer": {
+    "title": "Xabi Alonso asked Chelsea to sign PL star for problem position but Blues have someone else in mind…",
+    "normalized_title": "xabi alonso asked chelsea to sign pl star for problem position but blues have someone else in mind…",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T09:41:18+00:00",
+    "sent_at": "2026-08-26T09:45:42.173423+00:00"
   }
 }
