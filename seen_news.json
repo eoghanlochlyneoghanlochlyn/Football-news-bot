@@ -332,5 +332,26 @@
     "source": "Football365",
     "published": "2026-08-26T07:20:02+00:00",
     "sent_at": "2026-08-26T07:25:37.212446+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/dom-ballard-backheel-what-is-the-earliest-goal-of-the-season-to-be-scored": {
+    "title": "After Dom Ballard’s backheel, what is the earliest goal of the season? | The Knowledge",
+    "normalized_title": "after dom ballards backheel what is the earliest goal of the season | the knowledge",
+    "source": "The Guardian",
+    "published": "2026-08-26T07:00:36+00:00",
+    "sent_at": "2026-08-26T07:30:54.547199+00:00"
+  },
+  "https://www.football365.com/news/arsenal-julian-alvarez-decision-transfer-arteta-call": {
+    "title": "Arsenal learn Alvarez decision on transfer as Arteta makes call for giant summer deal",
+    "normalized_title": "arsenal learn alvarez decision on transfer as arteta makes call for giant summer deal",
+    "source": "Football365",
+    "published": "2026-08-26T07:25:48+00:00",
+    "sent_at": "2026-08-26T07:30:54.952424+00:00"
+  },
+  "https://www.footballfancast.com/best-centre-backs-in-premier-league-history": {
+    "title": "The Best Centre-Backs in Premier League History Ranked",
+    "normalized_title": "the best centre-backs in premier league history ranked",
+    "source": "FootballFanCast",
+    "published": "2026-08-26T07:29:47+00:00",
+    "sent_at": "2026-08-26T07:30:55.408758+00:00"
   }
 }
