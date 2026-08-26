@@ -3,3 +3,14 @@ requests
 beautifulsoup4
 google-genai
 openai
+RSS_FEEDS
+CHECK_INTERVAL
+log
+fetch_feed
+build_news_object
+is_seen
+mark_seen
+translate_news
+get_best_image
+format_telegram_post
+send_to_telegram
