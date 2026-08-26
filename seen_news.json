@@ -1095,5 +1095,12 @@
     "source": "FootballFanCast",
     "published": "2026-08-26T13:10:11+00:00",
     "sent_at": "2026-08-26T13:10:47.264589+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/forest-in-talks-with-celta-vigo-over-javi-rueda-as-axel-disasi-joins-palace-on-loan": {
+    "title": "Forest in talks with Celta Vigo over Javi Rueda as Axel Disasi joins Palace on loan",
+    "normalized_title": "forest in talks with celta vigo over javi rueda as axel disasi joins palace on loan",
+    "source": "The Guardian",
+    "published": "2026-08-26T13:05:18+00:00",
+    "sent_at": "2026-08-26T13:15:48.731886+00:00"
   }
 }
