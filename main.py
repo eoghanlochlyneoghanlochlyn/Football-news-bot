@@ -15,7 +15,7 @@ from seen import (
     save_seen,
 )
 
-from news_translator import translate_news
+from translator import translate_news
 
 from image_handler import get_best_image
 
