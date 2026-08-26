@@ -1109,5 +1109,19 @@
     "source": "Bulinews",
     "published": "2026-08-26T13:18:00+00:00",
     "sent_at": "2026-08-26T13:20:55.649072+00:00"
+  },
+  "https://football-italia.net/italian-fa-withdraws-support-for-infantino": {
+    "title": "Italian FA officially withdraws support for FIFA President Infantino",
+    "normalized_title": "italian fa officially withdraws support for fifa president infantino",
+    "source": "Football Italia",
+    "published": "2026-08-26T13:13:25+00:00",
+    "sent_at": "2026-08-26T13:25:40.928623+00:00"
+  },
+  "https://www.101greatgoals.com/match-previews/chelsea-vs-luton-preview-expected-line-ups-stats-and-where-to-watch": {
+    "title": "Chelsea vs Luton: Preview, expected line-ups, stats and where to watch",
+    "normalized_title": "chelsea vs luton preview expected line-ups stats and where to watch",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T13:21:23+00:00",
+    "sent_at": "2026-08-26T13:25:41.508866+00:00"
   }
 }
