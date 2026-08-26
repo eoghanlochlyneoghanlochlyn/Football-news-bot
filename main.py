@@ -14,7 +14,6 @@ from seen import (
     mark_as_seen,
     save_seen,
 )
-)
 
 from news_translator import translate_news
 
