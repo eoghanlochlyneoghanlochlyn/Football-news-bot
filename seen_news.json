@@ -1235,5 +1235,33 @@
     "source": "FootballFanCast",
     "published": "2026-08-26T14:14:23+00:00",
     "sent_at": "2026-08-26T14:15:44.785429+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/chelsea-emiliano-martinez-aston-villa-goalkeeper": {
+    "title": "Chelsea in talks with Emiliano Martínez’s camp after being offered goalkeeper",
+    "normalized_title": "chelsea in talks with emiliano martínezs camp after being offered goalkeeper",
+    "source": "The Guardian",
+    "published": "2026-08-26T13:48:03+00:00",
+    "sent_at": "2026-08-26T14:25:36.676564+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/ayyoub-bouaddi-manchester-city-lille-transfer-rodri": {
+    "title": "Ayyoub Bouaddi: maths student, chess fan and Manchester City’s new Rodri",
+    "normalized_title": "ayyoub bouaddi maths student chess fan and manchester citys new rodri",
+    "source": "The Guardian",
+    "published": "2026-08-26T14:00:15+00:00",
+    "sent_at": "2026-08-26T14:25:37.045952+00:00"
+  },
+  "https://www.fourfourtwo.com/team/liverpools-scouse-identity-is-at-risk-after-curtis-jones-exit": {
+    "title": "Liverpool’s Scouse identity is at risk after Curtis Jones exit",
+    "normalized_title": "liverpools scouse identity is at risk after curtis jones exit",
+    "source": "FourFourTwo",
+    "published": "2026-08-26T14:20:52+00:00",
+    "sent_at": "2026-08-26T14:25:37.650555+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/liverpool-ismaila-sarr-transfer-bid-rejected": {
+    "title": "“Plan” revealed as Liverpool nightmare continues with £50m transfer bid rejected",
+    "normalized_title": "plan revealed as liverpool nightmare continues with £50m transfer bid rejected",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T14:25:06+00:00",
+    "sent_at": "2026-08-26T14:25:39.904741+00:00"
   }
 }
