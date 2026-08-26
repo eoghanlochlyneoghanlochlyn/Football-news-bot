@@ -374,5 +374,19 @@
     "source": "CaughtOffside",
     "published": "2026-08-26T07:48:30+00:00",
     "sent_at": "2026-08-26T07:50:47.210810+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/cx2zlnpnk4zo": {
+    "title": "Newcastle agree £52m deal for Man City's Gonzalez",
+    "normalized_title": "newcastle agree £52m deal for man citys gonzalez",
+    "source": "BBC Sport",
+    "published": "2026-08-26T07:59:50+00:00",
+    "sent_at": "2026-08-26T08:05:33.315648+00:00"
+  },
+  "https://www.fourfourtwo.com/person/i-felt-i-was-stagnating-at-liverpool-even-though-i-loved-the-club-and-hamburg-offered-me-four-times-the-salary-that-i-was-on-kevin-keegan-on-the-upsides-and-downsides-of-his-spell-in-germany": {
+    "title": "'I felt I was stagnating at Liverpool even though I loved the club - and Hamburg offered me four times the salary that I was on' Kevin Keegan on the upsides and downsides of his spell in Germany",
+    "normalized_title": "i felt i was stagnating at liverpool even though i loved the club - and hamburg offered me four times the salary that i was on kevin keegan on the upsides and downsides of his spell in germany",
+    "source": "FourFourTwo",
+    "published": "2026-08-26T08:00:00+00:00",
+    "sent_at": "2026-08-26T08:05:34.328625+00:00"
   }
 }
