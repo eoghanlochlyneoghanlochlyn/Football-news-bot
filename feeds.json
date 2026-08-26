@@ -46,5 +46,33 @@
   {
     "name": "101 Great Goals",
     "url": "https://www.101greatgoals.com/feed/"
+  },
+  {
+    "name": "Transfermarkt",
+    "url": "https://www.transfermarkt.co.uk/rss/news"
+  },
+  {
+    "name": "Football Italia",
+    "url": "https://football-italia.net/feed"
+  },
+  {
+    "name": "Get Football News France",
+    "url": "https://www.getfootballnewsfrance.com/feed/"
+  },
+  {
+    "name": "Bulinews",
+    "url": "https://bulinews.com/rss.xml"
+  },
+  {
+    "name": "Football España",
+    "url": "https://www.football-espana.net/feed"
+  },
+  {
+    "name": "BBC Sport - Champions League",
+    "url": "https://feeds.bbci.co.uk/sport/football/champions-league/rss.xml"
+  },
+  {
+    "name": "BBC Sport - Europa League",
+    "url": "https://feeds.bbci.co.uk/sport/football/europa-league/rss.xml"
   }
 ]
