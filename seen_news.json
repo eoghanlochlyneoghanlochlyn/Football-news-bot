@@ -759,5 +759,12 @@
     "source": "Football365",
     "published": "2026-08-26T11:23:26+00:00",
     "sent_at": "2026-08-26T11:25:38.797335+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/uefa-poised-lift-boycott-threat-fifa-promises-no-world-cup-sale-repeat-gianni-infantino": {
+    "title": "Uefa poised to lift boycott threat after Fifa promises no World Cup sale repeat",
+    "normalized_title": "uefa poised to lift boycott threat after fifa promises no world cup sale repeat",
+    "source": "The Guardian",
+    "published": "2026-08-26T11:16:27+00:00",
+    "sent_at": "2026-08-26T11:30:44.987645+00:00"
   }
 }
