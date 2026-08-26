@@ -1,4 +1,6 @@
+```python
 import html
+import json
 from datetime import datetime, timezone, timedelta
 
 import feedparser
@@ -10,6 +12,7 @@ from config import (
     REQUEST_HEADERS,
     REQUEST_TIMEOUT,
 )
+
 from utils import clean_text
 
 
@@ -22,8 +25,6 @@ def load_feeds():
     feeds.json را می‌خواند و فهرست RSSها را برمی‌گرداند.
     """
 
-    import json
-
     try:
 
         with open(
@@ -35,6 +36,7 @@ def load_feeds():
             data = json.load(file)
 
         if isinstance(data, list):
+
             return data
 
         if isinstance(data, dict):
@@ -45,6 +47,7 @@ def load_feeds():
             )
 
             if isinstance(feeds, list):
+
                 return feeds
 
         print(
@@ -57,6 +60,15 @@ def load_feeds():
 
         print(
             f"❌ فایل {FEEDS_FILE} پیدا نشد."
+        )
+
+        return []
+
+    except json.JSONDecodeError as error:
+
+        print(
+            f"❌ خطا در ساختار JSON فایل "
+            f"{FEEDS_FILE}: {error}"
         )
 
         return []
@@ -91,6 +103,7 @@ def get_published_time(entry):
         )
 
     if not parsed_time:
+
         return None
 
     try:
@@ -129,6 +142,7 @@ def get_entry_title(entry):
     )
 
     if not title:
+
         return ""
 
     title = html.unescape(
@@ -155,6 +169,7 @@ def get_entry_link(entry):
     )
 
     if not link:
+
         return ""
 
     return html.unescape(
@@ -173,6 +188,10 @@ def fetch_feed(feed_url):
     از requests استفاده می‌کنیم تا کنترل بیشتری روی
     timeout و headerها داشته باشیم.
     """
+
+    if not feed_url:
+
+        return None
 
     try:
 
@@ -193,7 +212,8 @@ def fetch_feed(feed_url):
     except requests.RequestException as error:
 
         print(
-            f"❌ خطا در دریافت RSS: {error}"
+            f"❌ خطا در دریافت RSS "
+            f"{feed_url}: {error}"
         )
 
         return None
@@ -201,7 +221,8 @@ def fetch_feed(feed_url):
     except Exception as error:
 
         print(
-            f"❌ خطا در پردازش RSS: {error}"
+            f"❌ خطا در پردازش RSS "
+            f"{feed_url}: {error}"
         )
 
         return None
@@ -215,6 +236,13 @@ def get_news_from_feed(feed_info):
     """
     تمام خبرهای معتبر یک RSS را استخراج می‌کند.
     """
+
+    if not isinstance(
+        feed_info,
+        dict
+    ):
+
+        return []
 
     source = str(
         feed_info.get(
@@ -273,6 +301,7 @@ def get_news_from_feed(feed_info):
         )
 
         if not title or not link:
+
             continue
 
         published = get_published_time(
@@ -280,6 +309,7 @@ def get_news_from_feed(feed_info):
         )
 
         if not published:
+
             continue
 
         news = {
@@ -293,14 +323,14 @@ def get_news_from_feed(feed_info):
             "source": source,
 
             # کل entry را نگه می‌داریم.
-            # images.py بعداً برای پیدا کردن عکس
-            # به همین اطلاعات نیاز دارد.
+            # برای پیدا کردن تصویر و اطلاعات
+            # تکمیلی خبر استفاده خواهد شد.
             "entry": entry,
 
-            # بعداً توسط images.py پر می‌شود.
+            # بعداً در مرحله پردازش تکمیل می‌شود.
             "image": "",
 
-            # بعداً توسط translator.py پر می‌شود.
+            # بعداً توسط مترجم تکمیل می‌شود.
             "translated_title": "",
 
             "translated_body": ""
@@ -324,6 +354,14 @@ def collect_all_news():
 
     feeds = load_feeds()
 
+    if not feeds:
+
+        print(
+            "⚠️ هیچ منبع RSS برای بررسی وجود ندارد."
+        )
+
+        return []
+
     all_news = []
 
     for feed_info in feeds:
@@ -332,6 +370,11 @@ def collect_all_news():
             feed_info,
             dict
         ):
+
+            print(
+                "⚠️ یک ورودی RSS نامعتبر نادیده گرفته شد."
+            )
+
             continue
 
         news_list = get_news_from_feed(
@@ -358,6 +401,10 @@ def filter_by_time(
     را نگه می‌دارد.
     """
 
+    if not news_list:
+
+        return []
+
     now_utc = datetime.now(
         timezone.utc
     )
@@ -373,19 +420,38 @@ def filter_by_time(
 
     for news in news_list:
 
+        if not isinstance(
+            news,
+            dict
+        ):
+
+            continue
+
         published = news.get(
             "published"
         )
 
         if not published:
+
             continue
+
+        # اگر زمان بدون timezone باشد،
+        # برای جلوگیری از مقایسه نادرست
+        # آن را UTC در نظر می‌گیریم.
+        if published.tzinfo is None:
+
+            published = published.replace(
+                tzinfo=timezone.utc
+            )
 
         # خبر آینده را قبول نمی‌کنیم.
         if published > now_utc:
+
             continue
 
         # خبر قدیمی‌تر از پنجره را حذف می‌کنیم.
         if published < cutoff_time:
+
             continue
 
         filtered.append(
@@ -407,8 +473,14 @@ def sort_news_by_time(
     خبرها را بر اساس زمان انتشار مرتب می‌کند.
     """
 
+    if not news_list:
+
+        return []
+
     return sorted(
+
         news_list,
+
         key=lambda news:
             news.get(
                 "published",
@@ -416,8 +488,69 @@ def sort_news_by_time(
                     tzinfo=timezone.utc
                 )
             ),
+
         reverse=newest_first
     )
+
+
+# ============================================================
+# حذف خبرهای تکراری داخل همان RSSها
+# ============================================================
+
+def remove_duplicate_news(
+    news_list
+):
+    """
+    خبرهایی که لینک یکسان دارند را حذف می‌کند.
+
+    این تابع فقط تکراری‌های موجود در همان اجرای فعلی
+    را حذف می‌کند.
+
+    تشخیص خبرهایی که قبلاً در کانال منتشر شده‌اند
+    وظیفه seen_news است.
+    """
+
+    if not news_list:
+
+        return []
+
+    unique_news = []
+
+    seen_links = set()
+
+    for news in news_list:
+
+        if not isinstance(
+            news,
+            dict
+        ):
+
+            continue
+
+        link = str(
+            news.get(
+                "link",
+                ""
+            )
+        ).strip()
+
+        if not link:
+
+            continue
+
+        if link in seen_links:
+
+            continue
+
+        seen_links.add(
+            link
+        )
+
+        unique_news.append(
+            news
+        )
+
+    return unique_news
 
 
 # ============================================================
@@ -432,8 +565,20 @@ def collect_recent_news():
 
     all_news = collect_all_news()
 
+    if not all_news:
+
+        print(
+            "\nهیچ خبری از RSSها دریافت نشد."
+        )
+
+        return []
+
     recent_news = filter_by_time(
         all_news
+    )
+
+    recent_news = remove_duplicate_news(
+        recent_news
     )
 
     recent_news = sort_news_by_time(
@@ -447,3 +592,4 @@ def collect_recent_news():
     )
 
     return recent_news
+```
