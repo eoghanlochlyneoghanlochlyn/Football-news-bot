@@ -19,7 +19,7 @@ from translator import translate_news
 
 from images import get_best_image
 
-from telegram_formatter import format_telegram_post
+from telegram_sender import format_telegram_post
 
 
 # ============================================================
