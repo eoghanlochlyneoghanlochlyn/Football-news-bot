@@ -976,5 +976,40 @@
     "source": "Bulinews",
     "published": "2026-08-26T12:22:00+00:00",
     "sent_at": "2026-08-26T12:25:38.180482+00:00"
+  },
+  "https://football-italia.net/fiorentina-already-taken-decision-to-fine-kean": {
+    "title": "Fiorentina have already taken decision to fine Kean and have warning for Como",
+    "normalized_title": "fiorentina have already taken decision to fine kean and have warning for como",
+    "source": "Football Italia",
+    "published": "2026-08-26T12:22:22+00:00",
+    "sent_at": "2026-08-26T12:30:51.823978+00:00"
+  },
+  "https://www.fourfourtwo.com/transfer/liverpool-see-their-hopes-of-signing-forward-dashed-following-jose-mourinho-comments-report": {
+    "title": "Liverpool see their hopes of signing forward dashed, following Jose Mourinho comments: report",
+    "normalized_title": "liverpool see their hopes of signing forward dashed following jose mourinho comments report",
+    "source": "FourFourTwo",
+    "published": "2026-08-26T12:27:47+00:00",
+    "sent_at": "2026-08-26T12:30:52.304118+00:00"
+  },
+  "https://www.football365.com/news/liverpool-romano-transfer-sarr-crystal-palace-minteh": {
+    "title": "Romano drops Liverpool transfer bombshell as Reds make £50m offer for Premier League star",
+    "normalized_title": "romano drops liverpool transfer bombshell as reds make £50m offer for premier league star",
+    "source": "Football365",
+    "published": "2026-08-26T12:28:12+00:00",
+    "sent_at": "2026-08-26T12:30:52.677127+00:00"
+  },
+  "https://www.football365.com/news/man-utd-transfer-news-lewis-hall-plan-alejandro-balde-rejection": {
+    "title": "Whitwell confirms Man Utd plan for Lewis Hall amid Alejandro Balde rejection",
+    "normalized_title": "whitwell confirms man utd plan for lewis hall amid alejandro balde rejection",
+    "source": "Football365",
+    "published": "2026-08-26T12:28:19+00:00",
+    "sent_at": "2026-08-26T12:30:53.077872+00:00"
+  },
+  "https://www.getfootballnewsfrance.com/2026/liverpool-prioritize-deal-for-crystal-palace-forward-ismaila-sarr": {
+    "title": "Liverpool prioritize deal for Crystal Palace forward Ismaïla Sarr",
+    "normalized_title": "liverpool prioritize deal for crystal palace forward ismaïla sarr",
+    "source": "Get Football News France",
+    "published": "2026-08-26T12:28:58+00:00",
+    "sent_at": "2026-08-26T12:30:53.554742+00:00"
   }
 }
