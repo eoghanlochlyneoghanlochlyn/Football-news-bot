@@ -423,5 +423,33 @@
     "source": "Football365",
     "published": "2026-08-26T08:24:04+00:00",
     "sent_at": "2026-08-26T08:25:35.860879+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/26/football-transfer-rumours-jean-philippe-mateta-to-aston-villa": {
+    "title": "Football transfer rumours: Jean-Philippe Mateta to Aston Villa?",
+    "normalized_title": "football transfer rumours jean-philippe mateta to aston villa",
+    "source": "The Guardian",
+    "published": "2026-08-26T08:13:30+00:00",
+    "sent_at": "2026-08-26T08:30:48.035808+00:00"
+  },
+  "https://www.football365.com/news/liverpool-barcola-deal-done-medical-next-romano-update": {
+    "title": "Bradley Barcola transfer to Liverpool done with medical next as Romano gives update",
+    "normalized_title": "bradley barcola transfer to liverpool done with medical next as romano gives update",
+    "source": "Football365",
+    "published": "2026-08-26T08:27:13+00:00",
+    "sent_at": "2026-08-26T08:30:48.387753+00:00"
+  },
+  "https://www.football365.com/news/chelsea-enzo-fernandez-romano-update-man-city-green-light": {
+    "title": "Romano drops huge Enzo Fernandez to Man City update with ‘green light’ given",
+    "normalized_title": "romano drops huge enzo fernandez to man city update with green light given",
+    "source": "Football365",
+    "published": "2026-08-26T08:27:29+00:00",
+    "sent_at": "2026-08-26T08:30:48.779817+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/report-man-united-liverpool-both-enquiry-attacker": {
+    "title": "Report: Man United & Liverpool both make enquiry for French attacker",
+    "normalized_title": "report man united & liverpool both make enquiry for french attacker",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T08:30:02+00:00",
+    "sent_at": "2026-08-26T08:30:49.124198+00:00"
   }
 }
