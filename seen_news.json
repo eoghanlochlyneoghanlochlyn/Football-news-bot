@@ -899,5 +899,19 @@
     "source": "Get Football News France",
     "published": "2026-08-26T11:47:01+00:00",
     "sent_at": "2026-08-26T11:55:56.104893+00:00"
+  },
+  "https://www.getfootballnewsfrance.com/2026/saint-etiennes-pierre-ekwah-set-for-auxerre-loan": {
+    "title": "Saint-Étienne’s Pierre Ekwah set for Auxerre loan",
+    "normalized_title": "saint-étiennes pierre ekwah set for auxerre loan",
+    "source": "Get Football News France",
+    "published": "2026-08-26T11:56:08+00:00",
+    "sent_at": "2026-08-26T12:01:01.637842+00:00"
+  },
+  "https://www.fourfourtwo.com/transfer/manchester-city-scupper-newcastle-united-transfer-with-late-development-report": {
+    "title": "Manchester City scupper Newcastle United transfer with late development: report",
+    "normalized_title": "manchester city scupper newcastle united transfer with late development report",
+    "source": "FourFourTwo",
+    "published": "2026-08-26T12:00:00+00:00",
+    "sent_at": "2026-08-26T12:01:02.369225+00:00"
   }
 }
