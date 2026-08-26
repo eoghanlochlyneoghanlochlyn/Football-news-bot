@@ -19,7 +19,7 @@ from translator import translate_news
 
 from images import get_best_image
 
-from telegram_sender import format_telegram_post
+from formatter import format_telegram_post
 
 
 # ============================================================
@@ -76,7 +76,7 @@ def mark_seen(news):
     )
     
 # ============================================================
-# Telegram API
+#  API
 # ============================================================
 
 TELEGRAM_API = (
