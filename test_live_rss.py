@@ -17,7 +17,7 @@ import requests
 FEEDS_FILE = "feeds.json"
 SEEN_FILE = "seen_news.json"
 
-# فقط خبرهای منتشرشده در این بازه بررسی می‌شوند
+# فقط خبرهای منتشرشده در ۲ ساعت اخیر بررسی می‌شوند
 NEWS_WINDOW_HOURS = 2
 
 TELEGRAM_BOT_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
@@ -161,6 +161,124 @@ def normalize_title(title):
 
 
 # ============================================================
+# پیدا کردن عکس خبر از RSS
+# ============================================================
+
+def get_image_url(entry):
+
+    # --------------------------------------------------------
+    # media_content
+    # --------------------------------------------------------
+
+    media_content = entry.get(
+        "media_content",
+        []
+    )
+
+    if media_content:
+
+        for media in media_content:
+
+            if isinstance(media, dict):
+
+                url = media.get(
+                    "url",
+                    ""
+                )
+
+                if url:
+                    return url.strip()
+
+    # --------------------------------------------------------
+    # media_thumbnail
+    # --------------------------------------------------------
+
+    media_thumbnail = entry.get(
+        "media_thumbnail",
+        []
+    )
+
+    if media_thumbnail:
+
+        for media in media_thumbnail:
+
+            if isinstance(media, dict):
+
+                url = media.get(
+                    "url",
+                    ""
+                )
+
+                if url:
+                    return url.strip()
+
+    # --------------------------------------------------------
+    # enclosure
+    # --------------------------------------------------------
+
+    enclosures = entry.get(
+        "enclosures",
+        []
+    )
+
+    if enclosures:
+
+        for enclosure in enclosures:
+
+            if isinstance(enclosure, dict):
+
+                url = enclosure.get(
+                    "href",
+                    ""
+                ) or enclosure.get(
+                    "url",
+                    ""
+                )
+
+                media_type = enclosure.get(
+                    "type",
+                    ""
+                ).lower()
+
+                if url and (
+                    media_type.startswith("image/")
+                    or not media_type
+                ):
+                    return url.strip()
+
+    # --------------------------------------------------------
+    # استخراج عکس از HTML
+    # --------------------------------------------------------
+
+    html_fields = [
+        entry.get("summary", ""),
+        entry.get("description", "")
+    ]
+
+    for content in html_fields:
+
+        if not content:
+            continue
+
+        match = re.search(
+            r'<img[^>]+src=["\']([^"\']+)["\']',
+            content,
+            re.IGNORECASE
+        )
+
+        if match:
+
+            image_url = html.unescape(
+                match.group(1)
+            ).strip()
+
+            if image_url:
+                return image_url
+
+    return ""
+
+
+# ============================================================
 # زمان انتشار خبر
 # ============================================================
 
@@ -211,22 +329,11 @@ def is_duplicate(news, seen):
         .lower()
     )
 
-    # --------------------------------------------------------
-    # روش اصلی:
-    # لینک خبر قبلاً ارسال شده باشد
-    # --------------------------------------------------------
-
+    # بررسی لینک
     if normalized_link and normalized_link in seen:
         return True
 
-    # --------------------------------------------------------
-    # پشتیبان:
-    # عنوان یکسان + منبع یکسان
-    #
-    # این قسمت برای زمانی است که سایت RSS
-    # لینک خبر را کمی تغییر دهد.
-    # --------------------------------------------------------
-
+    # بررسی عنوان + منبع
     if normalized_title:
 
         for old_data in seen.values():
@@ -286,13 +393,32 @@ def mark_as_seen(news, seen):
 
 
 # ============================================================
-# ارسال به تلگرام
+# فرار دادن کاراکترهای HTML
 # ============================================================
 
-def send_to_telegram(news):
+def escape_html(text):
 
-    title = html.unescape(
+    if not text:
+        return ""
+
+    return html.escape(
+        str(text),
+        quote=False
+    )
+
+
+# ============================================================
+# ارسال عکس به تلگرام
+# ============================================================
+
+def send_photo_to_telegram(news):
+
+    title = escape_html(
         news["title"]
+    )
+
+    source = escape_html(
+        news["source"]
     )
 
     published = news["published"]
@@ -311,10 +437,102 @@ def send_to_telegram(news):
 
         time_text = "--:--"
 
+    link = html.escape(
+        news["link"],
+        quote=True
+    )
+
+    caption = (
+        f"📰 <b>{title}</b>\n\n"
+        f"📌 {source}\n"
+        f"🕐 {time_text}\n"
+        f'🔗 <a href="{link}">مطالعه خبر</a>'
+    )
+
+    url = (
+        f"https://api.telegram.org/bot"
+        f"{TELEGRAM_BOT_TOKEN}/sendPhoto"
+    )
+
+    payload = {
+        "chat_id": TELEGRAM_CHANNEL,
+        "photo": news["image"],
+        "caption": caption,
+        "parse_mode": "HTML"
+    }
+
+    try:
+
+        response = requests.post(
+            url,
+            data=payload,
+            timeout=30
+        )
+
+        if response.ok:
+
+            print(
+                "✓ عکس و خبر با موفقیت در تلگرام منتشر شد."
+            )
+
+            return True
+
+        print(
+            "خطا در ارسال عکس تلگرام:",
+            response.text
+        )
+
+        return False
+
+    except Exception as error:
+
+        print(
+            f"خطا در ارتباط با تلگرام: {error}"
+        )
+
+        return False
+
+
+# ============================================================
+# ارسال پیام متنی به تلگرام
+# ============================================================
+
+def send_text_to_telegram(news):
+
+    title = escape_html(
+        news["title"]
+    )
+
+    source = escape_html(
+        news["source"]
+    )
+
+    published = news["published"]
+
+    if published:
+
+        iran_time = published.astimezone(
+            IRAN_TZ
+        )
+
+        time_text = iran_time.strftime(
+            "%H:%M"
+        )
+
+    else:
+
+        time_text = "--:--"
+
+    link = html.escape(
+        news["link"],
+        quote=True
+    )
+
     message = (
-        f"📰 {title}\n\n"
-        f"📌 {news['source']}\n"
-        f"🕐 {time_text}"
+        f"📰 <b>{title}</b>\n\n"
+        f"📌 {source}\n"
+        f"🕐 {time_text}\n"
+        f'🔗 <a href="{link}">مطالعه خبر</a>'
     )
 
     url = (
@@ -325,6 +543,7 @@ def send_to_telegram(news):
     payload = {
         "chat_id": TELEGRAM_CHANNEL,
         "text": message,
+        "parse_mode": "HTML",
         "disable_web_page_preview": False
     }
 
@@ -339,7 +558,7 @@ def send_to_telegram(news):
         if response.ok:
 
             print(
-                "✓ خبر با موفقیت در تلگرام منتشر شد."
+                "✓ خبر متنی با موفقیت در تلگرام منتشر شد."
             )
 
             return True
@@ -358,6 +577,33 @@ def send_to_telegram(news):
         )
 
         return False
+
+
+# ============================================================
+# ارسال خبر
+# ============================================================
+
+def send_to_telegram(news):
+
+    # اگر عکس وجود دارد، ابتدا عکس را امتحان می‌کنیم
+    if news.get("image"):
+
+        success = send_photo_to_telegram(
+            news
+        )
+
+        if success:
+            return True
+
+        print(
+            "⚠️ ارسال عکس ناموفق بود؛ "
+            "خبر به صورت متنی ارسال می‌شود."
+        )
+
+    # اگر عکس نداشت یا ارسال عکس شکست خورد
+    return send_text_to_telegram(
+        news
+    )
 
 
 # ============================================================
@@ -387,7 +633,6 @@ def commit_seen_file():
 
             return True
 
-        # تنظیم نام کاربر گیت
         subprocess.run(
             [
                 "git",
@@ -398,7 +643,6 @@ def commit_seen_file():
             check=True
         )
 
-        # تنظیم ایمیل گیت
         subprocess.run(
             [
                 "git",
@@ -410,7 +654,6 @@ def commit_seen_file():
             check=True
         )
 
-        # اضافه کردن فایل
         subprocess.run(
             [
                 "git",
@@ -420,7 +663,6 @@ def commit_seen_file():
             check=True
         )
 
-        # ساخت commit
         subprocess.run(
             [
                 "git",
@@ -431,7 +673,6 @@ def commit_seen_file():
             check=True
         )
 
-        # ارسال به GitHub
         subprocess.run(
             [
                 "git",
@@ -512,6 +753,10 @@ def get_news_from_feed(feed_info):
             if not published:
                 continue
 
+            image = get_image_url(
+                entry
+            )
+
             news_list.append({
 
                 "title": title,
@@ -520,7 +765,9 @@ def get_news_from_feed(feed_info):
 
                 "published": published,
 
-                "source": source
+                "source": source,
+
+                "image": image
             })
 
         return news_list
@@ -546,10 +793,6 @@ def check_feeds(seen):
     now_utc = datetime.now(
         timezone.utc
     )
-
-    # --------------------------------------------------------
-    # مرز شناور دو ساعت اخیر
-    # --------------------------------------------------------
 
     cutoff_time = (
         now_utc
@@ -587,7 +830,7 @@ def check_feeds(seen):
     )
 
     # --------------------------------------------------------
-    # جمع‌آوری تمام خبرها
+    # جمع‌آوری خبرهای واجد شرایط
     # --------------------------------------------------------
 
     all_news = []
@@ -600,17 +843,12 @@ def check_feeds(seen):
 
         for news in news_list:
 
-            published = news["published"]
-
-            # خبر قدیمی‌تر از دو ساعت
-            if published < cutoff_time:
+            if news["published"] < cutoff_time:
                 continue
 
-            # خبر با زمان آینده
-            if published > now_utc:
+            if news["published"] > now_utc:
                 continue
 
-            # خبر تکراری
             if is_duplicate(
                 news,
                 seen
@@ -622,8 +860,7 @@ def check_feeds(seen):
             )
 
     # --------------------------------------------------------
-    # مرتب‌سازی:
-    # قدیمی‌ترین خبر واجد شرایط اول ارسال شود
+    # مرتب‌سازی از قدیمی به جدید
     # --------------------------------------------------------
 
     all_news.sort(
@@ -636,7 +873,7 @@ def check_feeds(seen):
     )
 
     # --------------------------------------------------------
-    # ارسال خبرها
+    # ارسال
     # --------------------------------------------------------
 
     for news in all_news:
@@ -665,17 +902,25 @@ def check_feeds(seen):
             f"منبع: {news['source']}"
         )
 
+        if news.get("image"):
+
+            print(
+                "عکس: پیدا شد"
+            )
+
+        else:
+
+            print(
+                "عکس: پیدا نشد"
+            )
+
         # ----------------------------------------------------
-        # ارسال به تلگرام
+        # ارسال
         # ----------------------------------------------------
 
         success = send_to_telegram(
             news
         )
-
-        # ----------------------------------------------------
-        # فقط در صورت موفقیت ثبت می‌کنیم
-        # ----------------------------------------------------
 
         if not success:
 
@@ -685,6 +930,10 @@ def check_feeds(seen):
             )
 
             continue
+
+        # ----------------------------------------------------
+        # ثبت فقط پس از ارسال موفق
+        # ----------------------------------------------------
 
         mark_as_seen(
             news,
@@ -699,7 +948,7 @@ def check_feeds(seen):
         )
 
     # --------------------------------------------------------
-    # ذخیره یک‌باره در GitHub
+    # ذخیره در GitHub
     # --------------------------------------------------------
 
     if changed:
