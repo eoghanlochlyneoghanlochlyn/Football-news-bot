@@ -22,6 +22,8 @@ TELEGRAM_CHANNEL = os.getenv(
 
 RSS_FEEDS_FILE = "feeds.json"
 
+SEEN_FILE = "seen_news.json"
+
 # فاصلهٔ بررسی منابع بر حسب ثانیه
 POLL_INTERVAL_SECONDS = int(
     os.getenv(
