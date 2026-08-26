@@ -1,49 +1,76 @@
+```python
 import os
-from datetime import timezone, timedelta
 
 
 # ============================================================
-# فایل‌ها
+# تنظیمات تلگرام
 # ============================================================
 
-FEEDS_FILE = "feeds.json"
-SEEN_FILE = "seen_news.json"
+TELEGRAM_BOT_TOKEN = os.getenv(
+    "TELEGRAM_BOT_TOKEN",
+    ""
+)
+
+TELEGRAM_CHANNEL = os.getenv(
+    "TELEGRAM_CHANNEL",
+    ""
+)
 
 
 # ============================================================
-# زمان‌بندی
+# تنظیمات RSS
+# ============================================================
+
+RSS_FEEDS_FILE = "feeds.json"
+
+# فاصلهٔ بررسی منابع بر حسب ثانیه
+POLL_INTERVAL_SECONDS = int(
+    os.getenv(
+        "POLL_INTERVAL_SECONDS",
+        "300"
+    )
+)
+
+
+# ============================================================
+# تنظیمات خبر
 # ============================================================
 
 # فقط خبرهای منتشرشده در این بازه بررسی می‌شوند.
-NEWS_WINDOW_HOURS = 2
+NEWS_WINDOW_HOURS = int(
+    os.getenv(
+        "NEWS_WINDOW_HOURS",
+        "24"
+    )
+)
 
-# خبرهای قدیمی‌تر از این مدت از seen_news حذف می‌شوند.
-SEEN_RETENTION_HOURS = 24
-
-
-# ============================================================
-# تصاویر
-# ============================================================
-
-# حداقل عرض قابل قبول تصویر.
-MIN_IMAGE_WIDTH = 800
-
-# حداقل ارتفاع قابل قبول تصویر.
-MIN_IMAGE_HEIGHT = 450
-
-# حداکثر حجم قابل قبول تصویر برای بررسی.
-MAX_IMAGE_SIZE_MB = 15
+# مدت نگهداری خبرهای ثبت‌شده در seen_news
+SEEN_RETENTION_HOURS = int(
+    os.getenv(
+        "SEEN_RETENTION_HOURS",
+        "168"
+    )
+)
 
 
 # ============================================================
-# درخواست‌های اینترنتی
+# تنظیمات درخواست‌های اینترنتی
 # ============================================================
 
-REQUEST_TIMEOUT = 20
+REQUEST_TIMEOUT = int(
+    os.getenv(
+        "REQUEST_TIMEOUT",
+        "20"
+    )
+)
 
-IMAGE_REQUEST_TIMEOUT = 15
+IMAGE_REQUEST_TIMEOUT = int(
+    os.getenv(
+        "IMAGE_REQUEST_TIMEOUT",
+        "15"
+    )
+)
 
-TELEGRAM_REQUEST_TIMEOUT = 30
 
 REQUEST_HEADERS = {
     "User-Agent": (
@@ -52,66 +79,43 @@ REQUEST_HEADERS = {
         "(KHTML, like Gecko) "
         "Chrome/131.0 Safari/537.36"
     ),
-    "Accept-Language": "en-US,en;q=0.9",
     "Accept": (
         "text/html,application/xhtml+xml,"
-        "application/xml;q=0.9,image/avif,"
-        "image/webp,*/*;q=0.8"
+        "application/xml;q=0.9,"
+        "image/avif,image/webp,"
+        "*/*;q=0.8"
+    ),
+    "Accept-Language": (
+        "en-US,en;q=0.9"
     ),
 }
 
 
 # ============================================================
-# منطقه زمانی ایران
+# تنظیمات تصویر
 # ============================================================
 
-IRAN_TZ = timezone(
-    timedelta(
-        hours=3,
-        minutes=30
+MIN_IMAGE_WIDTH = int(
+    os.getenv(
+        "MIN_IMAGE_WIDTH",
+        "640"
+    )
+)
+
+MIN_IMAGE_HEIGHT = int(
+    os.getenv(
+        "MIN_IMAGE_HEIGHT",
+        "360"
     )
 )
 
 
 # ============================================================
-# تلگرام
+# تنظیمات لاگ
 # ============================================================
 
-TELEGRAM_BOT_TOKEN = os.environ.get(
-    "TELEGRAM_BOT_TOKEN",
-    ""
+LOG_LEVEL = os.getenv(
+    "LOG_LEVEL",
+    "INFO"
 )
-
-TELEGRAM_CHANNEL = os.environ.get(
-    "TELEGRAM_CHANNEL",
-    ""
-)
-
-
-# ============================================================
-# بررسی تنظیمات ضروری
-# ============================================================
-
-def validate_config():
-    """
-    بررسی می‌کند تنظیمات ضروری وجود داشته باشند.
-    """
-
-    missing = []
-
-    if not TELEGRAM_BOT_TOKEN:
-        missing.append(
-            "TELEGRAM_BOT_TOKEN"
-        )
-
-    if not TELEGRAM_CHANNEL:
-        missing.append(
-            "TELEGRAM_CHANNEL"
-        )
-
-    if missing:
-
-        raise RuntimeError(
-            "متغیرهای محیطی زیر تنظیم نشده‌اند: "
-            + ", ".join(missing)
-        )
+```
