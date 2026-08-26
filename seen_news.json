@@ -661,5 +661,19 @@
     "source": "Football365",
     "published": "2026-08-26T10:22:36+00:00",
     "sent_at": "2026-08-26T10:30:56.418189+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/c8d3jej2lqlo": {
+    "title": "Man City complete £85.6m Bouaddi signing from Lille",
+    "normalized_title": "man city complete £856m bouaddi signing from lille",
+    "source": "BBC Sport",
+    "published": "2026-08-26T10:30:52+00:00",
+    "sent_at": "2026-08-26T10:35:37.198726+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/newcastle-target-nico-gonzalez-arrives-video": {
+    "title": "Video: Newcastle United transfer target spotted arriving as £50m deal close to completion",
+    "normalized_title": "video newcastle united transfer target spotted arriving as £50m deal close to completion",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T10:34:25+00:00",
+    "sent_at": "2026-08-26T10:35:37.971624+00:00"
   }
 }
