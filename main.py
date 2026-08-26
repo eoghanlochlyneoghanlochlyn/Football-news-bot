@@ -7,7 +7,7 @@ from config import (
 
 from rss import collect_recent_news
 
-from seen_news import (
+from seen import (
     is_seen,
     mark_seen,
 )
