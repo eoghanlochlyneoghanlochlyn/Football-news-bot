@@ -849,30 +849,184 @@ def get_image_from_wordpress_api(article_url):
         )
 
         return ""
-        article_image = get_best_article_image(
-            article_url
-        )
+       # ============================================================
+# پیدا کردن بهترین تصویر صفحهٔ خبر
+# ============================================================
 
-        if article_image:
-            print(
-                "✓ تصویر بهتر صفحهٔ خبر انتخاب شد."
-            )
-            return article_image
+def get_best_article_image(
+    article_url
+):
+
+    if not article_url:
+        return ""
+
+    # --------------------------------------------------------
+    # مرحله اول: دریافت مستقیم صفحه
+    # --------------------------------------------------------
+
+    try:
 
         print(
-            "⚠️ تصویر بهتر پیدا نشد؛ "
-            "همان تصویر RSS استفاده می‌شود."
+            "در حال بررسی صفحهٔ خبر برای تصویر بهتر..."
         )
 
-        return rss_image
+        response = requests.get(
+            article_url,
+            headers=REQUEST_HEADERS,
+            timeout=20
+        )
+
+        if response.ok:
+
+            content = response.text
+
+            candidates = get_article_images(
+                content,
+                article_url
+            )
+
+            if candidates:
+
+                # ------------------------------------------------
+                # ارزیابی تصاویر صفحه
+                # ------------------------------------------------
+
+                scored = []
+
+                for candidate in candidates:
+
+                    image_url = candidate["url"]
+
+                    priority = candidate.get(
+                        "priority",
+                        0
+                    )
+
+                    width = candidate.get(
+                        "width",
+                        0
+                    )
+
+                    score = priority
+
+                    # بندانگشتی جریمه می‌شود
+                    if looks_like_thumbnail_url(
+                        image_url
+                    ):
+
+                        score -= 100
+
+                    # اگر عرض از srcset مشخص باشد
+                    if width >= MIN_IMAGE_WIDTH:
+
+                        score += 100
+
+                    elif (
+                        width > 0
+                        and width < MIN_IMAGE_WIDTH
+                    ):
+
+                        score -= 50
+
+                    else:
+
+                        real_width, real_height = (
+                            get_real_image_dimensions(
+                                image_url
+                            )
+                        )
+
+                        if real_width >= MIN_IMAGE_WIDTH:
+
+                            score += 100
+                            width = real_width
+
+                        elif (
+                            real_width > 0
+                            and real_width < MIN_IMAGE_WIDTH
+                        ):
+
+                            score -= 50
+
+                    scored.append({
+                        "score": score,
+                        "url": image_url,
+                        "width": width
+                    })
+
+                scored.sort(
+                    key=lambda item:
+                        item["score"],
+                    reverse=True
+                )
+
+                for item in scored:
+
+                    if item["score"] >= 100:
+
+                        print(
+                            "✓ تصویر باکیفیت از صفحهٔ خبر پیدا شد."
+                        )
+
+                        print(
+                            f"عرض تصویر: "
+                            f"{item['width']}px"
+                        )
+
+                        print(
+                            f"آدرس تصویر: "
+                            f"{item['url']}"
+                        )
+
+                        return item["url"]
+
+            print(
+                "⚠️ تصویر باکیفیت در صفحه پیدا نشد."
+            )
+
+        else:
+
+            print(
+                f"خطا در دریافت صفحه: "
+                f"{response.status_code}"
+            )
+
+    except Exception as error:
+
+        print(
+            f"خطا در بررسی صفحهٔ خبر: {error}"
+        )
+
+    # --------------------------------------------------------
+    # مرحله دوم:
+    # اگر صفحه 403 داد یا قابل بررسی نبود،
+    # API عمومی سایت را امتحان می‌کنیم.
+    # --------------------------------------------------------
 
     print(
-        "⚠️ RSS تصویر ندارد؛ صفحهٔ خبر بررسی می‌شود."
+        "در حال تلاش برای دریافت تصویر از API سایت..."
     )
 
-    return get_best_article_image(
-        article_url
+    api_image = (
+        get_image_from_wordpress_api(
+            article_url
+        )
     )
+
+    if api_image:
+
+        return api_image
+
+    # --------------------------------------------------------
+    # مرحله سوم:
+    # هیچ روش قابل‌اعتمادی جواب نداد
+    # --------------------------------------------------------
+
+    print(
+        "⚠️ هیچ تصویر باکیفیتی از صفحه یا API پیدا نشد."
+    )
+
+    return ""
 
 
 def is_duplicate(news, seen):
