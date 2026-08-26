@@ -1,166 +1,1022 @@
-import json
-import os
+import time
 from datetime import datetime, timezone
+from typing import Dict, List, Optional
 
-from rss import get_news
-from scraper import get_article_text
-from telegram import send_message
+import feedparser
+import requests
 
-from config import CACHE_FILE
+from config import (
+    RSS_FEEDS,
+    TELEGRAM_BOT_TOKEN,
+    TELEGRAM_CHANNEL_ID,
+    POLL_INTERVAL_SECONDS,
+    REQUEST_HEADERS,
+    REQUEST_TIMEOUT,
+)
+
+from image_handler import get_best_image
+from news_translator import translate_news
+from telegram_formatter import format_telegram_post
+
+# ------------------------------------------------------------
+# اگر اسم توابع seen_news متفاوت بود،
+# فقط همین import را بعداً اصلاح می‌کنیم.
+# ------------------------------------------------------------
+
+from seen_news import (
+    is_seen,
+    mark_seen,
+)
 
 
-def load_cache():
-    if not os.path.exists(CACHE_FILE):
-        return {
-            "sent": [],
-            "last_check": None
-        }
+# ============================================================
+# Telegram API
+# ============================================================
+
+TELEGRAM_API = (
+    f"https://api.telegram.org/bot"
+    f"{TELEGRAM_BOT_TOKEN}"
+)
+
+
+# ============================================================
+# چاپ لاگ
+# ============================================================
+
+def log(message: str):
+
+    now = datetime.now().strftime(
+        "%H:%M:%S"
+    )
+
+    print(
+        f"[{now}] {message}"
+    )
+
+
+# ============================================================
+# تبدیل زمان RSS
+# ============================================================
+
+def parse_published(entry):
+
+    published = getattr(
+        entry,
+        "published_parsed",
+        None
+    )
+
+    if published:
+
+        try:
+
+            return datetime(
+                published.tm_year,
+                published.tm_mon,
+                published.tm_mday,
+                published.tm_hour,
+                published.tm_min,
+                published.tm_sec,
+                tzinfo=timezone.utc
+            )
+
+        except Exception:
+
+            pass
+
+    return datetime.now(
+        timezone.utc
+    )
+
+
+# ============================================================
+# ساخت دیکشنری خبر
+# ============================================================
+
+def build_news_object(
+    entry,
+    source
+):
+
+    news = {
+
+        "title":
+            str(
+                getattr(
+                    entry,
+                    "title",
+                    ""
+                )
+            ).strip(),
+
+        "link":
+            str(
+                getattr(
+                    entry,
+                    "link",
+                    ""
+                )
+            ).strip(),
+
+        "source":
+            source,
+
+        "published":
+            parse_published(
+                entry
+            ),
+
+        # برای image_handler
+        "entry":
+            dict(entry)
+    }
+
+    # --------------------------------------------------------
+    # نگه داشتن فیلدهای متنی RSS
+    # --------------------------------------------------------
+
+    for key in (
+        "summary",
+        "description",
+        "content",
+        "text",
+    ):
+
+        if hasattr(
+            entry,
+            key
+        ):
+
+            news[key] = getattr(
+                entry,
+                key
+            )
+
+    return news
+
+
+# ============================================================
+# دریافت RSS
+# ============================================================
+
+def fetch_feed(feed):
+
+    if isinstance(
+        feed,
+        str
+    ):
+
+        url = feed
+        source = feed
+
+    else:
+
+        url = str(
+            feed.get(
+                "url",
+                ""
+            )
+        ).strip()
+
+        source = str(
+            feed.get(
+                "source",
+                ""
+            )
+            or url
+        ).strip()
+
+    if not url:
+
+        return source, []
+
+    log(
+        f"دریافت RSS: {source}"
+    )
 
     try:
-        with open(CACHE_FILE, "r", encoding="utf-8") as file:
-            return json.load(file)
-    except Exception:
-        return {
-            "sent": [],
-            "last_check": None
-        }
 
+        response = requests.get(
 
-def save_cache(cache):
-    with open(CACHE_FILE, "w", encoding="utf-8") as file:
-        json.dump(cache, file, ensure_ascii=False, indent=2)
+            url,
 
+            headers=REQUEST_HEADERS,
 
-def get_item_date(item):
-    """
-    زمان انتشار خبر را از اطلاعات RSS استخراج می‌کند.
-    اگر زمان قابل تشخیص نباشد، None برمی‌گرداند.
-    """
+            timeout=REQUEST_TIMEOUT
 
-    published = item.get("published")
-
-    if not published:
-        return None
-
-    try:
-        parsed = datetime.fromisoformat(
-            published.replace("Z", "+00:00")
         )
 
-        if parsed.tzinfo is None:
-            parsed = parsed.replace(tzinfo=timezone.utc)
+        response.raise_for_status()
 
-        return parsed
+        parsed = feedparser.parse(
+            response.content
+        )
+
+        entries = getattr(
+            parsed,
+            "entries",
+            []
+        )
+
+        log(
+            f"{len(entries)} خبر دریافت شد."
+        )
+
+        return source, entries
+
+    except Exception as error:
+
+        log(
+            f"خطا در RSS: {error}"
+        )
+
+        return source, []
+
+
+# ============================================================
+# ارسال درخواست به تلگرام
+# ============================================================
+
+def telegram_request(
+    method,
+    payload
+):
+
+    url = (
+        TELEGRAM_API
+        + "/"
+        + method
+    )
+
+    response = requests.post(
+
+        url,
+
+        data=payload,
+
+        timeout=REQUEST_TIMEOUT
+
+    )
+
+    try:
+
+        data = response.json()
 
     except Exception:
-        return None
 
+        raise RuntimeError(
+            response.text
+        )
 
-def main():
-    print("در حال دریافت اخبار...")
+    if not response.ok:
 
-    news = get_news()
-
-    if not news:
-        print("هیچ خبری پیدا نشد.")
-        return
-
-    print(f"{len(news)} خبر پیدا شد.")
-
-    cache = load_cache()
-
-    sent = set(cache.get("sent", []))
-
-    last_check = None
-
-    if cache.get("last_check"):
-        try:
-            last_check = datetime.fromisoformat(
-                cache["last_check"]
+        raise RuntimeError(
+            data.get(
+                "description",
+                response.text
             )
-        except Exception:
-            last_check = None
+        )
 
-    new_news = []
+    if not data.get(
+        "ok",
+        False
+    ):
 
-    for item in news:
-        link = item["link"]
+        raise RuntimeError(
+            data.get(
+                "description",
+                "Telegram Error"
+            )
+        )
 
-        # قبلاً ارسال شده
-        if link in sent:
+    return data
+
+
+# ============================================================
+# ارسال پیام یا عکس
+# ============================================================
+
+def send_to_telegram(
+
+    message,
+
+    image_url=""
+
+):
+
+    if image_url:
+
+        return telegram_request(
+
+            "sendPhoto",
+
+            {
+
+                "chat_id":
+                    TELEGRAM_CHANNEL_ID,
+
+                "photo":
+                    image_url,
+
+                "caption":
+                    message,
+
+                "parse_mode":
+                    "HTML"
+
+            }
+
+        )
+
+    return telegram_request(
+
+        "sendMessage",
+
+        {
+
+            "chat_id":
+                TELEGRAM_CHANNEL_ID,
+
+            "text":
+                message,
+
+            "parse_mode":
+                "HTML",
+
+            "disable_web_page_preview":
+                False
+
+        }
+
+    )
+
+# ============================================================
+# پردازش یک خبر
+# ============================================================
+
+def process_news(news):
+    """
+    یک خبر را از ابتدا تا انتها پردازش می‌کند:
+
+    1. بررسی تکراری نبودن خبر
+    2. ترجمه و بازنویسی
+    3. پیدا کردن تصویر
+    4. ساخت پیام تلگرام
+    5. ارسال به کانال
+    6. ثبت خبر به عنوان ارسال‌شده
+    """
+
+    if not isinstance(news, dict):
+
+        log(
+            "⚠️ ساختار خبر نامعتبر است."
+        )
+
+        return False
+
+    title = str(
+        news.get(
+            "title",
+            ""
+        )
+    ).strip()
+
+    link = str(
+        news.get(
+            "link",
+            ""
+        )
+    ).strip()
+
+    # --------------------------------------------------------
+    # بررسی اطلاعات ضروری
+    # --------------------------------------------------------
+
+    if not title:
+
+        log(
+            "⚠️ خبر بدون عنوان نادیده گرفته شد."
+        )
+
+        return False
+
+    if not link:
+
+        log(
+            f"⚠️ خبر «{title}» لینک ندارد."
+        )
+
+        return False
+
+    # --------------------------------------------------------
+    # بررسی خبر تکراری
+    # --------------------------------------------------------
+
+    try:
+
+        if is_seen(news):
+
+            log(
+                f"خبر قبلاً ارسال شده است: {title}"
+            )
+
+            return False
+
+    except Exception as error:
+
+        log(
+            f"❌ خطا هنگام بررسی seen_news: "
+            f"{error}"
+        )
+
+        return False
+
+    # --------------------------------------------------------
+    # شروع پردازش
+    # --------------------------------------------------------
+
+    log(
+        f"📰 پردازش خبر جدید: {title}"
+    )
+
+    # --------------------------------------------------------
+    # ترجمه و بازنویسی
+    # --------------------------------------------------------
+
+    log(
+        "در حال ترجمه و بازنویسی خبر..."
+    )
+
+    try:
+
+        translation = translate_news(
+            news
+        )
+
+    except Exception as error:
+
+        log(
+            f"❌ خطا در ترجمه خبر: {error}"
+        )
+
+        return False
+
+    if not isinstance(
+        translation,
+        dict
+    ):
+
+        log(
+            "❌ پاسخ مترجم ساختار معتبری ندارد."
+        )
+
+        return False
+
+    if not translation.get(
+        "success",
+        False
+    ):
+
+        error_message = translation.get(
+            "error",
+            "خطای نامشخص"
+        )
+
+        log(
+            f"❌ ترجمه انجام نشد: "
+            f"{error_message}"
+        )
+
+        return False
+
+    translated_title = str(
+        translation.get(
+            "title",
+            ""
+        )
+    ).strip()
+
+    translated_body = str(
+        translation.get(
+            "body",
+            ""
+        )
+    ).strip()
+
+    if not translated_title:
+
+        log(
+            "❌ ترجمه عنوان خالی است."
+        )
+
+        return False
+
+    # --------------------------------------------------------
+    # قرار دادن ترجمه داخل news
+    # --------------------------------------------------------
+
+    news["translated_title"] = (
+        translated_title
+    )
+
+    news["translated_body"] = (
+        translated_body
+    )
+
+    log(
+        "✓ ترجمه با موفقیت انجام شد."
+    )
+
+    # --------------------------------------------------------
+    # پیدا کردن تصویر
+    # --------------------------------------------------------
+
+    log(
+        "در حال بررسی تصویر خبر..."
+    )
+
+    image_url = ""
+
+    try:
+
+        image_url = get_best_image(
+
+            news.get(
+                "entry",
+                {}
+            ),
+
+            link
+
+        )
+
+    except Exception as error:
+
+        log(
+            f"⚠️ خطا در پیدا کردن تصویر: "
+            f"{error}"
+        )
+
+        image_url = ""
+
+    if image_url:
+
+        log(
+            "✓ تصویر برای خبر انتخاب شد."
+        )
+
+    else:
+
+        log(
+            "⚠️ تصویر مناسبی پیدا نشد؛ "
+            "خبر به صورت متنی ارسال می‌شود."
+        )
+
+    # --------------------------------------------------------
+    # ساخت پیام تلگرام
+    # --------------------------------------------------------
+
+    log(
+        "در حال ساخت پیام تلگرام..."
+    )
+
+    try:
+
+        formatted = format_telegram_post(
+
+            news,
+
+            has_image=bool(
+                image_url
+            )
+
+        )
+
+    except Exception as error:
+
+        log(
+            f"❌ خطا در قالب‌بندی پیام: "
+            f"{error}"
+        )
+
+        return False
+
+    if not isinstance(
+        formatted,
+        dict
+    ):
+
+        log(
+            "❌ خروجی قالب‌بندی نامعتبر است."
+        )
+
+        return False
+
+    if not formatted.get(
+        "success",
+        False
+    ):
+
+        log(
+            f"❌ ساخت پیام ناموفق بود: "
+            f"{formatted.get('error', '')}"
+        )
+
+        return False
+
+    message = str(
+        formatted.get(
+            "message",
+            ""
+        )
+    ).strip()
+
+    if not message:
+
+        log(
+            "❌ پیام نهایی خالی است."
+        )
+
+        return False
+
+    # --------------------------------------------------------
+    # ارسال به تلگرام
+    # --------------------------------------------------------
+
+    log(
+        "در حال ارسال خبر به کانال..."
+    )
+
+    try:
+
+        telegram_result = send_to_telegram(
+
+            message=message,
+
+            image_url=image_url
+
+        )
+
+    except Exception as error:
+
+        log(
+            f"❌ ارسال به تلگرام ناموفق بود: "
+            f"{error}"
+        )
+
+        # ----------------------------------------------------
+        # بسیار مهم:
+        # اگر ارسال شکست خورد، خبر ثبت نمی‌شود.
+        # بنابراین اجرای بعدی دوباره آن را امتحان می‌کند.
+        # ----------------------------------------------------
+
+        return False
+
+    # --------------------------------------------------------
+    # بررسی نتیجه ارسال
+    # --------------------------------------------------------
+
+    if not isinstance(
+        telegram_result,
+        dict
+    ):
+
+        log(
+            "❌ پاسخ تلگرام نامعتبر است."
+        )
+
+        return False
+
+    if not telegram_result.get(
+        "ok",
+        False
+    ):
+
+        log(
+            "❌ تلگرام ارسال خبر را تأیید نکرد."
+        )
+
+        return False
+
+    log(
+        "✓ خبر با موفقیت در کانال منتشر شد."
+    )
+
+    # --------------------------------------------------------
+    # ثبت خبر به عنوان ارسال‌شده
+    # --------------------------------------------------------
+
+    try:
+
+        mark_seen(news)
+
+    except Exception as error:
+
+        log(
+            f"⚠️ خبر ارسال شد اما ثبت آن در "
+            f"seen_news ناموفق بود: {error}"
+        )
+
+        # ----------------------------------------------------
+        # اینجا False برنمی‌گردانیم؛ چون خبر واقعاً
+        # در تلگرام منتشر شده است.
+        # ----------------------------------------------------
+
+        return True
+
+    log(
+        "✓ خبر در seen_news ثبت شد."
+    )
+
+    return True
+
+
+# ============================================================
+# پردازش خبرهای یک RSS
+# ============================================================
+
+def process_feed(
+    feed
+):
+    """
+    یک منبع RSS را دریافت و خبرهای جدید آن را پردازش می‌کند.
+    """
+
+    source, entries = fetch_feed(
+        feed
+    )
+
+    if not entries:
+
+        return 0
+
+    processed_count = 0
+
+    # --------------------------------------------------------
+    # تبدیل خبرها به ساختار داخلی
+    # --------------------------------------------------------
+
+    news_items = []
+
+    for entry in entries:
+
+        try:
+
+            news = build_news_object(
+
+                entry,
+
+                source
+
+            )
+
+        except Exception as error:
+
+            log(
+                f"⚠️ خطا در ساخت خبر RSS: "
+                f"{error}"
+            )
+
             continue
 
-        published_date = get_item_date(item)
+        if not news.get(
+            "title"
+        ):
 
-        # اگر زمان خبر مشخص باشد،
-        # فقط خبرهای بعد از آخرین بررسی را قبول می‌کنیم.
-        if last_check and published_date:
-            if published_date <= last_check:
-                continue
+            continue
 
-        new_news.append(item)
+        if not news.get(
+            "link"
+        ):
 
-    if not new_news:
-        print("خبر جدیدی وجود ندارد.")
+            continue
 
-        # زمان بررسی را به‌روز می‌کنیم
-        cache["last_check"] = datetime.now(
-            timezone.utc
-        ).isoformat()
+        news_items.append(
+            news
+        )
 
-        save_cache(cache)
+    # --------------------------------------------------------
+    # جدیدترین خبرها اول
+    # --------------------------------------------------------
 
-        return
+    news_items.sort(
 
-    # قدیمی‌ترین خبر جدید را اول می‌فرستیم
-    new_news.sort(
-        key=lambda item: get_item_date(item)
-        or datetime.min.replace(tzinfo=timezone.utc)
+        key=lambda item:
+            item.get(
+                "published",
+                datetime.min.replace(
+                    tzinfo=timezone.utc
+                )
+            ),
+
+        reverse=True
+
     )
 
-    item = new_news[0]
+    # --------------------------------------------------------
+    # پردازش
+    # --------------------------------------------------------
 
-    print(f"خبر جدید: {item['title']}")
+    for news in news_items:
 
-    print("در حال دریافت متن کامل خبر...")
+        try:
 
-    try:
-        article_text = get_article_text(item["link"])
-    except Exception as error:
-        print(f"خطا در دریافت متن خبر: {error}")
-        article_text = item.get("summary", "")
+            success = process_news(
+                news
+            )
 
-    if not article_text:
-        print("متن خبر پیدا نشد.")
-        return
+            if success:
 
-    message = (
-        f"⚽ {item['title']}\n\n"
-        f"{article_text[:3000]}\n\n"
-        f"🔗 {item['link']}"
+                processed_count += 1
+
+        except Exception as error:
+
+            log(
+                f"❌ خطای غیرمنتظره هنگام "
+                f"پردازش خبر: {error}"
+            )
+
+    return processed_count
+
+
+# ============================================================
+# پردازش تمام منابع RSS
+# ============================================================
+
+def process_all_feeds():
+    """
+    تمام منابع RSS موجود در config.py را پردازش می‌کند.
+    """
+
+    if not RSS_FEEDS:
+
+        log(
+            "⚠️ هیچ منبع RSS تنظیم نشده است."
+        )
+
+        return 0
+
+    total_processed = 0
+
+    log(
+        f"شروع بررسی {len(RSS_FEEDS)} منبع RSS..."
     )
 
-    print("در حال ارسال خبر به تلگرام...")
+    for index, feed in enumerate(
+        RSS_FEEDS,
+        start=1
+    ):
+
+        log(
+            f"--- منبع {index} از "
+            f"{len(RSS_FEEDS)} ---"
+        )
+
+        try:
+
+            processed = process_feed(
+                feed
+            )
+
+            total_processed += processed
+
+        except Exception as error:
+
+            log(
+                f"❌ خطا در پردازش منبع RSS: "
+                f"{error}"
+            )
+
+    return total_processed
+
+```python
+# ============================================================
+# اجرای یک چرخه
+# ============================================================
+
+def run_cycle():
+    """
+    یک بار تمام منابع RSS را بررسی می‌کند.
+    """
+
+    log("")
+    log("=" * 60)
+    log("شروع چرخهٔ جدید بررسی اخبار")
+    log("=" * 60)
 
     try:
-        send_message(message)
+
+        processed = process_all_feeds()
+
+        if processed > 0:
+
+            log(
+                f"✓ در این چرخه {processed} خبر منتشر شد."
+            )
+
+        else:
+
+            log(
+                "خبر جدیدی برای انتشار وجود نداشت."
+            )
+
     except Exception as error:
-        print(f"خطا در ارسال به تلگرام: {error}")
+
+        log(
+            f"❌ خطای کلی در چرخه: {error}"
+        )
+
+    log(
+        "پایان چرخهٔ بررسی."
+    )
+
+
+# ============================================================
+# حلقهٔ اصلی
+# ============================================================
+
+def main():
+    """
+    اجرای دائمی ربات.
+    """
+
+    log("")
+    log("=" * 60)
+    log("🤖 ربات اخبار فوتبال شروع به کار کرد.")
+    log("=" * 60)
+
+    # --------------------------------------------------------
+    # بررسی اولیه
+    # --------------------------------------------------------
+
+    if not RSS_FEEDS:
+
+        log(
+            "❌ هیچ منبع RSS در config.py تنظیم نشده است."
+        )
+
         return
 
-    # ثبت خبر پس از ارسال موفق
-    sent.add(item["link"])
+    log(
+        f"تعداد منابع RSS: {len(RSS_FEEDS)}"
+    )
 
-    cache["sent"] = list(sent)[-1000:]
+    log(
+        f"فاصلهٔ بررسی: {CHECK_INTERVAL} ثانیه"
+    )
 
-    cache["last_check"] = datetime.now(
-        timezone.utc
-    ).isoformat()
+    # --------------------------------------------------------
+    # اجرای دائمی
+    # --------------------------------------------------------
 
-    save_cache(cache)
+    while True:
 
-    print("خبر با موفقیت ارسال و ثبت شد.")
+        try:
 
+            run_cycle()
+
+        except KeyboardInterrupt:
+
+            log(
+                "ربات توسط کاربر متوقف شد."
+            )
+
+            break
+
+        except Exception as error:
+
+            log(
+                f"❌ خطای پیش‌بینی‌نشده: {error}"
+            )
+
+        # ----------------------------------------------------
+        # انتظار تا چرخهٔ بعدی
+        # ----------------------------------------------------
+
+        log(
+            f"⏳ انتظار {CHECK_INTERVAL} ثانیه "
+            "تا بررسی بعدی..."
+        )
+
+        try:
+
+            time.sleep(
+                CHECK_INTERVAL
+            )
+
+        except KeyboardInterrupt:
+
+            log(
+                "ربات توسط کاربر متوقف شد."
+            )
+
+            break
+
+
+# ============================================================
+# نقطهٔ شروع برنامه
+# ============================================================
 
 if __name__ == "__main__":
+
     main()
