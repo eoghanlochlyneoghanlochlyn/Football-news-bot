@@ -304,5 +304,26 @@
     "source": "FootballFanCast",
     "published": "2026-08-26T07:15:11+00:00",
     "sent_at": "2026-08-26T07:15:41.647487+00:00"
+  },
+  "https://www.football365.com/news/premier-league-title-winning-goalkeepers-ranking-man-utd-arsenal-liverpool-chelsea": {
+    "title": "Title-winning keepers ranked: Only Man Utd win the Premier League with a bad goalkeeper",
+    "normalized_title": "title-winning keepers ranked only man utd win the premier league with a bad goalkeeper",
+    "source": "Football365",
+    "published": "2026-08-26T07:15:33+00:00",
+    "sent_at": "2026-08-26T07:20:50.440804+00:00"
+  },
+  "https://www.caughtoffside.com/2026/08/26/journalist-claims-man-city-chelsea-enzo-fernandez": {
+    "title": "Journalist claims how much Man City are willing to play for Chelsea’s Enzo Fernandez",
+    "normalized_title": "journalist claims how much man city are willing to play for chelseas enzo fernandez",
+    "source": "CaughtOffside",
+    "published": "2026-08-26T07:15:40+00:00",
+    "sent_at": "2026-08-26T07:20:50.938604+00:00"
+  },
+  "https://www.football365.com/news/premier-league-managers-ranked-first-game-in-charge": {
+    "title": "Premier League manager starts ranked: Man Utd boss top, Man City bottom",
+    "normalized_title": "premier league manager starts ranked man utd boss top man city bottom",
+    "source": "Football365",
+    "published": "2026-08-26T07:16:13+00:00",
+    "sent_at": "2026-08-26T07:20:51.502601+00:00"
   }
 }
