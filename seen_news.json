@@ -675,5 +675,19 @@
     "source": "CaughtOffside",
     "published": "2026-08-26T10:34:25+00:00",
     "sent_at": "2026-08-26T10:35:37.971624+00:00"
+  },
+  "https://www.101greatgoals.com/news/transfers/ayyoub-bouaddi-man-city-lille-transfer": {
+    "title": "Ayyoub Bouaddi: Man City sign Lille midfielder in £85.6m transfer",
+    "normalized_title": "ayyoub bouaddi man city sign lille midfielder in £856m transfer",
+    "source": "101 Great Goals",
+    "published": "2026-08-26T10:37:22+00:00",
+    "sent_at": "2026-08-26T10:40:41.629952+00:00"
+  },
+  "https://www.footballfancast.com/bbc-glasner-wants-lucas-bergvall-tottenham-nottingham-forest": {
+    "title": "BBC: Glasner personally wants to sign 'top' Tottenham player for Nottingham Forest",
+    "normalized_title": "bbc glasner personally wants to sign top tottenham player for nottingham forest",
+    "source": "FootballFanCast",
+    "published": "2026-08-26T10:40:11+00:00",
+    "sent_at": "2026-08-26T10:40:42.762162+00:00"
   }
 }
