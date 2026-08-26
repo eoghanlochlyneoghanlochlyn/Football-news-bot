@@ -395,5 +395,12 @@
     "source": "FootballFanCast",
     "published": "2026-08-26T08:10:11+00:00",
     "sent_at": "2026-08-26T08:10:40.646275+00:00"
+  },
+  "https://www.footballfancast.com/bbc-tottenham-late-interest-neco-williams-nottingham-forest-talks": {
+    "title": "BBC: Tottenham hold 'late' interest in signing ex-Liverpool player with talks held",
+    "normalized_title": "bbc tottenham hold late interest in signing ex-liverpool player with talks held",
+    "source": "FootballFanCast",
+    "published": "2026-08-26T08:15:11+00:00",
+    "sent_at": "2026-08-26T08:15:41.414462+00:00"
   }
 }
