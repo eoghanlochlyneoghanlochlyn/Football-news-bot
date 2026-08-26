@@ -409,5 +409,19 @@
     "source": "101 Great Goals",
     "published": "2026-08-26T08:19:18+00:00",
     "sent_at": "2026-08-26T08:20:40.841504+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/cx2z5ewlrwko": {
+    "title": "Tottenham agree loan for Man City's Marmoush",
+    "normalized_title": "tottenham agree loan for man citys marmoush",
+    "source": "BBC Sport",
+    "published": "2026-08-26T08:18:41+00:00",
+    "sent_at": "2026-08-26T08:25:35.191625+00:00"
+  },
+  "https://www.football365.com/news/mailbox-man-utd-bruno-fernandes-pfa-poty-liverpool-wirtz": {
+    "title": "‘Tiresome’ Man Utd are back to Bruno Fernandes being a problem…",
+    "normalized_title": "tiresome man utd are back to bruno fernandes being a problem…",
+    "source": "Football365",
+    "published": "2026-08-26T08:24:04+00:00",
+    "sent_at": "2026-08-26T08:25:35.860879+00:00"
   }
 }
