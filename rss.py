@@ -1,4 +1,3 @@
-```python
 import html
 import json
 from datetime import datetime, timezone, timedelta
@@ -592,4 +591,3 @@ def collect_recent_news():
     )
 
     return recent_news
-```
