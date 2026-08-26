@@ -1,4 +1,3 @@
-```yaml
 name: Test Football News Bot
 
 on:
@@ -33,4 +32,3 @@ jobs:
           echo
           echo "===== اجرای main.py ====="
           python main.py
-```
