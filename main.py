@@ -3,7 +3,6 @@ from datetime import datetime, timezone
 from config import (
     TELEGRAM_BOT_TOKEN,
     TELEGRAM_CHANNEL,
-    validate_config,
 )
 
 from rss import collect_recent_news
