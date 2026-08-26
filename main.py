@@ -8,8 +8,12 @@ from config import (
 from rss import collect_recent_news
 
 from seen import (
-    is_seen,
-    mark_seen,
+    load_seen,
+    prepare_seen,
+    is_duplicate,
+    mark_as_seen,
+    save_seen,
+)
 )
 
 from news_translator import translate_news
@@ -33,7 +37,45 @@ def log(message):
         f"[{now}] {message}"
     )
 
+# ============================================================
+# بررسی و ثبت خبرهای ارسال‌شده
+# ============================================================
 
+def is_seen(news):
+
+    seen = load_seen()
+
+    seen, changed = prepare_seen(
+        seen
+    )
+
+    if changed:
+        save_seen(
+            seen
+        )
+
+    return is_duplicate(
+        news,
+        seen
+    )
+
+
+def mark_seen(news):
+
+    seen = load_seen()
+
+    success = mark_as_seen(
+        news,
+        seen
+    )
+
+    if not success:
+        return False
+
+    return save_seen(
+        seen
+    )
+    
 # ============================================================
 # Telegram API
 # ============================================================
@@ -671,17 +713,7 @@ def main():
     # بررسی تنظیمات
     # --------------------------------------------------------
 
-    try:
-
-        validate_config()
-
-    except Exception as error:
-
-        log(
-            f"❌ تنظیمات نامعتبر است: {error}"
-        )
-
-        return
+   
 
     if not TELEGRAM_BOT_TOKEN:
 
