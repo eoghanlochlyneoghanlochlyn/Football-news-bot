@@ -6,7 +6,7 @@ import feedparser
 import requests
 
 from config import (
-    FEEDS_FILE,
+    RSS_FEEDS_FILE,
     NEWS_WINDOW_HOURS,
     REQUEST_HEADERS,
     REQUEST_TIMEOUT,
@@ -27,7 +27,7 @@ def load_feeds():
     try:
 
         with open(
-            FEEDS_FILE,
+            RSS_FEEDS_FILE,
             "r",
             encoding="utf-8"
         ) as file:
