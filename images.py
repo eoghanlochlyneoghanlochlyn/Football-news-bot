@@ -1767,7 +1767,7 @@ def get_article_image_candidates(
 # امتیازدهی تصویر صفحه
 # ============================================================
 
-    def score_article_image(
+def score_article_image(
     candidate
 ):
     """
@@ -1808,35 +1808,23 @@ def get_article_image_candidates(
             "height": 0,
         }
 
-    # --------------------------------------------------------
-    # حذف لوگوی خاص French Football Weekly
-    # --------------------------------------------------------
-
-    lower_url = url.lower()
-
-    if (
-        "frenchfootballweekly.com" in lower_url
-        and "french-football-weekly-1024x1024-1.png" in lower_url
-    ):
-
-        return {
-            "score": -5000,
-            "url": url,
-            "width": width,
-            "height": height,
-        }
-
-    # --------------------------------------------------------
-    # آدرس اصلی تصویر را از proxy بیرون می‌کشیم
-    # --------------------------------------------------------
-
     original_url = unwrap_image_proxy_url(
         url
     )
 
-    # --------------------------------------------------------
-    # thumbnail
-    # --------------------------------------------------------
+    lower_original_url = original_url.lower()
+
+    if (
+        "frenchfootballweekly.com" in lower_original_url
+        and "french-football-weekly-1024x1024-1.png" in lower_original_url
+    ):
+
+        return {
+            "score": -5000,
+            "url": original_url,
+            "width": width,
+            "height": height,
+        }
 
     if looks_like_thumbnail_url(
         original_url
@@ -1851,10 +1839,6 @@ def get_article_image_candidates(
 
     score = priority
 
-    # --------------------------------------------------------
-    # منبع‌های معتبرتر
-    # --------------------------------------------------------
-
     source_bonus = {
         "og:image": 150,
         "og:image:url": 145,
@@ -1868,10 +1852,6 @@ def get_article_image_candidates(
         source,
         20
     )
-
-    # --------------------------------------------------------
-    # اگر ابعاد از HTML/RSS موجود است
-    # --------------------------------------------------------
 
     if width > 0:
 
@@ -1897,10 +1877,6 @@ def get_article_image_candidates(
         else:
             score -= 100
 
-    # --------------------------------------------------------
-    # URLهای دارای اندازهٔ بزرگ
-    # --------------------------------------------------------
-
     large_size_patterns = (
         "1320x742",
         "1200x675",
@@ -1921,10 +1897,6 @@ def get_article_image_candidates(
 
             score += 250
             break
-
-    # --------------------------------------------------------
-    # URLهای واضحاً کوچک
-    # --------------------------------------------------------
 
     small_size_patterns = (
         "150x150",
