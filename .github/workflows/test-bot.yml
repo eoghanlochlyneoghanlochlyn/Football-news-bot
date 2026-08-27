@@ -27,7 +27,7 @@ jobs:
           TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
           GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
         run: |
-          python -c "import os; print('TELEGRAM_BOT_TOKEN:', bool(os.getenv('TELEGRAM_BOT_TOKEN'))); print('TELEGRAM_CHANNEL:', bool(os.getenv('TELEGRAM_CHANNEL'))); print('GEMINI_API_KEY_1:', bool(os.getenv('GEMINI_API_KEY_1')))"
+          python -c "import os; print('TELEGRAM_BOT_TOKEN:', bool(os.getenv('TELEGRAM_BOT_TOKEN'))); print('TELEGRAM_CHANNEL:', bool(os.getenv('TELEGRAM_CHANNEL'))); print('GEMINI_API_KEY_1:', bool(os.getenv('GEMINI_API_KEY_1)))"
 
       - name: اجرای ربات
         env:
@@ -36,3 +36,14 @@ jobs:
           GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
         run: |
           python main.py
+
+      - name: ذخیره seen_news
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add seen_news.json
+
+          git commit -m "Update seen news cache" || echo "No changes to commit"
+
+          git push
