@@ -189,7 +189,6 @@ def fetch_feed(feed_url):
     """
 
     if not feed_url:
-
         return None
 
     try:
@@ -202,8 +201,28 @@ def fetch_feed(feed_url):
 
         response.raise_for_status()
 
+        print(
+            "Content-Type:",
+            response.headers.get("Content-Type")
+        )
+
+        print(
+            "طول پاسخ:",
+            len(response.content)
+        )
+
+        print(
+            "شروع پاسخ:",
+            response.text[:200]
+        )
+
         feed = feedparser.parse(
-            response.content
+            response.text
+        )
+
+        print(
+            "تعداد entry بعد از parse:",
+            len(feed.entries)
         )
 
         return feed
@@ -211,8 +230,7 @@ def fetch_feed(feed_url):
     except requests.RequestException as error:
 
         print(
-            f"❌ خطا در دریافت RSS "
-            f"{feed_url}: {error}"
+            f"❌ خطا در دریافت RSS {feed_url}: {error}"
         )
 
         return None
@@ -220,12 +238,10 @@ def fetch_feed(feed_url):
     except Exception as error:
 
         print(
-            f"❌ خطا در پردازش RSS "
-            f"{feed_url}: {error}"
+            f"❌ خطا در پردازش RSS {feed_url}: {error}"
         )
 
         return None
-
 
 # ============================================================
 # دریافت خبرهای یک RSS
