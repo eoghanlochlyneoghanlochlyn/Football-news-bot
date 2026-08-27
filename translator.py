@@ -264,23 +264,14 @@ def request_gemini(
         }
     }
 
-    url = (
+      url = (
         GEMINI_API_URL
         + "?key="
         + api_key
     )
-    
-time.sleep(GEMINI_RATE_LIMIT_DELAY)
 
-response = requests.post(
-    url,
-    json=payload,
-    headers={
-        "Content-Type": "application/json"
-    },
-    timeout=REQUEST_TIMEOUT
-)
-    
+    time.sleep(GEMINI_RATE_LIMIT_DELAY)
+
     response = requests.post(
         url,
         json=payload,
