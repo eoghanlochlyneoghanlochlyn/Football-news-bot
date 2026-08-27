@@ -51,6 +51,9 @@ MAX_ATTEMPTS_PER_KEY = 1
 
 # فاصله کوتاه بین تلاش‌ها
 RETRY_DELAY_SECONDS = 2
+# محدودیت سرعت Gemini
+# حدود 12 درخواست در دقیقه
+GEMINI_RATE_LIMIT_DELAY = 5.2
 
 
 # ============================================================
@@ -266,7 +269,18 @@ def request_gemini(
         + "?key="
         + api_key
     )
+    
+time.sleep(GEMINI_RATE_LIMIT_DELAY)
 
+response = requests.post(
+    url,
+    json=payload,
+    headers={
+        "Content-Type": "application/json"
+    },
+    timeout=REQUEST_TIMEOUT
+)
+    
     response = requests.post(
         url,
         json=payload,
