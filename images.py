@@ -1767,7 +1767,7 @@ def get_article_image_candidates(
 # امتیازدهی تصویر صفحه
 # ============================================================
 
-def score_article_image(
+    def score_article_image(
     candidate
 ):
     """
@@ -1806,6 +1806,24 @@ def score_article_image(
             "url": "",
             "width": 0,
             "height": 0,
+        }
+
+    # --------------------------------------------------------
+    # حذف لوگوی خاص French Football Weekly
+    # --------------------------------------------------------
+
+    lower_url = url.lower()
+
+    if (
+        "frenchfootballweekly.com" in lower_url
+        and "french-football-weekly-1024x1024-1.png" in lower_url
+    ):
+
+        return {
+            "score": -5000,
+            "url": url,
+            "width": width,
+            "height": height,
         }
 
     # --------------------------------------------------------
