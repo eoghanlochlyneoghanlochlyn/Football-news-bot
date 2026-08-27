@@ -41,7 +41,7 @@ POLL_INTERVAL_SECONDS = int(
 NEWS_WINDOW_HOURS = int(
     os.getenv(
         "NEWS_WINDOW_HOURS",
-        "24"
+        "1"
     )
 )
 
