@@ -247,7 +247,6 @@ def request_gemini(
         + "متن خبر:\n"
         + article_text.strip()
     )
-
     payload = {
         "contents": [
             {
@@ -264,7 +263,7 @@ def request_gemini(
         }
     }
 
-      url = (
+    url = (
         GEMINI_API_URL
         + "?key="
         + api_key
