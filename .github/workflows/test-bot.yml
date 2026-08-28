@@ -6,6 +6,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: football-news-bot
+  cancel-in-progress: false
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -29,14 +33,25 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
           GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GEMINI_API_KEY_4: ${{ secrets.GEMINI_API_KEY_4 }}
+          GEMINI_API_KEY_5: ${{ secrets.GEMINI_API_KEY_5 }}
+
         run: |
-          python -c "import os; print('TELEGRAM_BOT_TOKEN:', bool(os.getenv('TELEGRAM_BOT_TOKEN'))); print('TELEGRAM_CHANNEL:', bool(os.getenv('TELEGRAM_CHANNEL'))); print('GEMINI_API_KEY_1:', bool(os.getenv('GEMINI_API_KEY_1')))"
+          python -c "import os; print('TELEGRAM_BOT_TOKEN:', bool(os.getenv('TELEGRAM_BOT_TOKEN'))); print('TELEGRAM_CHANNEL:', bool(os.getenv('TELEGRAM_CHANNEL'))); print('GEMINI_API_KEY_1:', bool(os.getenv('GEMINI_API_KEY_1'))); print('GEMINI_API_KEY_2:', bool(os.getenv('GEMINI_API_KEY_2'))); print('GEMINI_API_KEY_3:', bool(os.getenv('GEMINI_API_KEY_3'))); print('GEMINI_API_KEY_4:', bool(os.getenv('GEMINI_API_KEY_4'))); print('GEMINI_API_KEY_5:', bool(os.getenv('GEMINI_API_KEY_5')))"
 
       - name: اجرای ربات
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL: ${{ secrets.TELEGRAM_CHANNEL }}
+
           GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GEMINI_API_KEY_4: ${{ secrets.GEMINI_API_KEY_4 }}
+          GEMINI_API_KEY_5: ${{ secrets.GEMINI_API_KEY_5 }}
+
         run: |
           python main.py
 
