@@ -25,6 +25,12 @@ GEMINI_API_KEYS = [
     if key
 ]
 
+# ============================================================
+# Round Robin
+# ============================================================
+
+CURRENT_GEMINI_KEY_INDEX = 0
+
 # مدل را می‌توان بدون تغییر کد عوض کرد.
 # اگر در GitHub متغیر GEMINI_MODEL تعریف نشده باشد،
 # این مقدار استفاده می‌شود.
@@ -536,8 +542,9 @@ def limit_article_length(text):
 # ============================================================
 # ترجمه و بازنویسی خبر
 # ============================================================
-
 def translate_news(news):
+
+    global CURRENT_GEMINI_KEY_INDEX
 
     if not isinstance(news, dict):
 
@@ -572,17 +579,12 @@ def translate_news(news):
         article_text
     )
 
-    # --------------------------------------------------------
-    # اگر متن خبر موجود نبود
-    # --------------------------------------------------------
-
     if not article_text:
 
         print(
             "⚠️ متن کامل خبر موجود نیست."
         )
 
-        # در این حالت فقط عنوان را برای Gemini می‌فرستیم.
         article_text = (
             "متن کامل خبر در دسترس نیست. "
             "فقط بر اساس عنوان، آن را به عنوان یک "
@@ -594,10 +596,6 @@ def translate_news(news):
         article_text
     )
 
-    # --------------------------------------------------------
-    # بررسی کلیدها
-    # --------------------------------------------------------
-
     if not GEMINI_API_KEYS:
 
         return {
@@ -605,8 +603,7 @@ def translate_news(news):
             "title": "",
             "body": "",
             "error": (
-                "هیچ GEMINI_API_KEY_1 تا "
-                "GEMINI_API_KEY_5 تنظیم نشده است."
+                "هیچ GEMINI_API_KEY تنظیم نشده است."
             )
         }
 
@@ -615,84 +612,60 @@ def translate_news(news):
         f"(تعداد کلیدهای فعال: {len(GEMINI_API_KEYS)})..."
     )
 
-    # --------------------------------------------------------
-    # امتحان کردن کلیدها
-    # --------------------------------------------------------
-
     errors = []
 
-    for index, api_key in enumerate(
-        GEMINI_API_KEYS,
-        start=1
-    ):
+    key_count = len(GEMINI_API_KEYS)
+
+    start_index = CURRENT_GEMINI_KEY_INDEX
+
+    for offset in range(key_count):
+
+        index = (
+            start_index + offset
+        ) % key_count
+
+        api_key = GEMINI_API_KEYS[index]
 
         print(
-            f"در حال امتحان کلید Gemini شماره {index}..."
+            f"در حال امتحان کلید Gemini شماره {index + 1}..."
         )
 
-        for attempt in range(
-            MAX_ATTEMPTS_PER_KEY
-        ):
+        try:
 
-            try:
-
-                result = request_gemini(
-                    api_key=api_key,
-                    article_title=article_title,
-                    article_text=article_text
-                )
-
-                print(
-                    f"✓ ترجمه با کلید Gemini شماره "
-                    f"{index} با موفقیت انجام شد."
-                )
-
-                return {
-                    "success": True,
-                    "title": result["title"],
-                    "body": result["body"],
-                    "error": ""
-                }
-
-            except Exception as error:
-
-                error_text = str(
-                    error
-                )
-
-                errors.append(
-                    f"کلید {index}: {error_text}"
-                )
-
-                print(
-                    f"⚠️ کلید Gemini شماره {index} "
-                    f"ناموفق بود: {error_text}"
-                )
-
-                if (
-                    attempt
-                    < MAX_ATTEMPTS_PER_KEY - 1
-                ):
-
-                    time.sleep(
-                        RETRY_DELAY_SECONDS
-                    )
-
-        # ----------------------------------------------------
-        # قبل از رفتن به کلید بعدی
-        # ----------------------------------------------------
-
-        if index < len(
-            GEMINI_API_KEYS
-        ):
-
-            print(
-                "در حال استفاده از کلید Gemini بعدی..."
+            result = request_gemini(
+                api_key=api_key,
+                article_title=article_title,
+                article_text=article_text
             )
 
-    # --------------------------------------------------------
-    # همه کلیدها شکست خوردند
-    # --------------------------------------------------------
+            print(
+                f"✓ ترجمه با کلید Gemini شماره "
+                f"{index + 1} با موفقیت انجام شد."
+            )
+
+            CURRENT_GEMINI_KEY_INDEX = (
+                index + 1
+            ) % key_count
+
+            return {
+                "success": True,
+                "title": result["title"],
+                "body": result["body"],
+                "error": ""
+            }
+
+        except Exception as error:
+
+            error_text = str(error)
+
+            errors.append(
+                f"کلید {index + 1}: {error_text}"
+            )
+
+            print(
+                f"⚠️ کلید Gemini شماره {index + 1} "
+                f"ناموفق بود: {error_text}"
+            )
 
     print(
         "❌ تمام کلیدهای Gemini ناموفق بودند."
