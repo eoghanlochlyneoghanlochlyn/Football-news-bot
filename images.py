@@ -24,11 +24,13 @@ from utils import make_absolute_url
 # تنظیمات داخلی
 # ============================================================
 
-# حداکثر تعداد درخواست‌های متفاوت برای صفحهٔ خبر
 ARTICLE_REQUEST_PROFILES = 4
 
-# حداقل امتیاز لازم برای اینکه تصویر صفحهٔ خبر انتخاب شود
 MIN_ARTICLE_IMAGE_SCORE = 100
+
+# اگر صفحهٔ خبر تصویر مناسبی داشته باشد،
+# همیشه قبل از RSS بررسی می‌شود.
+ALWAYS_CHECK_ARTICLE_PAGE = True
 
 
 # ============================================================
@@ -36,9 +38,6 @@ MIN_ARTICLE_IMAGE_SCORE = 100
 # ============================================================
 
 def extract_image_url(item):
-    """
-    URL تصویر را از ساختارهای رایج RSS استخراج می‌کند.
-    """
 
     if not isinstance(item, dict):
         return ""
@@ -64,9 +63,6 @@ def extract_image_url(item):
 # ============================================================
 
 def get_image_dimensions(item):
-    """
-    width و height اعلام‌شده توسط RSS یا HTML را می‌خواند.
-    """
 
     if not isinstance(item, dict):
         return 0, 0
@@ -93,9 +89,6 @@ def get_image_dimensions(item):
 # ============================================================
 
 def looks_like_thumbnail_url(url):
-    """
-    نشانه‌های رایج تصاویر بندانگشتی را بررسی می‌کند.
-    """
 
     if not url:
         return False
@@ -104,13 +97,10 @@ def looks_like_thumbnail_url(url):
 
     patterns = [
 
-        # image-150x150.jpg
-        r"-\d{2,3}x\d{2,3}(?:\.[a-z0-9]+)(?:\?|$)",
+        r"-\d{2,4}x\d{2,4}(?:\.[a-z0-9]+)(?:\?|$)",
 
-        # /150x150/
-        r"/\d{2,3}x\d{2,3}/",
+        r"/\d{2,4}x\d{2,4}/",
 
-        # resize parameters
         r"[?&]width=(?:120|150|160|180|200|240|300|320|400|480|640)(?:&|$)",
 
         r"[?&]w=(?:120|150|160|180|200|240|300|320|400|480|640)(?:&|$)",
@@ -134,6 +124,7 @@ def looks_like_thumbnail_url(url):
         "small",
         "tiny",
         "avatar",
+        "favicon",
     )
 
     for word in words:
@@ -145,20 +136,49 @@ def looks_like_thumbnail_url(url):
 
 
 # ============================================================
+# تشخیص تصویر غیرمقاله‌ای
+# ============================================================
+
+def looks_like_site_asset_url(url):
+
+    if not url:
+        return False
+
+    lower = url.lower()
+
+    # --------------------------------------------------------
+    # مواردی که معمولاً لوگو، آواتار یا تصویر عمومی سایت هستند
+    # --------------------------------------------------------
+
+    patterns = (
+        "logo",
+        "site-logo",
+        "header-logo",
+        "footer-logo",
+        "avatar",
+        "author",
+        "profile",
+        "favicon",
+        "site-icon",
+        "icon",
+        "cropped-",
+        "wordpress-logo",
+        "wp-logo",
+    )
+
+    for pattern in patterns:
+
+        if pattern in lower:
+            return True
+
+    return False
+
+
+# ============================================================
 # تشخیص URL تصویر واسطه‌ای
 # ============================================================
 
 def unwrap_image_proxy_url(url):
-    """
-    اگر URL یک سرویس واسطهٔ تصویر باشد و آدرس اصلی
-    داخل پارامتر url قرار گرفته باشد، آدرس اصلی را استخراج می‌کند.
-
-    مثال:
-    images.example.com/c?url=https%3A%2F%2Foriginal.com%2Fimage.jpg
-
-    تبدیل می‌شود به:
-    https://original.com/image.jpg
-    """
 
     if not url:
         return ""
@@ -193,12 +213,8 @@ def unwrap_image_proxy_url(url):
             ).strip()
 
             if (
-                original.startswith(
-                    "http://"
-                )
-                or original.startswith(
-                    "https://"
-                )
+                original.startswith("http://")
+                or original.startswith("https://")
             ):
 
                 return original
@@ -214,18 +230,11 @@ def unwrap_image_proxy_url(url):
 # ============================================================
 
 def get_rss_image_candidates(entry):
-    """
-    تمام تصاویر قابل استخراج از RSS را جمع‌آوری می‌کند.
-    """
 
     candidates = []
 
     if not entry:
         return candidates
-
-    # --------------------------------------------------------
-    # media_content
-    # --------------------------------------------------------
 
     media_content = entry.get(
         "media_content",
@@ -260,10 +269,6 @@ def get_rss_image_candidates(entry):
                 "source": "media_content",
             })
 
-    # --------------------------------------------------------
-    # media_thumbnail
-    # --------------------------------------------------------
-
     media_thumbnail = entry.get(
         "media_thumbnail",
         []
@@ -296,10 +301,6 @@ def get_rss_image_candidates(entry):
                 "priority": 30,
                 "source": "media_thumbnail",
             })
-
-    # --------------------------------------------------------
-    # enclosures
-    # --------------------------------------------------------
 
     enclosures = entry.get(
         "enclosures",
@@ -355,23 +356,10 @@ def get_rss_image_candidates(entry):
                 "source": "enclosure",
             })
 
-    # --------------------------------------------------------
-    # RSS HTML
-    # --------------------------------------------------------
-
     html_fields = [
-        entry.get(
-            "summary",
-            ""
-        ),
-        entry.get(
-            "description",
-            ""
-        ),
-        entry.get(
-            "content",
-            ""
-        ),
+        entry.get("summary", ""),
+        entry.get("description", ""),
+        entry.get("content", ""),
     ]
 
     for content in html_fields:
@@ -410,10 +398,6 @@ def get_rss_image_candidates(entry):
             content
         )
 
-        # ----------------------------------------------------
-        # src / data-src / lazy images
-        # ----------------------------------------------------
-
         image_tags = re.findall(
             r"<img\b[^>]*>",
             content,
@@ -444,10 +428,6 @@ def get_rss_image_candidates(entry):
                         "source": "rss_html",
                     })
 
-            # ------------------------------------------------
-            # srcset
-            # ------------------------------------------------
-
             srcsets = re.findall(
                 r'srcset=["\']([^"\']+)["\']',
                 tag,
@@ -463,10 +443,6 @@ def get_rss_image_candidates(entry):
                         source="rss_srcset"
                     )
                 )
-
-        # ----------------------------------------------------
-        # حتی اگر img tag کامل نباشد
-        # ----------------------------------------------------
 
         standalone_urls = re.findall(
             r'(?:https?:)?//[^"\'>\s]+?\.(?:jpg|jpeg|png|webp)(?:\?[^"\'>\s]*)?',
@@ -507,9 +483,6 @@ def parse_srcset(
     priority=80,
     source="srcset"
 ):
-    """
-    srcset را به چند کاندیدای تصویر تبدیل می‌کند.
-    """
 
     candidates = []
 
@@ -559,9 +532,6 @@ def parse_srcset(
 def deduplicate_candidates(
     candidates
 ):
-    """
-    URLهای تکراری را حذف می‌کند.
-    """
 
     unique = {}
 
@@ -586,14 +556,8 @@ def deduplicate_candidates(
             old = unique[key]
 
             if (
-                candidate.get(
-                    "width",
-                    0
-                )
-                > old.get(
-                    "width",
-                    0
-                )
+                candidate.get("width", 0)
+                > old.get("width", 0)
             ):
 
                 unique[key] = candidate
@@ -610,10 +574,6 @@ def deduplicate_candidates(
 def get_real_image_dimensions(
     image_url
 ):
-    """
-    با Range تا حد امکان فقط ابتدای فایل تصویر را می‌گیرد
-    و ابعاد واقعی را استخراج می‌کند.
-    """
 
     if not image_url:
         return 0, 0
@@ -644,10 +604,6 @@ def get_real_image_dimensions(
 
         data = response.content
 
-        # ----------------------------------------------------
-        # JPEG
-        # ----------------------------------------------------
-
         if (
             "image/jpeg" in content_type
             or image_url.lower().split("?")[0].endswith(
@@ -658,10 +614,6 @@ def get_real_image_dimensions(
             return get_jpeg_dimensions(
                 data
             )
-
-        # ----------------------------------------------------
-        # PNG
-        # ----------------------------------------------------
 
         if (
             "image/png" in content_type
@@ -687,10 +639,6 @@ def get_real_image_dimensions(
                 )
 
                 return width, height
-
-        # ----------------------------------------------------
-        # GIF
-        # ----------------------------------------------------
 
         if (
             "image/gif" in content_type
@@ -719,10 +667,6 @@ def get_real_image_dimensions(
 
                 return width, height
 
-        # ----------------------------------------------------
-        # WebP
-        # ----------------------------------------------------
-
         if (
             "image/webp" in content_type
             or image_url.lower().split("?")[0].endswith(
@@ -746,9 +690,6 @@ def get_real_image_dimensions(
 # ============================================================
 
 def get_jpeg_dimensions(data):
-    """
-    ابعاد JPEG را از markerهای تصویر استخراج می‌کند.
-    """
 
     try:
 
@@ -841,9 +782,6 @@ def get_jpeg_dimensions(data):
 # ============================================================
 
 def get_webp_dimensions(data):
-    """
-    ابعاد WebP را برای ساختارهای رایج استخراج می‌کند.
-    """
 
     try:
 
@@ -853,10 +791,6 @@ def get_webp_dimensions(data):
             or data[8:12] != b"WEBP"
         ):
             return 0, 0
-
-        # ----------------------------------------------------
-        # VP8X
-        # ----------------------------------------------------
 
         if data[12:16] == b"VP8X":
 
@@ -881,16 +815,11 @@ def get_webp_dimensions(data):
 
             return width, height
 
-        # ----------------------------------------------------
-        # VP8 Lossy
-        # ----------------------------------------------------
-
         if data[12:16] == b"VP8 ":
 
             if len(data) < 30:
                 return 0, 0
 
-            # شروع فریم VP8
             frame_start = data.find(
                 b"\x9d\x01\x2a"
             )
@@ -912,10 +841,6 @@ def get_webp_dimensions(data):
                     ) & 0x3FFF
 
                     return width, height
-
-        # ----------------------------------------------------
-        # VP8L
-        # ----------------------------------------------------
 
         if data[12:16] == b"VP8L":
 
@@ -955,9 +880,6 @@ def get_webp_dimensions(data):
 def evaluate_rss_candidate(
     candidate
 ):
-    """
-    یک تصویر RSS را ارزیابی می‌کند.
-    """
 
     url = candidate.get(
         "url",
@@ -989,25 +911,33 @@ def evaluate_rss_candidate(
             "height": 0,
         }
 
-    # --------------------------------------------------------
-    # اگر URL واضحاً thumbnail باشد
-    # --------------------------------------------------------
+    original_url = unwrap_image_proxy_url(
+        url
+    )
 
     if looks_like_thumbnail_url(
-        url
+        original_url
     ):
 
         return {
             "good": False,
             "score": -500,
-            "url": url,
+            "url": original_url,
             "width": width,
             "height": height,
         }
 
-    # --------------------------------------------------------
-    # ابعاد از RSS
-    # --------------------------------------------------------
+    if looks_like_site_asset_url(
+        original_url
+    ):
+
+        return {
+            "good": False,
+            "score": -800,
+            "url": original_url,
+            "width": width,
+            "height": height,
+        }
 
     if width > 0:
 
@@ -1016,7 +946,7 @@ def evaluate_rss_candidate(
             return {
                 "good": False,
                 "score": -300,
-                "url": url,
+                "url": original_url,
                 "width": width,
                 "height": height,
             }
@@ -1034,18 +964,14 @@ def evaluate_rss_candidate(
         return {
             "good": True,
             "score": score,
-            "url": url,
+            "url": original_url,
             "width": width,
             "height": height,
         }
 
-    # --------------------------------------------------------
-    # اگر ابعاد مشخص نیست، URL اصلی را بررسی می‌کنیم
-    # --------------------------------------------------------
-
     real_width, real_height = (
         get_real_image_dimensions(
-            url
+            original_url
         )
     )
 
@@ -1056,7 +982,7 @@ def evaluate_rss_candidate(
             return {
                 "good": False,
                 "score": -300,
-                "url": url,
+                "url": original_url,
                 "width": real_width,
                 "height": real_height,
             }
@@ -1074,19 +1000,15 @@ def evaluate_rss_candidate(
         return {
             "good": True,
             "score": score,
-            "url": url,
+            "url": original_url,
             "width": real_width,
             "height": real_height,
         }
 
-    # --------------------------------------------------------
-    # اگر ابعاد قابل تشخیص نبود
-    # --------------------------------------------------------
-
     return {
         "good": False,
         "score": priority,
-        "url": url,
+        "url": original_url,
         "width": 0,
         "height": 0,
     }
@@ -1097,15 +1019,6 @@ def evaluate_rss_candidate(
 # ============================================================
 
 def get_best_rss_image(entry):
-    """
-    بهترین تصویر موجود در RSS را پیدا می‌کند.
-
-    خروجی:
-        {
-            "url": "...",
-            "good_quality": True/False
-        }
-    """
 
     candidates = get_rss_image_candidates(
         entry
@@ -1136,10 +1049,6 @@ def get_best_rss_image(entry):
         reverse=True
     )
 
-    # --------------------------------------------------------
-    # تصویر خوب
-    # --------------------------------------------------------
-
     for item in evaluated:
 
         if item["good"]:
@@ -1165,10 +1074,6 @@ def get_best_rss_image(entry):
                 "good_quality": True,
             }
 
-    # --------------------------------------------------------
-    # هیچ تصویر خوبی نیست؛ بهترین fallback
-    # --------------------------------------------------------
-
     fallback = evaluated[0]
 
     print(
@@ -1193,27 +1098,16 @@ def get_best_rss_image(entry):
 def fetch_article_page(
     article_url
 ):
-    """
-    صفحهٔ خبر را با چند الگوی درخواست مختلف امتحان می‌کند.
-    """
 
     if not article_url:
         return ""
 
     profiles = [
 
-        # ----------------------------------------------------
-        # پروفایل عادی
-        # ----------------------------------------------------
-
         {
             **REQUEST_HEADERS,
             "Referer": article_url,
         },
-
-        # ----------------------------------------------------
-        # مرورگر کمی متفاوت
-        # ----------------------------------------------------
 
         {
             **REQUEST_HEADERS,
@@ -1225,10 +1119,6 @@ def fetch_article_page(
             "Referer": article_url,
         },
 
-        # ----------------------------------------------------
-        # بدون Referer
-        # ----------------------------------------------------
-
         {
             **REQUEST_HEADERS,
             "Accept": (
@@ -1236,10 +1126,6 @@ def fetch_article_page(
                 "application/xml;q=0.9,*/*;q=0.8"
             ),
         },
-
-        # ----------------------------------------------------
-        # مرورگر دیگر
-        # ----------------------------------------------------
 
         {
             **REQUEST_HEADERS,
@@ -1325,9 +1211,6 @@ def extract_meta_images(
     content,
     article_url
 ):
-    """
-    og:image و twitter:image و انواع مشابه را استخراج می‌کند.
-    """
 
     candidates = []
 
@@ -1336,42 +1219,42 @@ def extract_meta_images(
         (
             r'<meta[^>]+property=["\']og:image["\']'
             r'[^>]+content=["\']([^"\']+)["\']',
-            120,
+            250,
             "og:image",
         ),
 
         (
             r'<meta[^>]+content=["\']([^"\']+)["\']'
             r'[^>]+property=["\']og:image["\']',
-            120,
+            250,
             "og:image",
         ),
 
         (
             r'<meta[^>]+name=["\']twitter:image["\']'
             r'[^>]+content=["\']([^"\']+)["\']',
-            110,
+            180,
             "twitter:image",
         ),
 
         (
             r'<meta[^>]+content=["\']([^"\']+)["\']'
             r'[^>]+name=["\']twitter:image["\']',
-            110,
+            180,
             "twitter:image",
         ),
 
         (
             r'<meta[^>]+property=["\']og:image:url["\']'
             r'[^>]+content=["\']([^"\']+)["\']',
-            115,
+            230,
             "og:image:url",
         ),
 
         (
             r'<meta[^>]+content=["\']([^"\']+)["\']'
             r'[^>]+property=["\']og:image:url["\']',
-            115,
+            230,
             "og:image:url",
         ),
     ]
@@ -1413,9 +1296,6 @@ def extract_jsonld_images(
     content,
     article_url
 ):
-    """
-    تصاویر موجود در داده‌های JSON-LD را استخراج می‌کند.
-    """
 
     candidates = []
 
@@ -1481,6 +1361,39 @@ def extract_jsonld_images(
             ):
                 continue
 
+            # فقط تصویر موجود در NewsArticle / Article
+            # اولویت بسیار بالایی دارد.
+            obj_type = obj.get(
+                "@type",
+                ""
+            )
+
+            if isinstance(
+                obj_type,
+                list
+            ):
+
+                article_object = any(
+                    str(item).lower()
+                    in (
+                        "newsarticle",
+                        "article",
+                        "reportagenewsarticle",
+                    )
+                    for item in obj_type
+                )
+
+            else:
+
+                article_object = (
+                    str(obj_type).lower()
+                    in (
+                        "newsarticle",
+                        "article",
+                        "reportagenewsarticle",
+                    )
+                )
+
             image = obj.get(
                 "image"
             )
@@ -1501,7 +1414,11 @@ def extract_jsonld_images(
                         "url": image_url,
                         "width": 0,
                         "height": 0,
-                        "priority": 100,
+                        "priority": (
+                            300
+                            if article_object
+                            else 150
+                        ),
                         "source": "jsonld",
                     })
 
@@ -1515,16 +1432,6 @@ def extract_jsonld_images(
                     ""
                 )
 
-                width = image.get(
-                    "width",
-                    0
-                )
-
-                height = image.get(
-                    "height",
-                    0
-                )
-
                 image_url = make_absolute_url(
                     image_url,
                     article_url
@@ -1535,12 +1442,22 @@ def extract_jsonld_images(
                     candidates.append({
                         "url": image_url,
                         "width": safe_int(
-                            width
+                            image.get(
+                                "width",
+                                0
+                            )
                         ),
                         "height": safe_int(
-                            height
+                            image.get(
+                                "height",
+                                0
+                            )
                         ),
-                        "priority": 105,
+                        "priority": (
+                            320
+                            if article_object
+                            else 160
+                        ),
                         "source": "jsonld",
                     })
 
@@ -1567,7 +1484,11 @@ def extract_jsonld_images(
                                 "url": image_url,
                                 "width": 0,
                                 "height": 0,
-                                "priority": 100,
+                                "priority": (
+                                    300
+                                    if article_object
+                                    else 150
+                                ),
                                 "source": "jsonld",
                             })
 
@@ -1602,7 +1523,11 @@ def extract_jsonld_images(
                                         0
                                     )
                                 ),
-                                "priority": 105,
+                                "priority": (
+                                    320
+                                    if article_object
+                                    else 160
+                                ),
                                 "source": "jsonld",
                             })
 
@@ -1617,9 +1542,6 @@ def extract_html_images(
     content,
     article_url
 ):
-    """
-    تصاویر موجود در img و srcset را استخراج می‌کند.
-    """
 
     candidates = []
 
@@ -1629,11 +1551,7 @@ def extract_html_images(
         re.IGNORECASE
     )
 
-    for tag in tags:
-
-        # ----------------------------------------------------
-        # عرض و ارتفاع HTML
-        # ----------------------------------------------------
+    for position, tag in enumerate(tags):
 
         width = 0
         height = 0
@@ -1660,10 +1578,6 @@ def extract_html_images(
                 height_match.group(1)
             )
 
-        # ----------------------------------------------------
-        # URLهای مستقیم و lazy
-        # ----------------------------------------------------
-
         attributes = re.findall(
             r'(?:src|data-src|data-original|'
             r'data-lazy-src|data-image|data-url)='
@@ -1687,11 +1601,8 @@ def extract_html_images(
                     "height": height,
                     "priority": 70,
                     "source": "img",
+                    "position": position,
                 })
-
-        # ----------------------------------------------------
-        # srcset
-        # ----------------------------------------------------
 
         srcsets = re.findall(
             r'srcset=["\']([^"\']+)["\']',
@@ -1716,6 +1627,8 @@ def extract_html_images(
                     )
                 )
 
+                candidate["position"] = position
+
                 candidates.append(
                     candidate
                 )
@@ -1731,9 +1644,6 @@ def get_article_image_candidates(
     content,
     article_url
 ):
-    """
-    تمام منابع قابل اتکای تصویر صفحه را جمع می‌کند.
-    """
 
     candidates = []
 
@@ -1770,9 +1680,6 @@ def get_article_image_candidates(
 def score_article_image(
     candidate
 ):
-    """
-    تصویر صفحه را از نظر کیفیت و احتمال اصلی بودن امتیازدهی می‌کند.
-    """
 
     url = candidate.get(
         "url",
@@ -1812,11 +1719,38 @@ def score_article_image(
         url
     )
 
-    lower_original_url = original_url.lower()
+    lower_original_url = (
+        original_url.lower()
+    )
+
+    # --------------------------------------------------------
+    # حذف صریح لوگوی مشکل‌دار French Football Weekly
+    # --------------------------------------------------------
 
     if (
-        "frenchfootballweekly.com" in lower_original_url
-        and "french-football-weekly-1024x1024-1.png" in lower_original_url
+        "frenchfootballweekly.com"
+        in lower_original_url
+        and (
+            "cropped-french-football-weekly"
+            in lower_original_url
+            or "french-football-weekly-1024x1024"
+            in lower_original_url
+        )
+    ):
+
+        return {
+            "score": -10000,
+            "url": original_url,
+            "width": width,
+            "height": height,
+        }
+
+    # --------------------------------------------------------
+    # حذف تصاویر عمومی سایت
+    # --------------------------------------------------------
+
+    if looks_like_site_asset_url(
+        original_url
     ):
 
         return {
@@ -1826,12 +1760,16 @@ def score_article_image(
             "height": height,
         }
 
+    # --------------------------------------------------------
+    # حذف thumbnail
+    # --------------------------------------------------------
+
     if looks_like_thumbnail_url(
         original_url
     ):
 
         return {
-            "score": -1000,
+            "score": -3000,
             "url": original_url,
             "width": width,
             "height": height,
@@ -1839,19 +1777,35 @@ def score_article_image(
 
     score = priority
 
+    # --------------------------------------------------------
+    # امتیاز منبع
+    # --------------------------------------------------------
+
     source_bonus = {
-        "og:image": 150,
-        "og:image:url": 145,
-        "twitter:image": 130,
-        "jsonld": 120,
-        "srcset": 80,
-        "img": 50,
+
+        # تصویر معرفی اصلی مقاله
+        "og:image": 500,
+
+        "og:image:url": 480,
+
+        "twitter:image": 300,
+
+        # تصویر Article در JSON-LD
+        "jsonld": 350,
+
+        "srcset": 100,
+
+        "img": 60,
     }
 
     score += source_bonus.get(
         source,
         20
     )
+
+    # --------------------------------------------------------
+    # ابعاد
+    # --------------------------------------------------------
 
     if width > 0:
 
@@ -1862,6 +1816,7 @@ def score_article_image(
 
         if width >= MIN_IMAGE_WIDTH:
             score += 300
+
         else:
             score -= 250
 
@@ -1874,8 +1829,13 @@ def score_article_image(
 
         if height >= MIN_IMAGE_HEIGHT:
             score += 200
+
         else:
             score -= 100
+
+    # --------------------------------------------------------
+    # الگوهای تصویر بزرگ
+    # --------------------------------------------------------
 
     large_size_patterns = (
         "1320x742",
@@ -1889,14 +1849,16 @@ def score_article_image(
         "2160x",
     )
 
-    lower_url = original_url.lower()
-
     for pattern in large_size_patterns:
 
-        if pattern in lower_url:
+        if pattern in lower_original_url:
 
             score += 250
             break
+
+    # --------------------------------------------------------
+    # الگوهای کوچک
+    # --------------------------------------------------------
 
     small_size_patterns = (
         "150x150",
@@ -1910,7 +1872,7 @@ def score_article_image(
 
     for pattern in small_size_patterns:
 
-        if pattern in lower_url:
+        if pattern in lower_original_url:
 
             score -= 400
             break
@@ -1930,16 +1892,12 @@ def score_article_image(
 def get_best_article_image(
     article_url
 ):
-    """
-    صفحهٔ خبر را بررسی می‌کند و بهترین تصویر واقعی
-    موجود در آن را انتخاب می‌کند.
-    """
 
     if not article_url:
         return ""
 
     print(
-        "در حال بررسی صفحهٔ خبر برای تصویر بهتر..."
+        "در حال بررسی صفحهٔ خبر برای تصویر اصلی..."
     )
 
     content = fetch_article_page(
@@ -1974,10 +1932,6 @@ def get_best_article_image(
         result = score_article_image(
             candidate
         )
-
-        # ----------------------------------------------------
-        # اگر ابعاد واقعی هنوز مشخص نیست
-        # ----------------------------------------------------
 
         if (
             result["score"] > -1000
@@ -2036,7 +1990,23 @@ def get_best_article_image(
     )
 
     # --------------------------------------------------------
-    # انتخاب اولین تصویر واقعاً مناسب
+    # چاپ چند گزینهٔ برتر برای اشکال‌زدایی
+    # --------------------------------------------------------
+
+    print(
+        "تصاویر برتر صفحه:"
+    )
+
+    for item in scored[:5]:
+
+        print(
+            f"  امتیاز={item['score']} | "
+            f"{item['width']}x{item['height']} | "
+            f"{item['url']}"
+        )
+
+    # --------------------------------------------------------
+    # انتخاب بهترین تصویر
     # --------------------------------------------------------
 
     for item in scored:
@@ -2047,7 +2017,7 @@ def get_best_article_image(
         ):
 
             print(
-                "✓ تصویر باکیفیت از صفحهٔ خبر پیدا شد."
+                "✓ تصویر اصلی صفحهٔ خبر انتخاب شد."
             )
 
             print(
@@ -2065,7 +2035,8 @@ def get_best_article_image(
             return item["url"]
 
     print(
-        "⚠️ تصویر باکیفیت قابل‌اعتمادی در صفحه پیدا نشد."
+        "⚠️ تصویر مناسب و قابل‌اعتمادی "
+        "در صفحه پیدا نشد."
     )
 
     return ""
@@ -2079,15 +2050,45 @@ def get_best_image(
     entry,
     article_url
 ):
-    """
-    سیاست نهایی انتخاب تصویر:
 
-    1. RSS خوب → همان تصویر
-    2. RSS بد → بررسی صفحه
-    3. صفحه تصویر خوب داشت → تصویر صفحه
-    4. صفحه هم چیزی نداشت → fallback به RSS
-    5. هیچ‌کدام → بدون تصویر
     """
+    سیاست جدید:
+
+    1. همیشه ابتدا صفحهٔ خود خبر بررسی می‌شود.
+    2. اگر صفحه تصویر اصلی مناسبی داشت، همان انتخاب می‌شود.
+    3. اگر صفحه تصویر مناسبی نداشت، RSS بررسی می‌شود.
+    4. اگر RSS هم مناسب نبود، بهترین fallback استفاده می‌شود.
+    """
+
+    article_image = ""
+
+    # --------------------------------------------------------
+    # اول صفحهٔ خبر
+    # --------------------------------------------------------
+
+    if (
+        ALWAYS_CHECK_ARTICLE_PAGE
+        and article_url
+    ):
+
+        article_image = (
+            get_best_article_image(
+                article_url
+            )
+        )
+
+        if article_image:
+
+            print(
+                "✓ تصویر صفحهٔ خبر "
+                "به عنوان تصویر نهایی انتخاب شد."
+            )
+
+            return article_image
+
+    # --------------------------------------------------------
+    # سپس RSS
+    # --------------------------------------------------------
 
     rss_result = get_best_rss_image(
         entry
@@ -2103,73 +2104,29 @@ def get_best_image(
         False
     )
 
-    # --------------------------------------------------------
-    # RSS تصویر خوب دارد
-    # --------------------------------------------------------
-
     if (
         rss_image
         and rss_is_good
     ):
 
         print(
-            "✓ تصویر RSS کیفیت مناسبی دارد؛ "
-            "صفحهٔ خبر بررسی نمی‌شود."
+            "✓ تصویر مناسب RSS "
+            "به عنوان fallback انتخاب شد."
         )
 
         return rss_image
-
-    # --------------------------------------------------------
-    # RSS تصویر دارد ولی بد است
-    # --------------------------------------------------------
 
     if rss_image:
 
         print(
-            "⚠️ تصویر RSS کوچک یا بی‌کیفیت است."
-        )
-
-        better_image = (
-            get_best_article_image(
-                article_url
-            )
-        )
-
-        if better_image:
-
-            print(
-                "✓ تصویر بهتر صفحهٔ خبر انتخاب شد."
-            )
-
-            return better_image
-
-        print(
-            "⚠️ تصویر بهتر از صفحه پیدا نشد."
+            "⚠️ تصویر RSS کیفیت ایده‌آلی ندارد."
         )
 
         print(
-            "✓ همان تصویر RSS به عنوان fallback استفاده می‌شود."
+            "✓ تصویر RSS به عنوان fallback استفاده می‌شود."
         )
 
         return rss_image
-
-    # --------------------------------------------------------
-    # RSS اصلاً تصویر ندارد
-    # --------------------------------------------------------
-
-    print(
-        "⚠️ RSS تصویر ندارد؛ صفحهٔ خبر بررسی می‌شود."
-    )
-
-    article_image = (
-        get_best_article_image(
-            article_url
-        )
-    )
-
-    if article_image:
-
-        return article_image
 
     print(
         "⚠️ هیچ تصویر قابل استفاده‌ای پیدا نشد."
@@ -2183,9 +2140,6 @@ def get_best_image(
 # ============================================================
 
 def safe_int(value):
-    """
-    تبدیل مقدار به عدد صحیح.
-    """
 
     try:
         return int(
