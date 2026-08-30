@@ -16,13 +16,15 @@ from config import (
     REQUEST_HEADERS,
     REQUEST_TIMEOUT,
 )
+
 from utils import make_absolute_url
+
 from image.image_filters import (
     safe_int,
     unwrap_image_proxy_url,
     looks_like_thumbnail_url,
+    looks_like_site_asset_url,
 )
-
 # ============================================================
 # تنظیمات داخلی
 # ============================================================
