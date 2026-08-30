@@ -20,8 +20,8 @@ from utils import make_absolute_url
 from image.image_filters import (
     safe_int,
     unwrap_image_proxy_url,
+    looks_like_thumbnail_url,
 )
-
 
 # ============================================================
 # تنظیمات داخلی
@@ -75,57 +75,6 @@ def get_image_dimensions(item):
     )
 
     return width, height
-
-
-# ============================================================
-# تشخیص thumbnail
-# ============================================================
-
-def looks_like_thumbnail_url(url):
-
-    if not url:
-        return False
-
-    lower = url.lower()
-
-    patterns = [
-
-        r"-\d{2,4}x\d{2,4}(?:\.[a-z0-9]+)(?:\?|$)",
-
-        r"/\d{2,4}x\d{2,4}/",
-
-        r"[?&](?:width|w)="
-        r"(?:120|150|160|180|200|240|300|320|400|480|640)"
-        r"(?:&|$)",
-
-        r"[?&](?:width|w)="
-        r"(?:120|150|160|180|200|240|300|320|400|480|640)"
-        r"[^0-9]",
-
-    ]
-
-    for pattern in patterns:
-
-        if re.search(
-            pattern,
-            lower
-        ):
-            return True
-
-    words = (
-        "thumbnail",
-        "thumb",
-        "tiny",
-        "avatar",
-        "favicon",
-    )
-
-    for word in words:
-
-        if word in lower:
-            return True
-
-    return False
 
 
 # ============================================================
