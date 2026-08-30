@@ -776,17 +776,7 @@ def evaluate_rss_candidate_without_download(candidate):
             "height": height,
         }
 
-    if looks_like_french_football_weekly_asset(
-        original_url
-    ):
-
-        return {
-            "score": -10000,
-            "url": original_url,
-            "width": width,
-            "height": height,
-        }
-
+  
     score = priority
 
     # تصویر دارای ابعاد اعلام‌شده ارزش بیشتری دارد
@@ -1520,20 +1510,6 @@ def score_article_image(candidate):
 
     lower = original_url.lower()
 
-    # --------------------------------------------------------
-    # French Football Weekly
-    # --------------------------------------------------------
-
-    if looks_like_french_football_weekly_asset(
-        original_url
-    ):
-
-        return {
-            "score": -10000,
-            "url": original_url,
-            "width": width,
-            "height": height,
-        }
 
     # --------------------------------------------------------
     # asset عمومی
