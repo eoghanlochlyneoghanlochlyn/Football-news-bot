@@ -2124,5 +2124,40 @@
     "source": "FootballFanCast",
     "published": "2026-08-30T06:16:16+00:00",
     "sent_at": "2026-08-30T06:41:14.439427+00:00"
+  },
+  "https://www.theguardian.com/football/2026/aug/30/mario-balotelli-interview-italy-saudi-arabia-maturity": {
+    "title": "‘I’ve had a very hectic career’: Mario Balotelli on Italian football’s troubles and his future",
+    "normalized_title": "ive had a very hectic career mario balotelli on italian footballs troubles and his future",
+    "source": "The Guardian",
+    "published": "2026-08-30T07:00:50+00:00",
+    "sent_at": "2026-08-30T07:38:32.445052+00:00"
+  },
+  "https://www.footballfancast.com/how-sunderland-could-sign-fofana-upgrade-on-catamo-paixao": {
+    "title": "How Sunderland could seal a late-window upgrade on Catamo and Paixao",
+    "normalized_title": "how sunderland could seal a late-window upgrade on catamo and paixao",
+    "source": "FootballFanCast",
+    "published": "2026-08-30T07:10:11+00:00",
+    "sent_at": "2026-08-30T07:38:39.207354+00:00"
+  },
+  "https://www.footballfancast.com/how-aston-villa-could-secure-amad-diallo-upgrade-on-ibrahim-mbaye": {
+    "title": "How Aston Villa could secure an instant £40m upgrade on Ibrahim Mbaye",
+    "normalized_title": "how aston villa could secure an instant £40m upgrade on ibrahim mbaye",
+    "source": "FootballFanCast",
+    "published": "2026-08-30T07:10:11+00:00",
+    "sent_at": "2026-08-30T07:38:46.149827+00:00"
+  },
+  "https://www.theguardian.com/football/live/2026/aug/30/transfer-latest-premier-league-buildup-and-more-matchday-live": {
+    "title": "Transfer latest as deadline looms, Premier League buildup and more – matchday live",
+    "normalized_title": "transfer latest as deadline looms premier league buildup and more – matchday live",
+    "source": "The Guardian",
+    "published": "2026-08-30T07:24:02+00:00",
+    "sent_at": "2026-08-30T07:38:53.108610+00:00"
+  },
+  "https://www.football365.com/news/aston-villa-ian-maatsen-manchester-united-decision-reached": {
+    "title": "Aston Villa respond to Man Utd enquiry for Ian Maatsen",
+    "normalized_title": "aston villa respond to man utd enquiry for ian maatsen",
+    "source": "Football365",
+    "published": "2026-08-30T07:30:48+00:00",
+    "sent_at": "2026-08-30T07:38:59.514380+00:00"
   }
 }
