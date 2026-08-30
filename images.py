@@ -17,7 +17,10 @@ from config import (
     REQUEST_TIMEOUT,
 )
 from utils import make_absolute_url
-from image.image_filters import safe_int
+from image.image_filters import (
+    safe_int,
+    unwrap_image_proxy_url,
+)
 
 
 # ============================================================
@@ -192,56 +195,6 @@ def looks_like_french_football_weekly_asset(url):
 
     return False
 
-
-# ============================================================
-# باز کردن URL های واسطه‌ای تصویر
-# ============================================================
-
-def unwrap_image_proxy_url(url):
-
-    if not url:
-        return ""
-
-    try:
-
-        parsed = urlsplit(url)
-
-        query = parse_qs(
-            parsed.query
-        )
-
-        for key in (
-            "url",
-            "src",
-            "image",
-            "image_url",
-            "original",
-        ):
-
-            values = query.get(key)
-
-            if not values:
-                continue
-
-            original = values[0]
-
-            original = unquote(
-                html.unescape(
-                    original
-                )
-            ).strip()
-
-            if (
-                original.startswith("http://")
-                or original.startswith("https://")
-            ):
-
-                return original
-
-    except Exception:
-        pass
-
-    return url
 
 
 # ============================================================
