@@ -103,3 +103,33 @@ def looks_like_thumbnail_url(url):
             return True
 
     return False
+
+def looks_like_site_asset_url(url):
+
+    if not url:
+        return False
+
+    lower = url.lower()
+
+    patterns = (
+        "logo",
+        "site-logo",
+        "header-logo",
+        "footer-logo",
+        "avatar",
+        "author",
+        "profile",
+        "favicon",
+        "site-icon",
+        "icon",
+        "cropped-",
+        "wordpress-logo",
+        "wp-logo",
+    )
+
+    for pattern in patterns:
+
+        if pattern in lower:
+            return True
+
+    return False
