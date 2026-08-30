@@ -2159,5 +2159,12 @@
     "source": "Football365",
     "published": "2026-08-30T07:30:48+00:00",
     "sent_at": "2026-08-30T07:38:59.514380+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/ceqewejnpr3o": {
+    "title": "Barcola - the 'grasshopper' who has overcome setbacks",
+    "normalized_title": "barcola - the grasshopper who has overcome setbacks",
+    "source": "BBC Sport",
+    "published": "2026-08-30T07:38:07+00:00",
+    "sent_at": "2026-08-30T07:47:47.033617+00:00"
   }
 }
