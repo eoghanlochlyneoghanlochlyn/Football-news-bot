@@ -17,6 +17,7 @@ from config import (
     REQUEST_TIMEOUT,
 )
 from utils import make_absolute_url
+from image.image_filters import safe_int
 
 
 # ============================================================
@@ -39,14 +40,6 @@ MAX_REAL_DIMENSION_CHECKS = 2
 # ============================================================
 # ابزارهای عمومی
 # ============================================================
-
-def safe_int(value):
-
-    try:
-        return int(value)
-    except Exception:
-        return 0
-
 
 def extract_image_url(item):
 
