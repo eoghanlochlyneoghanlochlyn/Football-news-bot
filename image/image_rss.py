@@ -16,6 +16,7 @@ from image.image_filters import (
     looks_like_site_asset_url,
 )
 
+MAX_REAL_DIMENSION_CHECKS = 2
 
 # ============================================================
 # ابزارهای عمومی
