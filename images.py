@@ -32,6 +32,7 @@ from image.image_dimensions import (
 
 from image.image_rss import (
     get_best_rss_image,
+    parse_srcset,
 )
 
 # ============================================================
