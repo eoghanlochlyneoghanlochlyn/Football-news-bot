@@ -1,20 +1,19 @@
 import html
 import re
 
-from image.image_filters import (
-    unwrap_image_proxy_url,
-    looks_like_thumbnail_url,
-    looks_like_site_asset_url,
+from config import (
+    MIN_IMAGE_HEIGHT,
+    MIN_IMAGE_WIDTH,
 )
 
 from image.image_dimensions import (
     get_real_image_dimensions,
 )
 
-from config import (
-    MIN_IMAGE_HEIGHT,
-    MIN_IMAGE_WIDTH,
-    MAX_REAL_DIMENSION_CHECKS,
+from image.image_filters import (
+    unwrap_image_proxy_url,
+    looks_like_thumbnail_url,
+    looks_like_site_asset_url,
 )
 
 
