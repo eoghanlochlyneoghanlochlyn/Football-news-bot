@@ -30,6 +30,10 @@ from image.image_dimensions import (
     get_real_image_dimensions,
 )
 
+from image.image_rss import (
+    get_best_rss_image,
+)
+
 # ============================================================
 # تنظیمات داخلی
 # ============================================================
