@@ -133,3 +133,92 @@ def looks_like_site_asset_url(url):
             return True
 
     return False
+
+def parse_srcset(
+    srcset,
+    priority=80,
+    source="srcset"
+):
+
+    candidates = []
+
+    for part in srcset.split(","):
+
+        pieces = part.strip().split()
+
+        if not pieces:
+            continue
+
+        image_url = html.unescape(
+            pieces[0]
+        ).strip()
+
+        width = 0
+
+        if len(pieces) > 1:
+
+            match = re.search(
+                r"(\d+)w",
+                pieces[1]
+            )
+
+            if match:
+                width = int(match.group(1))
+
+        if image_url:
+
+            candidates.append({
+                "url": image_url,
+                "width": width,
+                "height": 0,
+                "priority": priority,
+                "source": source,
+            })
+
+    return candidates
+
+
+def deduplicate_candidates(candidates):
+
+    unique = {}
+
+    for candidate in candidates:
+
+        url = candidate.get("url", "")
+
+        if not url:
+            continue
+
+        key = url.strip()
+
+        if key not in unique:
+
+            unique[key] = candidate
+
+        else:
+
+            old = unique[key]
+
+            old_size = (
+                old.get("width", 0)
+                * old.get("height", 0)
+            )
+
+            new_size = (
+                candidate.get("width", 0)
+                * candidate.get("height", 0)
+            )
+
+            if new_size > old_size:
+
+                unique[key] = candidate
+
+            elif (
+                new_size == old_size
+                and candidate.get("priority", 0)
+                > old.get("priority", 0)
+            ):
+
+                unique[key] = candidate
+
+    return list(unique.values())
