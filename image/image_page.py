@@ -11,7 +11,7 @@ from config import (
 
 from utils import make_absolute_url
 
-from image.image_common import (
+from image.image_filters import (
     safe_int,
     parse_srcset,
     deduplicate_candidates,
