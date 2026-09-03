@@ -1664,5 +1664,12 @@
     "source": "FootballFanCast",
     "published": "2026-09-03T16:15:11+00:00",
     "sent_at": "2026-09-03T16:17:15.660815+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/ce87vzgyzd9o": {
+    "title": "Breaking down Chelsea's staggering 39 exits this summer",
+    "normalized_title": "breaking down chelseas staggering 39 exits this summer",
+    "source": "BBC Sport",
+    "published": "2026-09-03T16:20:42+00:00",
+    "sent_at": "2026-09-03T16:26:08.619850+00:00"
   }
 }
