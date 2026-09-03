@@ -1685,5 +1685,19 @@
     "source": "French Football Weekly",
     "published": "2026-09-03T15:13:52+00:00",
     "sent_at": "2026-09-03T15:16:13.761520+00:00"
+  },
+  "https://football-italia.net/serie-a-schedule-confirmed-weeks-3-12": {
+    "title": "Official: Serie A schedule, times and dates confirmed for weeks 3-12",
+    "normalized_title": "official serie a schedule times and dates confirmed for weeks 3-12",
+    "source": "Football Italia",
+    "published": "2026-09-03T15:02:03+00:00",
+    "sent_at": "2026-09-03T15:21:17.394462+00:00"
+  },
+  "https://www.footballfancast.com/west-ham-transfers-signings": {
+    "title": "All Completed West Ham Transfers in 2026/27",
+    "normalized_title": "all completed west ham transfers in 2026/27",
+    "source": "FootballFanCast",
+    "published": "2026-09-03T15:15:17+00:00",
+    "sent_at": "2026-09-03T15:22:09.023980+00:00"
   }
 }
