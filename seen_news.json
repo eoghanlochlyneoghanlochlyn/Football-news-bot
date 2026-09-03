@@ -1860,5 +1860,19 @@
     "source": "CaughtOffside",
     "published": "2026-09-03T22:58:34+00:00",
     "sent_at": "2026-09-03T23:01:08.563524+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/03/stade-rennais-lilian-brassier-very-close-to-eintracht-frankfurt": {
+    "title": "Stade Rennais: Lilian Brassier very close to Eintracht Frankfurt",
+    "normalized_title": "stade rennais lilian brassier very close to eintracht frankfurt",
+    "source": "French Football Weekly",
+    "published": "2026-09-03T23:13:52+00:00",
+    "sent_at": "2026-09-03T23:15:54.542375+00:00"
+  },
+  "https://thehardtackle.com/transfer-news/2026/09/04/everton-decide-against-signing-a-free-agent-striker": {
+    "title": "Everton decide against signing a free agent striker",
+    "normalized_title": "everton decide against signing a free agent striker",
+    "source": "The Hard Tackle",
+    "published": "2026-09-03T23:14:34+00:00",
+    "sent_at": "2026-09-03T23:16:02.257034+00:00"
   }
 }
