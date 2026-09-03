@@ -1706,5 +1706,12 @@
     "source": "Bulinews",
     "published": "2026-09-03T19:24:00+00:00",
     "sent_at": "2026-09-03T19:26:00.910942+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/03/thierry-henry-fifa-scandal-players": {
+    "title": "Thierry Henry says players ‘have more power than they think’ amid Fifa scandals",
+    "normalized_title": "thierry henry says players have more power than they think amid fifa scandals",
+    "source": "The Guardian",
+    "published": "2026-09-03T19:10:36+00:00",
+    "sent_at": "2026-09-03T19:31:06.536611+00:00"
   }
 }
