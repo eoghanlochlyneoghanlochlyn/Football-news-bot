@@ -1741,5 +1741,12 @@
     "source": "Football Italia",
     "published": "2026-09-03T14:31:12+00:00",
     "sent_at": "2026-09-03T14:41:02.969576+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/crm93nv8n7yo": {
+    "title": "Leeds' Rodon out for up to 10 weeks with hamstring injury",
+    "normalized_title": "leeds rodon out for up to 10 weeks with hamstring injury",
+    "source": "BBC Sport",
+    "published": "2026-09-03T14:39:30+00:00",
+    "sent_at": "2026-09-03T14:45:58.647095+00:00"
   }
 }
