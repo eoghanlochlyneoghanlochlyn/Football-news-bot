@@ -1,60 +1,4 @@
 {
-  "https://football-italia.net/champions-league-draw-roma-reunite-mourinho": {
-    "title": "Champions League draw: Roma players hope for Mourinho reunion",
-    "normalized_title": "champions league draw roma players hope for mourinho reunion",
-    "source": "Football Italia",
-    "published": "2026-08-27T15:34:32+00:00",
-    "sent_at": "2026-08-27T16:06:00.406892+00:00"
-  },
-  "https://football-italia.net/uefa-criminal-mismanagement-complaint-fifa": {
-    "title": "UEFA file ‘criminal mismanagement’ complaint against FIFA over $4.2 billion sell-off plan",
-    "normalized_title": "uefa file criminal mismanagement complaint against fifa over $42 billion sell-off plan",
-    "source": "Football Italia",
-    "published": "2026-08-27T15:35:06+00:00",
-    "sent_at": "2026-08-27T16:06:09.195413+00:00"
-  },
-  "https://bulinews.com/polzin-possible-fabio-vieira-return-huge-boost-came-back": {
-    "title": "Polzin on possible Fábio Vieira return: \"It would be a huge boost if he came back\"",
-    "normalized_title": "polzin on possible fábio vieira return it would be a huge boost if he came back",
-    "source": "Bulinews",
-    "published": "2026-08-27T15:40:00+00:00",
-    "sent_at": "2026-08-27T16:07:21.043880+00:00"
-  },
-  "https://www.caughtoffside.com/2026/08/27/honest-ahanor-chelsea-transfer-here-we-go-romano": {
-    "title": "Fabrizio Romano reveals “here we go” for Chelsea to complete £40m transfer",
-    "normalized_title": "fabrizio romano reveals here we go for chelsea to complete £40m transfer",
-    "source": "CaughtOffside",
-    "published": "2026-08-27T15:42:25+00:00",
-    "sent_at": "2026-08-27T16:07:28.284681+00:00"
-  },
-  "https://football-italia.net/leao-milan-toxic-relationship-ahanor-chelsea": {
-    "title": "Leao & Milan toxic relationship finally over. Ahanor to Chelsea: good or bad for Italy? VIDEO",
-    "normalized_title": "leao & milan toxic relationship finally over ahanor to chelsea good or bad for italy video",
-    "source": "Football Italia",
-    "published": "2026-08-27T15:42:46+00:00",
-    "sent_at": "2026-08-27T16:07:36.034879+00:00"
-  },
-  "https://www.theguardian.com/football/live/2026/aug/27/uefa-champions-league-2026-27-league-phase-draw-live": {
-    "title": "Uefa Champions League 2026-27: league phase draw – live",
-    "normalized_title": "uefa champions league 2026-27 league phase draw – live",
-    "source": "The Guardian",
-    "published": "2026-08-27T15:53:03+00:00",
-    "sent_at": "2026-08-27T16:08:47.977272+00:00"
-  },
-  "https://bulinews.com/official-bayern-send-bryan-zaragoza-loan-espanyol": {
-    "title": "Official: Bayern send Bryan Zaragoza on loan to Espanyol",
-    "normalized_title": "official bayern send bryan zaragoza on loan to espanyol",
-    "source": "Bulinews",
-    "published": "2026-08-27T15:54:00+00:00",
-    "sent_at": "2026-08-27T16:08:54.674653+00:00"
-  },
-  "https://bulinews.com/confirmed-lineups-freiburg-motherwell": {
-    "title": "Confirmed Lineups: SC Freiburg vs. Motherwell FC",
-    "normalized_title": "confirmed lineups sc freiburg vs motherwell fc",
-    "source": "Bulinews",
-    "published": "2026-08-27T16:02:00+00:00",
-    "sent_at": "2026-08-27T16:10:06.819690+00:00"
-  },
   "https://bulinews.com/champions-league-draw-bayern-dortmund-leipzig-and-stuttgart-discover-league-phase-opponents": {
     "title": "Champions League draw: Bayern, Dortmund, Leipzig and Stuttgart discover league phase opponents",
     "normalized_title": "champions league draw bayern dortmund leipzig and stuttgart discover league phase opponents",
@@ -1671,5 +1615,26 @@
     "source": "The Hard Tackle",
     "published": "2026-09-03T15:52:57+00:00",
     "sent_at": "2026-09-03T15:56:06.740649+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/03/summer-transfer-window-2026-trends-premier-league-la-liga-serie-a-bundesliga-ligue-1": {
+    "title": "World Cup wishlists, early movers, big clearouts: 2026 summer transfer window trends",
+    "normalized_title": "world cup wishlists early movers big clearouts 2026 summer transfer window trends",
+    "source": "The Guardian",
+    "published": "2026-09-03T16:00:42+00:00",
+    "sent_at": "2026-09-03T16:11:00.710350+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/03/wsl-transfer-deadline-day-arsenal-elisa-de-almeida-psg": {
+    "title": "Arsenal poised to land PSG’s Élisa De Almeida on WSL transfer deadline day",
+    "normalized_title": "arsenal poised to land psgs élisa de almeida on wsl transfer deadline day",
+    "source": "The Guardian",
+    "published": "2026-09-03T16:02:46+00:00",
+    "sent_at": "2026-09-03T16:11:09.943429+00:00"
+  },
+  "https://www.fourfourtwo.com/person/player/ismaila-sarr-heartbroken-after-failed-liverpool-transfer-crystal-palace-boss-addresses-possible-january-move": {
+    "title": "Ismaila Sarr 'recovering' after failed Liverpool transfer as Crystal Palace boss addresses January move",
+    "normalized_title": "ismaila sarr recovering after failed liverpool transfer as crystal palace boss addresses january move",
+    "source": "FourFourTwo",
+    "published": "2026-09-03T16:04:56+00:00",
+    "sent_at": "2026-09-03T16:11:18.938465+00:00"
   }
 }
