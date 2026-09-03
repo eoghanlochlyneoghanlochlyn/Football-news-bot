@@ -1671,5 +1671,19 @@
     "source": "BBC Sport",
     "published": "2026-09-03T16:20:42+00:00",
     "sent_at": "2026-09-03T16:26:08.619850+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/03/gabriel-martinelli-leaves-arsenal-al-hilal": {
+    "title": "Gabriel Martinelli leaves Arsenal for Saudi Arabian club Al-Hilal in £60m deal",
+    "normalized_title": "gabriel martinelli leaves arsenal for saudi arabian club al-hilal in £60m deal",
+    "source": "The Guardian",
+    "published": "2026-09-03T16:30:08+00:00",
+    "sent_at": "2026-09-03T16:41:16.363933+00:00"
+  },
+  "https://www.footballfancast.com/galatasaray-rival-al-ittihad-chemsdine-talbi-sunderland": {
+    "title": "League champions rival Al-Ittihad for Talbi as Sunderland star sparks transfer race",
+    "normalized_title": "league champions rival al-ittihad for talbi as sunderland star sparks transfer race",
+    "source": "FootballFanCast",
+    "published": "2026-09-03T16:40:11+00:00",
+    "sent_at": "2026-09-03T16:41:24.125116+00:00"
   }
 }
