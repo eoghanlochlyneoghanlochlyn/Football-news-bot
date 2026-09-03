@@ -1713,5 +1713,26 @@
     "source": "The Hard Tackle",
     "published": "2026-09-03T17:02:41+00:00",
     "sent_at": "2026-09-03T17:06:10.609935+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/cq5xl575q7no": {
+    "title": "Arsenal's Martinelli joins Al-Hilal in £60m move",
+    "normalized_title": "arsenals martinelli joins al-hilal in £60m move",
+    "source": "BBC Sport",
+    "published": "2026-09-03T16:30:43+00:00",
+    "sent_at": "2026-09-03T17:16:41.734103+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/c07lk45y3ego": {
+    "title": "'Adonis' Gibbs-White's chance to shine - will Tuchel take notice?",
+    "normalized_title": "adonis gibbs-whites chance to shine - will tuchel take notice",
+    "source": "BBC Sport",
+    "published": "2026-09-03T17:07:18+00:00",
+    "sent_at": "2026-09-03T17:16:48.373302+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/03/serie-a-juventus-starts-well-in-frosinone-lecce-dominates-venice": {
+    "title": "Serie A: Juventus starts well in Frosinone, Lecce dominates Venice",
+    "normalized_title": "serie a juventus starts well in frosinone lecce dominates venice",
+    "source": "French Football Weekly",
+    "published": "2026-09-03T17:13:52+00:00",
+    "sent_at": "2026-09-03T17:17:00.687885+00:00"
   }
 }
