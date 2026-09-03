@@ -1713,5 +1713,26 @@
     "source": "The Guardian",
     "published": "2026-09-03T19:10:36+00:00",
     "sent_at": "2026-09-03T19:31:06.536611+00:00"
+  },
+  "https://www.cbssports.com/soccer/news/gabriel-martinelli-transfer-grades-arsenal": {
+    "title": "Gabriel Martinelli transfer grades: Arsenal attacker moves to Al-Hilal in $81 million deal",
+    "normalized_title": "gabriel martinelli transfer grades arsenal attacker moves to al-hilal in $81 million deal",
+    "source": "CBS Sports",
+    "published": "2026-09-03T19:09:50+00:00",
+    "sent_at": "2026-09-03T19:40:53.009733+00:00"
+  },
+  "https://www.footballfancast.com/mikey-moore-should-be-frustrated-spurs-have-signed-mudryk": {
+    "title": "The \"English Neymar\" should be frustrated that Spurs have signed Mudryk",
+    "normalized_title": "the english neymar should be frustrated that spurs have signed mudryk",
+    "source": "FootballFanCast",
+    "published": "2026-09-03T19:40:11+00:00",
+    "sent_at": "2026-09-03T19:41:00.387131+00:00"
+  },
+  "https://www.footballfancast.com/arsenal-held-talks-to-sign-lautaro-martinez-better-than-julian-alvarez": {
+    "title": "Arsenal held talks to sign a better striker than Julian Alvarez last week",
+    "normalized_title": "arsenal held talks to sign a better striker than julian alvarez last week",
+    "source": "FootballFanCast",
+    "published": "2026-09-03T19:40:11+00:00",
+    "sent_at": "2026-09-03T19:41:06.954110+00:00"
   }
 }
