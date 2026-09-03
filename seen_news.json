@@ -1734,5 +1734,26 @@
     "source": "French Football Weekly",
     "published": "2026-09-03T17:13:52+00:00",
     "sent_at": "2026-09-03T17:17:00.687885+00:00"
+  },
+  "https://football-italia.net/amorim-has-opportunity-to-make-milan-history": {
+    "title": "Amorim has an opportunity to make history if Milan beat Juventus",
+    "normalized_title": "amorim has an opportunity to make history if milan beat juventus",
+    "source": "Football Italia",
+    "published": "2026-09-03T17:08:08+00:00",
+    "sent_at": "2026-09-03T17:21:12.186312+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/c79038z3q4yo": {
+    "title": "Spurs omit Richarlison from Premier League squad",
+    "normalized_title": "spurs omit richarlison from premier league squad",
+    "source": "BBC Sport",
+    "published": "2026-09-03T17:11:10+00:00",
+    "sent_at": "2026-09-03T17:21:19.171475+00:00"
+  },
+  "https://www.101greatgoals.com/football/premier-league/martinelli-completes-60m-move-from-arsenal-to-al-hilal": {
+    "title": "Martinelli completes £60m move from Arsenal to Al Hilal",
+    "normalized_title": "martinelli completes £60m move from arsenal to al hilal",
+    "source": "101 Great Goals",
+    "published": "2026-09-03T17:17:04+00:00",
+    "sent_at": "2026-09-03T17:21:31.233057+00:00"
   }
 }
