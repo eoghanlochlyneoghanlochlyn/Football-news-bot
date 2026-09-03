@@ -1755,5 +1755,19 @@
     "source": "FootballFanCast",
     "published": "2026-09-03T19:45:11+00:00",
     "sent_at": "2026-09-03T19:47:19.605654+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/c62j5lkjg74o": {
+    "title": "Sutton's predictions v Kasabian frontman Serge Pizzorno",
+    "normalized_title": "suttons predictions v kasabian frontman serge pizzorno",
+    "source": "BBC Sport",
+    "published": "2026-09-03T19:58:10+00:00",
+    "sent_at": "2026-09-03T20:06:09.369638+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/03/everton-anthony-martial-transfer-free-agent": {
+    "title": "Everton offered chance to sign 63-goal former Man United star after disastrous transfer window",
+    "normalized_title": "everton offered chance to sign 63-goal former man united star after disastrous transfer window",
+    "source": "CaughtOffside",
+    "published": "2026-09-03T20:01:42+00:00",
+    "sent_at": "2026-09-03T20:06:17.460287+00:00"
   }
 }
