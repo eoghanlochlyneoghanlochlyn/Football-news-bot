@@ -1,39 +1,4 @@
 {
-  "https://football-italia.net/suwarso-surreal-como-champions-stadium-well": {
-    "title": "Suwarso: ‘Surreal’ to see Como in Champions League, hopes stadium plans ‘go well’",
-    "normalized_title": "suwarso surreal to see como in champions league hopes stadium plans go well",
-    "source": "Football Italia",
-    "published": "2026-08-27T17:46:13+00:00",
-    "sent_at": "2026-08-27T18:16:25.652491+00:00"
-  },
-  "https://www.footballfancast.com/tonali-repeat-emi-martinez-could-seal-spurs-transfer": {
-    "title": "Tonali repeat: One of the Premier League's best players could sign for Spurs",
-    "normalized_title": "tonali repeat one of the premier leagues best players could sign for spurs",
-    "source": "FootballFanCast",
-    "published": "2026-08-27T18:06:50+00:00",
-    "sent_at": "2026-08-27T18:16:44.250957+00:00"
-  },
-  "https://thehardtackle.com/round-up/2026/08/27/coventry-city-vs-hull-city-preview-and-prediction": {
-    "title": "Coventry City vs Hull City: Preview and Prediction",
-    "normalized_title": "coventry city vs hull city preview and prediction",
-    "source": "The Hard Tackle",
-    "published": "2026-08-27T18:08:02+00:00",
-    "sent_at": "2026-08-27T18:16:55.203000+00:00"
-  },
-  "https://bulinews.com/bayern-munich-vfb-stuttgart-preview-big-clash-season-opener": {
-    "title": "FC Bayern Munich vs VfB Stuttgart preview: Big clash in season opener",
-    "normalized_title": "fc bayern munich vs vfb stuttgart preview big clash in season opener",
-    "source": "Bulinews",
-    "published": "2026-08-27T18:13:00+00:00",
-    "sent_at": "2026-08-27T18:17:45.728638+00:00"
-  },
-  "https://frenchfootballweekly.com/2026/08/27/real-madrid-jose-mourinho-no-longer-wants-recruits": {
-    "title": "Real Madrid: José Mourinho no longer wants recruits",
-    "normalized_title": "real madrid josé mourinho no longer wants recruits",
-    "source": "French Football Weekly",
-    "published": "2026-08-27T18:13:51+00:00",
-    "sent_at": "2026-08-27T18:17:53.427657+00:00"
-  },
   "https://www.caughtoffside.com/2026/08/29/chelsea-legend-on-emiliano-martinez-transfer": {
     "title": "“Signing of the summer” – John Terry claims Chelsea will be getting an “unbelievable” player",
     "normalized_title": "signing of the summer – john terry claims chelsea will be getting an unbelievable player",
@@ -1657,5 +1622,19 @@
     "source": "French Football Weekly",
     "published": "2026-09-03T18:13:53+00:00",
     "sent_at": "2026-09-03T18:16:01.566502+00:00"
+  },
+  "https://www.101greatgoals.com/football/premier-league/liverpool-ismaila-sarr-needs-time-to-digest-failed-move": {
+    "title": "Liverpool: Ismaila Sarr ‘needs time’ to ‘digest’ failed move",
+    "normalized_title": "liverpool ismaila sarr needs time to digest failed move",
+    "source": "101 Great Goals",
+    "published": "2026-09-03T18:18:12+00:00",
+    "sent_at": "2026-09-03T18:21:05.202526+00:00"
+  },
+  "https://www.footballfancast.com/rangers-besiktas-twist-nicolas-raskin-u-turn": {
+    "title": "Turkish journalist shares \"bizarre\" Rangers and Besiktas twist after Raskin U-turn",
+    "normalized_title": "turkish journalist shares bizarre rangers and besiktas twist after raskin u-turn",
+    "source": "FootballFanCast",
+    "published": "2026-09-03T18:20:11+00:00",
+    "sent_at": "2026-09-03T18:21:19.031018+00:00"
   }
 }
