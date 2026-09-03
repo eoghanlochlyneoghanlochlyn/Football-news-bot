@@ -1671,5 +1671,26 @@
     "source": "Football365",
     "published": "2026-09-03T15:35:18+00:00",
     "sent_at": "2026-09-03T15:36:08.249645+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/03/mike-dean-claims-secret-games-for-a-laugh-while-refereeing-matches-football-premier-league": {
+    "title": "Mike Dean claims he played secret games for a laugh while refereeing matches",
+    "normalized_title": "mike dean claims he played secret games for a laugh while refereeing matches",
+    "source": "The Guardian",
+    "published": "2026-09-03T15:22:39+00:00",
+    "sent_at": "2026-09-03T15:40:58.118016+00:00"
+  },
+  "https://www.football365.com/news/tottenham-complete-richarlison-sale-within-24-hours-mega-money-deal-agreed-sources": {
+    "title": "Tottenham to complete major sale within 24 hours after mega-money deal agreed – sources",
+    "normalized_title": "tottenham to complete major sale within 24 hours after mega-money deal agreed – sources",
+    "source": "Football365",
+    "published": "2026-09-03T15:37:46+00:00",
+    "sent_at": "2026-09-03T15:41:19.860253+00:00"
+  },
+  "https://www.football365.com/news/chelsea-manchester-united-pedro-neto": {
+    "title": "£54m Chelsea star’s reaction to Man Utd interest emerges",
+    "normalized_title": "£54m chelsea stars reaction to man utd interest emerges",
+    "source": "Football365",
+    "published": "2026-09-03T15:38:54+00:00",
+    "sent_at": "2026-09-03T15:41:30.663714+00:00"
   }
 }
