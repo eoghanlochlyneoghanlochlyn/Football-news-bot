@@ -1650,5 +1650,12 @@
     "source": "FootballFanCast",
     "published": "2026-09-03T18:10:11+00:00",
     "sent_at": "2026-09-03T18:11:03.917346+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/03/manchester-united-targets-barca-player": {
+    "title": "Manchester United targets Barça player",
+    "normalized_title": "manchester united targets barça player",
+    "source": "French Football Weekly",
+    "published": "2026-09-03T18:13:53+00:00",
+    "sent_at": "2026-09-03T18:16:01.566502+00:00"
   }
 }
