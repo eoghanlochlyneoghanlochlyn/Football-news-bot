@@ -1706,5 +1706,26 @@
     "source": "French Football Weekly",
     "published": "2026-09-03T14:13:56+00:00",
     "sent_at": "2026-09-03T14:16:22.505592+00:00"
+  },
+  "https://football-italia.net/tomori-returns-milan-training-freeze-out": {
+    "title": "Tomori returns to Milan training after surviving summer freeze-out",
+    "normalized_title": "tomori returns to milan training after surviving summer freeze-out",
+    "source": "Football Italia",
+    "published": "2026-09-03T14:19:14+00:00",
+    "sent_at": "2026-09-03T14:25:52.015745+00:00"
+  },
+  "https://bulinews.com/gruda-emerges-doubt-for-leipzig-trip-bremen": {
+    "title": "Gruda emerges as a doubt for RB Leipzig's trip to Bremen",
+    "normalized_title": "gruda emerges as a doubt for rb leipzigs trip to bremen",
+    "source": "Bulinews",
+    "published": "2026-09-03T14:20:00+00:00",
+    "sent_at": "2026-09-03T14:26:28.920625+00:00"
+  },
+  "https://www.footballfancast.com/sunderland-transfers-signings": {
+    "title": "All Completed Sunderland Transfers in 2026/27",
+    "normalized_title": "all completed sunderland transfers in 2026/27",
+    "source": "FootballFanCast",
+    "published": "2026-09-03T14:22:41+00:00",
+    "sent_at": "2026-09-03T14:26:36.406742+00:00"
   }
 }
