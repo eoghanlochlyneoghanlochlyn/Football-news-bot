@@ -1874,5 +1874,19 @@
     "source": "The Hard Tackle",
     "published": "2026-09-03T23:14:34+00:00",
     "sent_at": "2026-09-03T23:16:02.257034+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/04/premier-league-10-things-to-look-out-for-this-weekend": {
+    "title": "Premier League: 10 things to look out for this weekend",
+    "normalized_title": "premier league 10 things to look out for this weekend",
+    "source": "The Guardian",
+    "published": "2026-09-03T23:01:51+00:00",
+    "sent_at": "2026-09-03T23:25:52.186193+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/04/womens-super-league-2026-27-preview-no-14-west-ham": {
+    "title": "Women’s Super League 2026-27 preview No 14: West Ham",
+    "normalized_title": "womens super league 2026-27 preview no 14 west ham",
+    "source": "The Guardian",
+    "published": "2026-09-03T23:01:51+00:00",
+    "sent_at": "2026-09-03T23:25:59.359374+00:00"
   }
 }
