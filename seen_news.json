@@ -1811,5 +1811,12 @@
     "source": "French Football Weekly",
     "published": "2026-09-03T21:13:51+00:00",
     "sent_at": "2026-09-03T21:15:56.153173+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/02/scottish-premiership-celtic-aberdeen-kenny-dalglish-rangers-falkirk": {
+    "title": "Scottish Premiership: McPake’s solo pearler seals Hearts’ cruise past 10-man Hibs",
+    "normalized_title": "scottish premiership mcpakes solo pearler seals hearts cruise past 10-man hibs",
+    "source": "The Guardian",
+    "published": "2026-09-03T21:13:18+00:00",
+    "sent_at": "2026-09-03T21:21:01.099454+00:00"
   }
 }
