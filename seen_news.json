@@ -1,109 +1,4 @@
 {
-  "https://www.bbc.co.uk/sport/football/articles/c980e1d2vpgo": {
-    "title": "Arsenal only likely exit for Alvarez as striker skips training",
-    "normalized_title": "arsenal only likely exit for alvarez as striker skips training",
-    "source": "BBC Sport",
-    "published": "2026-08-27T14:18:57+00:00",
-    "sent_at": "2026-08-27T15:12:51.314623+00:00"
-  },
-  "https://www.theguardian.com/football/2026/aug/27/jamie-carragher-hit-with-hmrc-bankruptcy-petition-over-unpaid-tax-bill": {
-    "title": "Jamie Carragher hit with HMRC bankruptcy petition over unpaid tax bill",
-    "normalized_title": "jamie carragher hit with hmrc bankruptcy petition over unpaid tax bill",
-    "source": "The Guardian",
-    "published": "2026-08-27T14:23:17+00:00",
-    "sent_at": "2026-08-27T15:12:58.357534+00:00"
-  },
-  "https://www.cbssports.com/soccer/news/liverpool-agree-sign-bradley-barcola-from-psg-2026": {
-    "title": "Liverpool agree to sign French star Bradley Barcola from PSG for $116 million, per report",
-    "normalized_title": "liverpool agree to sign french star bradley barcola from psg for $116 million per report",
-    "source": "CBS Sports",
-    "published": "2026-08-27T14:23:19+00:00",
-    "sent_at": "2026-08-27T15:13:05.024418+00:00"
-  },
-  "https://football-italia.net/juventus-meeting-kessie-agents-2-year-contract": {
-    "title": "Juventus meeting with Kessie agents, two-year contract proposed",
-    "normalized_title": "juventus meeting with kessie agents two-year contract proposed",
-    "source": "Football Italia",
-    "published": "2026-08-27T14:29:37+00:00",
-    "sent_at": "2026-08-27T15:13:13.341440+00:00"
-  },
-  "https://www.football365.com/match-preview/liverpool-v-nottingham-forest-prediction-preview": {
-    "title": "Liverpool v Nottingham Forest: Prediction, team news, lineups and odds",
-    "normalized_title": "liverpool v nottingham forest prediction team news lineups and odds",
-    "source": "Football365",
-    "published": "2026-08-27T14:31:36+00:00",
-    "sent_at": "2026-08-27T15:13:20.555338+00:00"
-  },
-  "https://www.bbc.co.uk/sport/football/articles/clyj50j91xgo": {
-    "title": "Tottenham sign Man City's Marmoush on loan",
-    "normalized_title": "tottenham sign man citys marmoush on loan",
-    "source": "BBC Sport",
-    "published": "2026-08-27T14:34:14+00:00",
-    "sent_at": "2026-08-27T15:13:28.332604+00:00"
-  },
-  "https://bulinews.com/newcastle-and-everton-among-reported-suitors-for-stuttgart-star": {
-    "title": "Newcastle and Everton among reported suitors for Stuttgart star",
-    "normalized_title": "newcastle and everton among reported suitors for stuttgart star",
-    "source": "Bulinews",
-    "published": "2026-08-27T14:44:00+00:00",
-    "sent_at": "2026-08-27T15:13:34.876919+00:00"
-  },
-  "https://football-italia.net/report-chelsea-ahanor-atalanta-e48m-inc-bonus": {
-    "title": "Report Chelsea agreement for Ahanor, Atalanta sale at €48m including bonus",
-    "normalized_title": "report chelsea agreement for ahanor atalanta sale at €48m including bonus",
-    "source": "Football Italia",
-    "published": "2026-08-27T14:51:39+00:00",
-    "sent_at": "2026-08-27T15:13:43.567207+00:00"
-  },
-  "https://www.fourfourtwo.com/competition/watch-chelsea-vs-luton-town-carabao-cup-2nd-round": {
-    "title": "How to watch Chelsea vs Luton Town: stream Carabao Cup 2nd round clash online from anywhere",
-    "normalized_title": "how to watch chelsea vs luton town stream carabao cup 2nd round clash online from anywhere",
-    "source": "FourFourTwo",
-    "published": "2026-08-27T15:00:00+00:00",
-    "sent_at": "2026-08-27T15:13:52.360338+00:00"
-  },
-  "https://www.101greatgoals.com/football/premier-league/iraola-refuses-rule-out-gakpo-departure": {
-    "title": "Iraola refuses to rule out Gakpo departure as Barcola deal close to completion",
-    "normalized_title": "iraola refuses to rule out gakpo departure as barcola deal close to completion",
-    "source": "101 Great Goals",
-    "published": "2026-08-27T15:00:04+00:00",
-    "sent_at": "2026-08-27T15:13:59.776708+00:00"
-  },
-  "https://www.football365.com/news/arsenal-julian-alvarez-reaches-decision-transfer-romano-update": {
-    "title": "Julian Alvarez reaches fresh decision on Arsenal transfer amid latest Romano update",
-    "normalized_title": "julian alvarez reaches fresh decision on arsenal transfer amid latest romano update",
-    "source": "Football365",
-    "published": "2026-08-27T15:00:42+00:00",
-    "sent_at": "2026-08-27T15:14:06.836586+00:00"
-  },
-  "https://www.footballfancast.com/nottingham-forest-talks-tottenham-player-lucas-bergvall-pape-sarr": {
-    "title": "Nottingham Forest open talks to sign another Tottenham player instead of Bergvall",
-    "normalized_title": "nottingham forest open talks to sign another tottenham player instead of bergvall",
-    "source": "FootballFanCast",
-    "published": "2026-08-27T15:05:11+00:00",
-    "sent_at": "2026-08-27T15:14:23.056028+00:00"
-  },
-  "https://bulinews.com/bremen-and-hsv-linked-leverkusen-full-back-arthur": {
-    "title": "Bremen and HSV linked with Leverkusen full-back Arthur",
-    "normalized_title": "bremen and hsv linked with leverkusen full-back arthur",
-    "source": "Bulinews",
-    "published": "2026-08-27T15:06:00+00:00",
-    "sent_at": "2026-08-27T15:14:32.661560+00:00"
-  },
-  "https://www.101greatgoals.com/football/conference-league/jablonec-v-rangers-confirmed-line-ups": {
-    "title": "Jablonec v Rangers: Confirmed line-ups for Conference League play-off clash",
-    "normalized_title": "jablonec v rangers confirmed line-ups for conference league play-off clash",
-    "source": "101 Great Goals",
-    "published": "2026-08-27T15:06:04+00:00",
-    "sent_at": "2026-08-27T15:15:00.748131+00:00"
-  },
-  "https://football-italia.net/champions-league-draw-inter-napoli-roma-como": {
-    "title": "Champions League 2026/27 Draw: Live Inter, Napoli, Roma and Como rivals",
-    "normalized_title": "champions league 2026/27 draw live inter napoli roma and como rivals",
-    "source": "Football Italia",
-    "published": "2026-08-27T15:11:59+00:00",
-    "sent_at": "2026-08-27T15:15:08.811557+00:00"
-  },
   "https://www.footballfancast.com/arsenal-could-make-vinicius-junior-level-signing-before-the-deadline": {
     "title": "How Arsenal could make a Vinicius Junior-level signing before the deadline",
     "normalized_title": "how arsenal could make a vinicius junior-level signing before the deadline",
@@ -1783,5 +1678,12 @@
     "source": "BBC Sport",
     "published": "2026-09-03T15:05:22+00:00",
     "sent_at": "2026-09-03T15:11:04.695155+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/03/algeria-a-former-om-player-named-coach": {
+    "title": "Algeria: A former OM player named coach?",
+    "normalized_title": "algeria a former om player named coach",
+    "source": "French Football Weekly",
+    "published": "2026-09-03T15:13:52+00:00",
+    "sent_at": "2026-09-03T15:16:13.761520+00:00"
   }
 }
