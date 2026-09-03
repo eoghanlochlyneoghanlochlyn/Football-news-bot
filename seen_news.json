@@ -1748,5 +1748,19 @@
     "source": "BBC Sport",
     "published": "2026-09-03T14:39:30+00:00",
     "sent_at": "2026-09-03T14:45:58.647095+00:00"
+  },
+  "https://bulinews.com/nwaneri-explains-decision-join-dortmund-loan-arsenal": {
+    "title": "Nwaneri explains decision to join Dortmund on loan from Arsenal",
+    "normalized_title": "nwaneri explains decision to join dortmund on loan from arsenal",
+    "source": "Bulinews",
+    "published": "2026-09-03T14:45:00+00:00",
+    "sent_at": "2026-09-03T14:51:21.640879+00:00"
+  },
+  "https://www.footballfancast.com/tottenham-transfers-signings": {
+    "title": "All Completed Tottenham Transfers in 2026/27",
+    "normalized_title": "all completed tottenham transfers in 2026/27",
+    "source": "FootballFanCast",
+    "published": "2026-09-03T14:48:06+00:00",
+    "sent_at": "2026-09-03T14:51:28.536660+00:00"
   }
 }
