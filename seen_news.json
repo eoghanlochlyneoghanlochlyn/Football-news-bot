@@ -2665,5 +2665,19 @@
     "source": "FourFourTwo",
     "published": "2026-09-04T13:07:53+00:00",
     "sent_at": "2026-09-04T13:18:11.211958+00:00"
+  },
+  "https://www.cbssports.com/soccer/news/womens-champions-league-league-phase-draw-arsenal-barcelona-ol-lyonnes": {
+    "title": "Women's Champions League league phase draw: Arsenal to face Barcelona and OL Lyonnes in blockbuster matches",
+    "normalized_title": "womens champions league league phase draw arsenal to face barcelona and ol lyonnes in blockbuster matches",
+    "source": "CBS Sports",
+    "published": "2026-09-04T12:30:22+00:00",
+    "sent_at": "2026-09-04T13:28:21.877938+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/04/chelsea-already-get-rid-of-flop-marc-guiu": {
+    "title": "Chelsea already get rid of flop Marc Guiu",
+    "normalized_title": "chelsea already get rid of flop marc guiu",
+    "source": "French Football Weekly",
+    "published": "2026-09-04T13:13:52+00:00",
+    "sent_at": "2026-09-04T13:29:38.906555+00:00"
   }
 }
