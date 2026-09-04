@@ -2525,5 +2525,19 @@
     "source": "Football Italia",
     "published": "2026-09-04T11:10:27+00:00",
     "sent_at": "2026-09-04T11:11:25.520175+00:00"
+  },
+  "https://www.fourfourtwo.com/transfer/richarlisons-tottenham-hotspur-escape-hangs-in-the-balance-as-deadline-looms": {
+    "title": "Richarlison's Tottenham Hotspur escape hangs in the balance as deadline looms",
+    "normalized_title": "richarlisons tottenham hotspur escape hangs in the balance as deadline looms",
+    "source": "FourFourTwo",
+    "published": "2026-09-04T11:09:02+00:00",
+    "sent_at": "2026-09-04T11:16:45.904051+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/04/we-will-do-everything-for-stade-rennais-is-already-warning-psg-to-host-the-return-match": {
+    "title": "“We will do everything for”: Stade Rennais is already warning PSG to host the return match",
+    "normalized_title": "we will do everything for stade rennais is already warning psg to host the return match",
+    "source": "French Football Weekly",
+    "published": "2026-09-04T11:13:53+00:00",
+    "sent_at": "2026-09-04T11:16:53.131567+00:00"
   }
 }
