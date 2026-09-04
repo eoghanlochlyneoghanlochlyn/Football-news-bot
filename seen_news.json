@@ -2399,5 +2399,33 @@
     "source": "FootballFanCast",
     "published": "2026-09-04T10:10:11+00:00",
     "sent_at": "2026-09-04T10:11:27.242101+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/04/nottingham-forests-liam-delap-i-play-at-my-best-on-the-edge-of-being-horrible": {
+    "title": "Nottingham Forest’s Liam Delap: ‘I play at my best on the edge of being horrible’",
+    "normalized_title": "nottingham forests liam delap i play at my best on the edge of being horrible",
+    "source": "The Guardian",
+    "published": "2026-09-04T10:00:05+00:00",
+    "sent_at": "2026-09-04T10:16:16.682837+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/04/liverpool-agree-lamine-camara-personal-terms": {
+    "title": "Personal terms agreed: Liverpool make progress on signing in “fast-moving story”",
+    "normalized_title": "personal terms agreed liverpool make progress on signing in fast-moving story",
+    "source": "CaughtOffside",
+    "published": "2026-09-04T10:11:59+00:00",
+    "sent_at": "2026-09-04T10:16:31.887927+00:00"
+  },
+  "https://www.football365.com/news/noni-madueke-arsenal-left-wing": {
+    "title": "Perry Groves tells Mikel Arteta to deploy £48.5m Arsenal star at left wing – ‘crazy’",
+    "normalized_title": "perry groves tells mikel arteta to deploy £485m arsenal star at left wing – crazy",
+    "source": "Football365",
+    "published": "2026-09-04T10:12:52+00:00",
+    "sent_at": "2026-09-04T10:16:44.514709+00:00"
+  },
+  "https://www.football365.com/news/chelsea-estevao-january-transfer-decision": {
+    "title": "Chelsea reach decision on selling Estevao in January after Xabi Alonso call",
+    "normalized_title": "chelsea reach decision on selling estevao in january after xabi alonso call",
+    "source": "Football365",
+    "published": "2026-09-04T10:13:49+00:00",
+    "sent_at": "2026-09-04T10:16:58.896829+00:00"
   }
 }
