@@ -3029,5 +3029,33 @@
     "source": "Football Italia",
     "published": "2026-09-04T17:49:12+00:00",
     "sent_at": "2026-09-04T17:56:28.092574+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/04/premier-league-team-news-predicted-lineups-for-the-weekend-action": {
+    "title": "Premier League team news: predicted lineups for the weekend action",
+    "normalized_title": "premier league team news predicted lineups for the weekend action",
+    "source": "The Guardian",
+    "published": "2026-09-04T17:38:28+00:00",
+    "sent_at": "2026-09-04T18:06:54.617467+00:00"
+  },
+  "https://www.101greatgoals.com/football/premier-league/carrick-says-dorgu-is-like-a-new-signing-as-man-united-boss-expresses-delight-with-transfer-window": {
+    "title": "Carrick says Dorgu is ‘like a new signing’ as Man United boss expresses delight with transfer window",
+    "normalized_title": "carrick says dorgu is like a new signing as man united boss expresses delight with transfer window",
+    "source": "101 Great Goals",
+    "published": "2026-09-04T17:51:35+00:00",
+    "sent_at": "2026-09-04T18:07:41.134351+00:00"
+  },
+  "https://www.footballfancast.com/glasner-de-zerbi-dig-nottingham-forest-tottenham": {
+    "title": "Glasner throws De Zerbi dig ahead of Nottingham Forest and Tottenham showdown",
+    "normalized_title": "glasner throws de zerbi dig ahead of nottingham forest and tottenham showdown",
+    "source": "FootballFanCast",
+    "published": "2026-09-04T17:57:22+00:00",
+    "sent_at": "2026-09-04T18:08:32.968120+00:00"
+  },
+  "https://football-italia.net/grosso-fiorentina-have-a-new-project-potential": {
+    "title": "Grosso: ‘Fiorentina have a new project with potential, need to show it’",
+    "normalized_title": "grosso fiorentina have a new project with potential need to show it",
+    "source": "Football Italia",
+    "published": "2026-09-04T18:01:35+00:00",
+    "sent_at": "2026-09-04T18:09:11.151979+00:00"
   }
 }
