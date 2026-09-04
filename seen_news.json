@@ -2308,5 +2308,26 @@
     "source": "Bulinews",
     "published": "2026-09-04T09:05:00+00:00",
     "sent_at": "2026-09-04T09:12:32.175130+00:00"
+  },
+  "https://www.football-espana.net/2026/09/04/julian-alvarez-transfer-atletico-barcelona": {
+    "title": "Why Julián Álvarez’s Barcelona Dream Still Faces Atlético’s Veto",
+    "normalized_title": "why julián álvarezs barcelona dream still faces atléticos veto",
+    "source": "Football España",
+    "published": "2026-09-04T09:00:00+00:00",
+    "sent_at": "2026-09-04T09:16:06.170003+00:00"
+  },
+  "https://www.fourfourtwo.com/person/player/tottenham-hotspur-star-dumped-by-club-after-failed-negotiations-as-roberto-de-zerbi-takes-hard-line": {
+    "title": "Tottenham Hotspur star dumped by club after failed negotiations, as Roberto De Zerbi takes hard line",
+    "normalized_title": "tottenham hotspur star dumped by club after failed negotiations as roberto de zerbi takes hard line",
+    "source": "FourFourTwo",
+    "published": "2026-09-04T09:13:03+00:00",
+    "sent_at": "2026-09-04T09:16:17.468250+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/04/newcastle-offers-nico-gonzalez-for-e60-million": {
+    "title": "Newcastle offers Nico Gonzalez for €60 million",
+    "normalized_title": "newcastle offers nico gonzalez for €60 million",
+    "source": "French Football Weekly",
+    "published": "2026-09-04T09:13:55+00:00",
+    "sent_at": "2026-09-04T09:16:28.683625+00:00"
   }
 }
