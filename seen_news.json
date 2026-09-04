@@ -2070,5 +2070,26 @@
     "source": "The Guardian",
     "published": "2026-09-04T07:00:01+00:00",
     "sent_at": "2026-09-04T07:01:11.853262+00:00"
+  },
+  "https://www.fourfourtwo.com/quiz/friday-football-quiz-040926": {
+    "title": "Friday Football Quiz, episode 131: Can you get 20 correct answers?",
+    "normalized_title": "friday football quiz episode 131 can you get 20 correct answers",
+    "source": "FourFourTwo",
+    "published": "2026-09-04T07:00:00+00:00",
+    "sent_at": "2026-09-04T07:05:56.218364+00:00"
+  },
+  "https://www.football365.com/news/big-weekend-arsenal-v-chelsea-aston-villa-matthias-jaissle-bruno-fernandes-our-league-coded-serie-a": {
+    "title": "Big Weekend: Arsenal v Chelsea, Aston Villa, Matthias Jaissle, Bruno Fernandes, Our League-coded Serie A",
+    "normalized_title": "big weekend arsenal v chelsea aston villa matthias jaissle bruno fernandes our league-coded serie a",
+    "source": "Football365",
+    "published": "2026-09-04T07:03:08+00:00",
+    "sent_at": "2026-09-04T07:06:10.179675+00:00"
+  },
+  "https://www.football365.com/news/english-football-already-counting-the-cost-of-changing-climate": {
+    "title": "English football already counting the cost of changing climate",
+    "normalized_title": "english football already counting the cost of changing climate",
+    "source": "Football365",
+    "published": "2026-09-04T07:04:51+00:00",
+    "sent_at": "2026-09-04T07:06:17.073041+00:00"
   }
 }
