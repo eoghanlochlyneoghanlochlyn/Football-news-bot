@@ -2476,5 +2476,19 @@
     "source": "CaughtOffside",
     "published": "2026-09-04T10:45:12+00:00",
     "sent_at": "2026-09-04T10:46:44.222749+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/articles/cgk5g2z3kyxo": {
+    "title": "Liverpool target Minteh can still get dream move - Hurzeler",
+    "normalized_title": "liverpool target minteh can still get dream move - hurzeler",
+    "source": "BBC Sport",
+    "published": "2026-09-04T10:44:37+00:00",
+    "sent_at": "2026-09-04T10:51:06.226424+00:00"
+  },
+  "https://football-italia.net/totti-baggio-batistuta-ribery-legends-game": {
+    "title": "Totti, Baggio, Batistuta & Ribery back on the field for Fiorentina: We attended the legends’ game",
+    "normalized_title": "totti baggio batistuta & ribery back on the field for fiorentina we attended the legends game",
+    "source": "Football Italia",
+    "published": "2026-09-04T10:46:45+00:00",
+    "sent_at": "2026-09-04T10:51:13.862539+00:00"
   }
 }
