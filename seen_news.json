@@ -3078,5 +3078,19 @@
     "source": "French Football Weekly",
     "published": "2026-09-04T18:13:54+00:00",
     "sent_at": "2026-09-04T18:16:31.261907+00:00"
+  },
+  "https://www.101greatgoals.com/live/betis-vs-real-madrid-live-la-liga-updates-goals-stats": {
+    "title": "LIVE – Real Betis v Real Madrid: Commentary, updates, goals and stats",
+    "normalized_title": "live – real betis v real madrid commentary updates goals and stats",
+    "source": "101 Great Goals",
+    "published": "2026-09-04T18:20:00+00:00",
+    "sent_at": "2026-09-04T18:21:11.822112+00:00"
+  },
+  "https://www.101greatgoals.com/live/ipswich-vs-liverpool-premier-league-commentary-updates-goals-stats": {
+    "title": "LIVE – Ipswich v Liverpool: Commentary, updates, goals and stats",
+    "normalized_title": "live – ipswich v liverpool commentary updates goals and stats",
+    "source": "101 Great Goals",
+    "published": "2026-09-04T18:20:00+00:00",
+    "sent_at": "2026-09-04T18:21:50.781483+00:00"
   }
 }
