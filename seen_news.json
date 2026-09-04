@@ -2441,5 +2441,19 @@
     "source": "The Guardian",
     "published": "2026-09-04T10:20:41+00:00",
     "sent_at": "2026-09-04T10:31:10.519547+00:00"
+  },
+  "https://www.football365.com/news/man-utd-arsenal-and-liverpool-among-clubs-one-injury-away-from-disaster": {
+    "title": "Man Utd, Arsenal and Liverpool among clubs one injury away from disaster",
+    "normalized_title": "man utd arsenal and liverpool among clubs one injury away from disaster",
+    "source": "Football365",
+    "published": "2026-09-04T10:33:42+00:00",
+    "sent_at": "2026-09-04T10:35:52.927584+00:00"
+  },
+  "https://www.football365.com/news/arsenal-set-to-follow-new-mikel-arteta-contract-with-three-big-deals": {
+    "title": "Arsenal set to follow new Mikel Arteta contract with three big deals",
+    "normalized_title": "arsenal set to follow new mikel arteta contract with three big deals",
+    "source": "Football365",
+    "published": "2026-09-04T10:34:39+00:00",
+    "sent_at": "2026-09-04T10:35:59.740383+00:00"
   }
 }
