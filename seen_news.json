@@ -2721,5 +2721,33 @@
     "source": "BBC Sport",
     "published": "2026-09-04T13:35:28+00:00",
     "sent_at": "2026-09-04T13:59:49.194916+00:00"
+  },
+  "https://www.football365.com/news/xabi-alonso-morgan-rogers-arsenal-chelsea": {
+    "title": "Xabi Alonso reveals how Morgan Rogers feels after rejecting Arsenal for Chelsea",
+    "normalized_title": "xabi alonso reveals how morgan rogers feels after rejecting arsenal for chelsea",
+    "source": "Football365",
+    "published": "2026-09-04T13:53:32+00:00",
+    "sent_at": "2026-09-04T14:49:36.225611+00:00"
+  },
+  "https://www.football365.com/news/liverpool-boss-iraola-decides-new-plan-gakpo-man-city-transfer-collapse": {
+    "title": "Liverpool boss Andoni Iraola decides new plan for Cody Gakpo after Man City transfer collapse",
+    "normalized_title": "liverpool boss andoni iraola decides new plan for cody gakpo after man city transfer collapse",
+    "source": "Football365",
+    "published": "2026-09-04T13:59:48+00:00",
+    "sent_at": "2026-09-04T14:52:12.371009+00:00"
+  },
+  "https://www.fourfourtwo.com/person/mike-dean-and-his-secret-games-have-made-premier-league-referees-jobs-even-harder": {
+    "title": "Mike Dean and his 'secret games' have made Premier League referees' jobs even harder",
+    "normalized_title": "mike dean and his secret games have made premier league referees jobs even harder",
+    "source": "FourFourTwo",
+    "published": "2026-09-04T14:00:00+00:00",
+    "sent_at": "2026-09-04T14:54:23.275108+00:00"
+  },
+  "https://football-italia.net/gasperini-appears-to-close-door-on-zaha-roma": {
+    "title": "Gasperini appears to close door on Zaha and Roma links",
+    "normalized_title": "gasperini appears to close door on zaha and roma links",
+    "source": "Football Italia",
+    "published": "2026-09-04T14:35:00+00:00",
+    "sent_at": "2026-09-04T15:08:02.000966+00:00"
   }
 }
