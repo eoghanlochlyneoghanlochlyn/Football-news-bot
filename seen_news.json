@@ -2987,5 +2987,47 @@
     "source": "Bulinews",
     "published": "2026-09-04T17:30:00+00:00",
     "sent_at": "2026-09-04T17:41:33.463064+00:00"
+  },
+  "https://www.theguardian.com/football/live/2026/sep/04/ipswich-town-v-liverpool-premier-league-live-updates": {
+    "title": "Ipswich Town v Liverpool: Premier League – live",
+    "normalized_title": "ipswich town v liverpool premier league – live",
+    "source": "The Guardian",
+    "published": "2026-09-04T17:30:13+00:00",
+    "sent_at": "2026-09-04T17:51:56.819382+00:00"
+  },
+  "https://www.football365.com/news/liverpool-reach-decision-signing-chelsea-star-malo-gusto-75m-january": {
+    "title": "Liverpool reach decision on signing Chelsea star for £75m in January to solve biggest issue",
+    "normalized_title": "liverpool reach decision on signing chelsea star for £75m in january to solve biggest issue",
+    "source": "Football365",
+    "published": "2026-09-04T17:32:48+00:00",
+    "sent_at": "2026-09-04T17:52:54.938238+00:00"
+  },
+  "https://football-italia.net/serie-a-week-3-liveblog-genoa-vs-como": {
+    "title": "Serie A Week 3 Liveblog: Genoa vs. Como",
+    "normalized_title": "serie a week 3 liveblog genoa vs como",
+    "source": "Football Italia",
+    "published": "2026-09-04T17:47:28+00:00",
+    "sent_at": "2026-09-04T17:53:40.636703+00:00"
+  },
+  "https://www.101greatgoals.com/football/premier-league/ipswich-vs-liverpool-line-ups-confirmed": {
+    "title": "Ipswich vs Liverpool: Line-ups confirmed for Friday night football",
+    "normalized_title": "ipswich vs liverpool line-ups confirmed for friday night football",
+    "source": "101 Great Goals",
+    "published": "2026-09-04T17:47:30+00:00",
+    "sent_at": "2026-09-04T17:54:45.920627+00:00"
+  },
+  "https://www.101greatgoals.com/football/la-liga/real-betis-vs-real-madrid-line-ups-confirmed": {
+    "title": "Real Betis vs Real Madrid: Line-ups confirmed for La Liga clash",
+    "normalized_title": "real betis vs real madrid line-ups confirmed for la liga clash",
+    "source": "101 Great Goals",
+    "published": "2026-09-04T17:48:36+00:00",
+    "sent_at": "2026-09-04T17:55:18.810601+00:00"
+  },
+  "https://football-italia.net/serie-a-week-3-official-line-ups-genoa-vs-como": {
+    "title": "Serie A Week 3 official line-ups: Genoa vs. Como",
+    "normalized_title": "serie a week 3 official line-ups genoa vs como",
+    "source": "Football Italia",
+    "published": "2026-09-04T17:49:12+00:00",
+    "sent_at": "2026-09-04T17:56:28.092574+00:00"
   }
 }
