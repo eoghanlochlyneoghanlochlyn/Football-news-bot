@@ -2063,5 +2063,12 @@
     "source": "Bulinews",
     "published": "2026-09-04T06:45:00+00:00",
     "sent_at": "2026-09-04T06:46:15.331409+00:00"
+  },
+  "https://www.theguardian.com/football/2026/sep/04/paris-saint-germain-luis-enrique-monaco": {
+    "title": "Tough start for PSG but Luis Enrique has faith in burst of ‘new energy’ from signings",
+    "normalized_title": "tough start for psg but luis enrique has faith in burst of new energy from signings",
+    "source": "The Guardian",
+    "published": "2026-09-04T07:00:01+00:00",
+    "sent_at": "2026-09-04T07:01:11.853262+00:00"
   }
 }
