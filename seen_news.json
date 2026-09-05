@@ -1,256 +1,4 @@
 {
-  "https://www.caughtoffside.com/2026/08/29/chelsea-legend-on-emiliano-martinez-transfer": {
-    "title": "“Signing of the summer” – John Terry claims Chelsea will be getting an “unbelievable” player",
-    "normalized_title": "signing of the summer – john terry claims chelsea will be getting an unbelievable player",
-    "source": "CaughtOffside",
-    "published": "2026-08-29T10:44:17+00:00",
-    "sent_at": "2026-08-29T11:31:34.970934+00:00"
-  },
-  "https://www.101greatgoals.com/news/transfers/liverpool-agree-to-pay-123m-to-sign-bradley-barcola-from-psg-reports": {
-    "title": "Liverpool agree to pay £123m to sign Bradley Barcola from PSG – reports",
-    "normalized_title": "liverpool agree to pay £123m to sign bradley barcola from psg – reports",
-    "source": "101 Great Goals",
-    "published": "2026-08-29T10:45:54+00:00",
-    "sent_at": "2026-08-29T11:31:41.740239+00:00"
-  },
-  "https://www.football365.com/news/ornstein-reveals-alvarez-answer-arteta-joining-arsenal-atletico-madrid": {
-    "title": "Ornstein reveals Alvarez’s answer to Arteta on joining Arsenal as Atletico Madrid ‘would do a deal’",
-    "normalized_title": "ornstein reveals alvarezs answer to arteta on joining arsenal as atletico madrid would do a deal",
-    "source": "Football365",
-    "published": "2026-08-29T10:48:38+00:00",
-    "sent_at": "2026-08-29T11:31:48.404458+00:00"
-  },
-  "https://www.101greatgoals.com/live/liverpool-v-nottingham-forest-live-premier-league-text-commentary-updates-goals-stats": {
-    "title": "LIVE – Liverpool v Nottingham Forest: Premier League updates",
-    "normalized_title": "live – liverpool v nottingham forest premier league updates",
-    "source": "101 Great Goals",
-    "published": "2026-08-29T10:50:00+00:00",
-    "sent_at": "2026-08-29T11:31:55.280102+00:00"
-  },
-  "https://bulinews.com/adil-aouchiche-expected-extend-schalke-stay-until-2030": {
-    "title": "Adil Aouchiche expected to extend Schalke stay until 2030",
-    "normalized_title": "adil aouchiche expected to extend schalke stay until 2030",
-    "source": "Bulinews",
-    "published": "2026-08-29T10:50:00+00:00",
-    "sent_at": "2026-08-29T11:32:01.912014+00:00"
-  },
-  "https://www.fourfourtwo.com/competition/watch-bournemouth-vs-everton-premier-league-2026-27": {
-    "title": "Can I watch Bournemouth vs Everton on TV? Streaming info for 3pm Premier League clash today",
-    "normalized_title": "can i watch bournemouth vs everton on tv streaming info for 3pm premier league clash today",
-    "source": "FourFourTwo",
-    "published": "2026-08-29T11:00:00+00:00",
-    "sent_at": "2026-08-29T11:32:10.122433+00:00"
-  },
-  "https://www.fourfourtwo.com/competition/watch-coventry-city-hull-city-premier-league-2026-27": {
-    "title": "How to watch Coventry City vs Hull City: Live streams and TV channels as newly-promoted duo face off",
-    "normalized_title": "how to watch coventry city vs hull city live streams and tv channels as newly-promoted duo face off",
-    "source": "FourFourTwo",
-    "published": "2026-08-29T11:00:00+00:00",
-    "sent_at": "2026-08-29T11:32:17.662087+00:00"
-  },
-  "https://www.caughtoffside.com/2026/08/29/julian-alvarez-arsenal-transfer-david-ornstein": {
-    "title": "David Ornstein drops significant Julian Alvarez transfer update after talks with Arsenal boss Mikel Arteta",
-    "normalized_title": "david ornstein drops significant julian alvarez transfer update after talks with arsenal boss mikel arteta",
-    "source": "CaughtOffside",
-    "published": "2026-08-29T11:00:27+00:00",
-    "sent_at": "2026-08-29T11:32:24.810692+00:00"
-  },
-  "https://football-italia.net/orsolini-serie-a-clubs-called-bologna-1-italy": {
-    "title": "Orsolini: Serie A clubs ‘called me’ before Bologna extension, I have one Italy hope",
-    "normalized_title": "orsolini serie a clubs called me before bologna extension i have one italy hope",
-    "source": "Football Italia",
-    "published": "2026-08-29T11:01:11+00:00",
-    "sent_at": "2026-08-29T11:32:32.371223+00:00"
-  },
-  "https://bulinews.com/official-wolfsburg-and-vavro-part-ways-enable-viktoria-plzen-switch": {
-    "title": "Official: Wolfsburg and Vavro part ways to enable Viktoria Plzeň switch",
-    "normalized_title": "official wolfsburg and vavro part ways to enable viktoria plzeň switch",
-    "source": "Bulinews",
-    "published": "2026-08-29T11:11:00+00:00",
-    "sent_at": "2026-08-29T11:32:38.889035+00:00"
-  },
-  "https://frenchfootballweekly.com/2026/08/29/curtis-jones-joins-inter-milan": {
-    "title": "Curtis Jones joins Inter Milan",
-    "normalized_title": "curtis jones joins inter milan",
-    "source": "French Football Weekly",
-    "published": "2026-08-29T11:13:55+00:00",
-    "sent_at": "2026-08-29T11:32:45.991063+00:00"
-  },
-  "https://www.theguardian.com/football/live/2026/aug/29/liverpool-v-nottingham-forest-premier-league-live": {
-    "title": "Liverpool v Nottingham Forest: Premier League – live",
-    "normalized_title": "liverpool v nottingham forest premier league – live",
-    "source": "The Guardian",
-    "published": "2026-08-29T11:18:03+00:00",
-    "sent_at": "2026-08-29T11:32:52.627421+00:00"
-  },
-  "https://www.bbc.co.uk/sport/football/articles/cy0znn7lg51o": {
-    "title": "Forest to bid £40m for Everton teenager Armstrong",
-    "normalized_title": "forest to bid £40m for everton teenager armstrong",
-    "source": "BBC Sport",
-    "published": "2026-08-29T11:28:34+00:00",
-    "sent_at": "2026-08-29T11:33:00.884635+00:00"
-  },
-  "https://www.caughtoffside.com/2026/08/29/aston-villa-learn-asking-price-to-land-24-year-old-ace-after-failed-18m-bid": {
-    "title": "Aston Villa learn asking price to land 24-year-old ace after failed £18m bid",
-    "normalized_title": "aston villa learn asking price to land 24-year-old ace after failed £18m bid",
-    "source": "CaughtOffside",
-    "published": "2026-08-29T11:00:13+00:00",
-    "sent_at": "2026-08-29T11:59:08.429836+00:00"
-  },
-  "https://www.theguardian.com/football/2026/aug/29/xabi-alonso-chelsea-keepers-robert-sanchez-emiliano-martinez": {
-    "title": "Alonso gets Chelsea’s priorities right by ditching Sánchez for winner Martínez | Jacob Steinberg",
-    "normalized_title": "alonso gets chelseas priorities right by ditching sánchez for winner martínez | jacob steinberg",
-    "source": "The Guardian",
-    "published": "2026-08-29T11:00:26+00:00",
-    "sent_at": "2026-08-29T11:59:22.482751+00:00"
-  },
-  "https://www.caughtoffside.com/2026/08/29/tottenham-explore-player-plus-cash-deal-for-premier-league-star": {
-    "title": "Tottenham explore player-plus-cash deal for Premier League star",
-    "normalized_title": "tottenham explore player-plus-cash deal for premier league star",
-    "source": "CaughtOffside",
-    "published": "2026-08-29T11:30:06+00:00",
-    "sent_at": "2026-08-29T12:00:55.400700+00:00"
-  },
-  "https://www.football365.com/match-preview/man-utd-v-ipswich-town-prediction-preview": {
-    "title": "Man Utd v Ipswich Town: Prediction, team news, lineups and odds",
-    "normalized_title": "man utd v ipswich town prediction team news lineups and odds",
-    "source": "Football365",
-    "published": "2026-08-29T11:34:06+00:00",
-    "sent_at": "2026-08-29T12:01:33.884155+00:00"
-  },
-  "https://www.football365.com/news/man-utd-told-carrick-commit-sackable-offence-ipswich-two-stars-car-crash-hull": {
-    "title": "Man Utd told Carrick could commit ‘sackable offence’ vs Ipswich after two stars were ‘car crash’ vs Hull",
-    "normalized_title": "man utd told carrick could commit sackable offence vs ipswich after two stars were car crash vs hull",
-    "source": "Football365",
-    "published": "2026-08-29T11:34:18+00:00",
-    "sent_at": "2026-08-29T12:02:19.702858+00:00"
-  },
-  "https://football-italia.net/champions-league-fixtures-inter-napoli-arsenal": {
-    "title": "Official Champions League fixtures: Inter and Napoli debut against Real Madrid and Arsenal",
-    "normalized_title": "official champions league fixtures inter and napoli debut against real madrid and arsenal",
-    "source": "Football Italia",
-    "published": "2026-08-29T11:37:03+00:00",
-    "sent_at": "2026-08-29T12:04:32.314876+00:00"
-  },
-  "https://www.football365.com/news/fabrizio-romano-reacts-victor-osimhen-arsenal-claims-julian-alvarez-rejects-mikel-arteta": {
-    "title": "Romano reacts to Osimhen to Arsenal claims after Alvarez rejects Arteta",
-    "normalized_title": "romano reacts to osimhen to arsenal claims after alvarez rejects arteta",
-    "source": "Football365",
-    "published": "2026-08-29T11:44:21+00:00",
-    "sent_at": "2026-08-29T12:05:46.983783+00:00"
-  },
-  "https://www.caughtoffside.com/2026/08/29/arsenal-heading-for-nightmare-transfer-window-after-latest-blow": {
-    "title": "Whisper it, but Arsenal have had a much worse transfer window than it looks",
-    "normalized_title": "whisper it but arsenal have had a much worse transfer window than it looks",
-    "source": "CaughtOffside",
-    "published": "2026-08-29T11:47:33+00:00",
-    "sent_at": "2026-08-29T12:05:58.696212+00:00"
-  },
-  "https://football-italia.net/juventus-concer-thuram-surgery-kessie-snub": {
-    "title": "Further Juventus concern as Thuram risks surgery after Kessié snub",
-    "normalized_title": "further juventus concern as thuram risks surgery after kessié snub",
-    "source": "Football Italia",
-    "published": "2026-08-29T11:52:48+00:00",
-    "sent_at": "2026-08-29T12:06:07.687886+00:00"
-  },
-  "https://www.fourfourtwo.com/person/player/beating-fulham-was-one-of-the-best-nights-of-my-career-i-took-my-shirt-off-and-threw-myself-onto-the-turf-as-if-it-were-a-swimming-pool-diego-forlan-on-his-2010-europa-league-success": {
-    "title": "“Beating Fulham was one of the best nights of my career. I took my shirt off and threw myself onto the turf as if it were a swimming pool” Diego Forlan on his 2010 Europa League success",
-    "normalized_title": "beating fulham was one of the best nights of my career i took my shirt off and threw myself onto the turf as if it were a swimming pool diego forlan on his 2010 europa league success",
-    "source": "FourFourTwo",
-    "published": "2026-08-29T12:00:00+00:00",
-    "sent_at": "2026-08-29T12:16:24.174097+00:00"
-  },
-  "https://www.101greatgoals.com/football/watch-liverpool-behind-at-anfield-as-forest-dominate": {
-    "title": "Watch: Liverpool behind at Anfield as Forest dominate",
-    "normalized_title": "watch liverpool behind at anfield as forest dominate",
-    "source": "101 Great Goals",
-    "published": "2026-08-29T12:01:49+00:00",
-    "sent_at": "2026-08-29T12:16:31.083082+00:00"
-  },
-  "https://www.football365.com/news/alejandro-balde-manchester-united-barcelona-fabrizio-romano-transfer-update": {
-    "title": "Fabrizio Romano reveals Alejandro Balde stance on joining Man Utd from Barcelona",
-    "normalized_title": "fabrizio romano reveals alejandro balde stance on joining man utd from barcelona",
-    "source": "Football365",
-    "published": "2026-08-29T12:09:17+00:00",
-    "sent_at": "2026-08-29T12:16:37.456590+00:00"
-  },
-  "https://www.footballfancast.com/newcastle-make-offer-martin-baturina-most-expensive-midfield-signing": {
-    "title": "Newcastle make offer for their most expensive midfield signing of all time, reply received",
-    "normalized_title": "newcastle make offer for their most expensive midfield signing of all time reply received",
-    "source": "FootballFanCast",
-    "published": "2026-08-29T12:10:11+00:00",
-    "sent_at": "2026-08-29T12:16:44.800202+00:00"
-  },
-  "https://football-italia.net/official-4-juventus-players-out-parma-squad": {
-    "title": "Official: Four Juventus players ruled out for Parma clash as squad list confirmed",
-    "normalized_title": "official four juventus players ruled out for parma clash as squad list confirmed",
-    "source": "Football Italia",
-    "published": "2026-08-29T12:12:34+00:00",
-    "sent_at": "2026-08-29T12:16:53.126897+00:00"
-  },
-  "https://frenchfootballweekly.com/2026/08/29/atletico-kang-in-lees-firecracker-for-his-premiere": {
-    "title": "Atlético: Kang-in Lee’s firecracker for his premiere",
-    "normalized_title": "atlético kang-in lees firecracker for his premiere",
-    "source": "French Football Weekly",
-    "published": "2026-08-29T12:13:58+00:00",
-    "sent_at": "2026-08-29T12:17:00.028168+00:00"
-  },
-  "https://www.footballfancast.com/aston-villa-offer-submitted-martin-baturina-transfer-update": {
-    "title": "Aston Villa offer submitted for huge signing alongside Mbaye, reply received",
-    "normalized_title": "aston villa offer submitted for huge signing alongside mbaye reply received",
-    "source": "FootballFanCast",
-    "published": "2026-08-29T12:14:30+00:00",
-    "sent_at": "2026-08-29T12:17:07.560585+00:00"
-  },
-  "https://www.footballfancast.com/fabrizio-romano-sunderland-kevin-danso-tottenham-transfer": {
-    "title": "Fabrizio Romano: Sunderland launch talks to sign Premier League defender, he wants exit",
-    "normalized_title": "fabrizio romano sunderland launch talks to sign premier league defender he wants exit",
-    "source": "FootballFanCast",
-    "published": "2026-08-29T12:16:05+00:00",
-    "sent_at": "2026-08-29T12:17:14.473904+00:00"
-  },
-  "https://thehardtackle.com/transfer-news/2026/08/29/aston-villa-planning-loan-exit-for-bradley-burrowes": {
-    "title": "Aston Villa planning loan exit for Bradley Burrowes",
-    "normalized_title": "aston villa planning loan exit for bradley burrowes",
-    "source": "The Hard Tackle",
-    "published": "2026-08-29T11:47:44+00:00",
-    "sent_at": "2026-08-29T12:29:00.078467+00:00"
-  },
-  "https://thehardtackle.com/transfer-news/2026/08/29/ipswich-town-eyeing-late-move-for-wilson-odobert-tottenham-unlikely-to-sell": {
-    "title": "Ipswich Town eyeing late move for Wilson Odobert, Tottenham unlikely to sell",
-    "normalized_title": "ipswich town eyeing late move for wilson odobert tottenham unlikely to sell",
-    "source": "The Hard Tackle",
-    "published": "2026-08-29T11:47:47+00:00",
-    "sent_at": "2026-08-29T12:29:07.461880+00:00"
-  },
-  "https://www.caughtoffside.com/2026/08/29/newcastle-interested-in-21-year-old-ace-but-60m-asking-price-raises-concerns": {
-    "title": "Newcastle interested in 21-year-old ace but £60m asking price raises concerns",
-    "normalized_title": "newcastle interested in 21-year-old ace but £60m asking price raises concerns",
-    "source": "CaughtOffside",
-    "published": "2026-08-29T12:00:16+00:00",
-    "sent_at": "2026-08-29T12:29:15.641782+00:00"
-  },
-  "https://www.footballfancast.com/man-utd-approach-aston-villa-ian-maatsen-transfer": {
-    "title": "Contact made: Man Utd launch deadline-busting approach to sign former Chelsea starlet",
-    "normalized_title": "contact made man utd launch deadline-busting approach to sign former chelsea starlet",
-    "source": "FootballFanCast",
-    "published": "2026-08-29T12:18:41+00:00",
-    "sent_at": "2026-08-29T12:29:22.803256+00:00"
-  },
-  "https://www.football365.com/news/aston-villa-submit-concrete-offer-man-utd-star-red-devils-man-transfer-u-turn": {
-    "title": "Aston Villa submit concrete offer for Man Utd star as another Red Devils man makes transfer U-turn",
-    "normalized_title": "aston villa submit concrete offer for man utd star as another red devils man makes transfer u-turn",
-    "source": "Football365",
-    "published": "2026-08-29T12:23:31+00:00",
-    "sent_at": "2026-08-29T12:29:29.516436+00:00"
-  },
-  "https://bulinews.com/confirmed-lineups-elversberg-bayer-04-leverkusen": {
-    "title": "Confirmed Lineups: SV Elversberg vs. Bayer 04 Leverkusen",
-    "normalized_title": "confirmed lineups sv elversberg vs bayer 04 leverkusen",
-    "source": "Bulinews",
-    "published": "2026-08-29T12:25:00+00:00",
-    "sent_at": "2026-08-29T12:29:37.046350+00:00"
-  },
   "https://bulinews.com/eintracht-frankfurt-bahoya-set-for-hull-city-medical": {
     "title": "Eintracht Frankfurt's Bahoya set for Hull City medical",
     "normalized_title": "eintracht frankfurts bahoya set for hull city medical",
@@ -3246,5 +2994,215 @@
     "source": "French Football Weekly",
     "published": "2026-09-04T20:13:54+00:00",
     "sent_at": "2026-09-04T20:16:02.297711+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/premier-league-liverpool-win-at-ipswich-for-bradley-barcolas-first": {
+    "title": "Premier League: Liverpool win at Ipswich for Bradley Barcola’s first",
+    "normalized_title": "premier league liverpool win at ipswich for bradley barcolas first",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T14:24:54+00:00",
+    "sent_at": "2026-09-05T15:21:39.759304+00:00"
+  },
+  "https://www.football365.com/news/newcastle-bournemouth-howe-different-ways-move-on-rose-jaissle": {
+    "title": "Newcastle and Bournemouth show Howe there are different ways to move on",
+    "normalized_title": "newcastle and bournemouth show howe there are different ways to move on",
+    "source": "Football365",
+    "published": "2026-09-05T14:25:22+00:00",
+    "sent_at": "2026-09-05T15:21:50.331365+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/05/ornstein-chelsea-able-to-sign-scott-bournemouth": {
+    "title": "Ornstein explains why Chelsea weren’t able to sign Alex Scott from Bournemouth",
+    "normalized_title": "ornstein explains why chelsea werent able to sign alex scott from bournemouth",
+    "source": "CaughtOffside",
+    "published": "2026-09-05T14:30:00+00:00",
+    "sent_at": "2026-09-05T15:21:58.287007+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/05/arsenal-made-kevin-schade-transfer-enquiry": {
+    "title": "New report reveals Arsenal missed out on £70m-plus attacker transfer this summer",
+    "normalized_title": "new report reveals arsenal missed out on £70m-plus attacker transfer this summer",
+    "source": "CaughtOffside",
+    "published": "2026-09-05T14:30:10+00:00",
+    "sent_at": "2026-09-05T15:22:21.146269+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/05/journalist-sure-liverpool-could-pursue-january-deal-for-22-year-old-forward": {
+    "title": "Journalist ‘sure’ Liverpool could pursue January deal for 22-year-old forward",
+    "normalized_title": "journalist sure liverpool could pursue january deal for 22-year-old forward",
+    "source": "CaughtOffside",
+    "published": "2026-09-05T14:30:18+00:00",
+    "sent_at": "2026-09-05T15:22:30.136779+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/premier-league-club-considers-jamie-vardy": {
+    "title": "Premier League club considers Jamie Vardy",
+    "normalized_title": "premier league club considers jamie vardy",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T14:32:00+00:00",
+    "sent_at": "2026-09-05T15:23:12.664357+00:00"
+  },
+  "https://thehardtackle.com/transfer-news/2026/09/05/manchester-city-have-e50-million-buyback-clause-in-claudio-echeverri-agreement-with-benfica": {
+    "title": "Manchester City have €50 million buyback clause in Claudio Echeverri agreement with Benfica",
+    "normalized_title": "manchester city have €50 million buyback clause in claudio echeverri agreement with benfica",
+    "source": "The Hard Tackle",
+    "published": "2026-09-05T14:34:16+00:00",
+    "sent_at": "2026-09-05T15:23:19.822623+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/liverpool-the-first-appearance-of-bradley-barcola-is-already-satisfactory": {
+    "title": "Liverpool: the first appearance of Bradley Barcola is already satisfactory",
+    "normalized_title": "liverpool the first appearance of bradley barcola is already satisfactory",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T14:39:07+00:00",
+    "sent_at": "2026-09-05T15:23:27.263010+00:00"
+  },
+  "https://thehardtackle.com/transfer-news/2026/09/05/manchester-united-set-to-trigger-optional-year-in-bruno-fernandes-deal": {
+    "title": "Manchester United set to trigger optional year in Bruno Fernandes deal",
+    "normalized_title": "manchester united set to trigger optional year in bruno fernandes deal",
+    "source": "The Hard Tackle",
+    "published": "2026-09-05T14:42:22+00:00",
+    "sent_at": "2026-09-05T15:23:34.387389+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/algeria-a-former-om-named-coach-of-the-fennecs": {
+    "title": "Algeria, a former OM named coach of the Fennecs!",
+    "normalized_title": "algeria a former om named coach of the fennecs",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T14:49:16+00:00",
+    "sent_at": "2026-09-05T15:23:49.731674+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/videos/cew9knre1pxo": {
+    "title": "Rose proud of team 'confidence' as Cherries let lead slip",
+    "normalized_title": "rose proud of team confidence as cherries let lead slip",
+    "source": "BBC Sport",
+    "published": "2026-09-05T14:49:50+00:00",
+    "sent_at": "2026-09-05T15:25:02.293826+00:00"
+  },
+  "https://thehardtackle.com/transfer-news/2026/09/05/liverpool-manchester-city-unlikely-to-pay-75-million-to-sign-malo-gusto-in-january": {
+    "title": "Liverpool, Manchester City unlikely to pay £75 million to sign Malo Gusto in January",
+    "normalized_title": "liverpool manchester city unlikely to pay £75 million to sign malo gusto in january",
+    "source": "The Hard Tackle",
+    "published": "2026-09-05T14:50:14+00:00",
+    "sent_at": "2026-09-05T15:25:09.339448+00:00"
+  },
+  "https://thehardtackle.com/transfer-news/2026/09/05/arsenal-line-up-e80-million-move-for-raphinha": {
+    "title": "Arsenal line up €80 million move for Raphinha",
+    "normalized_title": "arsenal line up €80 million move for raphinha",
+    "source": "The Hard Tackle",
+    "published": "2026-09-05T14:50:15+00:00",
+    "sent_at": "2026-09-05T15:25:21.879965+00:00"
+  },
+  "https://football-italia.net/spalletti-juventus-not-everything-wanted-milan": {
+    "title": "Spalletti: ‘Juventus didn’t do everything we wanted, Milan have clear ideas’",
+    "normalized_title": "spalletti juventus didnt do everything we wanted milan have clear ideas",
+    "source": "Football Italia",
+    "published": "2026-09-05T14:53:15+00:00",
+    "sent_at": "2026-09-05T15:27:13.517501+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/antoine-kombouare-would-not-say-no-to-om-nor-to-manchester-united": {
+    "title": "Antoine Kombouaré would not say no to OM… nor to Manchester United",
+    "normalized_title": "antoine kombouaré would not say no to om… nor to manchester united",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T14:53:22+00:00",
+    "sent_at": "2026-09-05T15:27:29.194969+00:00"
+  },
+  "https://football-italia.net/serie-a-official-line-ups-inter-vs-napoli": {
+    "title": "Serie A official line-ups: Inter vs. Napoli",
+    "normalized_title": "serie a official line-ups inter vs napoli",
+    "source": "Football Italia",
+    "published": "2026-09-05T14:57:02+00:00",
+    "sent_at": "2026-09-05T15:27:37.312256+00:00"
+  },
+  "https://www.fourfourtwo.com/team/its-not-often-im-scared-but-i-was-scared-for-my-kids-former-millwall-owner-theo-paphitis-describes-watching-the-club-play-in-europe": {
+    "title": "“It’s not often I’m scared, but I was scared for my kids” Former owner Theo Paphitis describes watching Millwall play in Europe",
+    "normalized_title": "its not often im scared but i was scared for my kids former owner theo paphitis describes watching millwall play in europe",
+    "source": "FourFourTwo",
+    "published": "2026-09-05T15:00:00+00:00",
+    "sent_at": "2026-09-05T15:28:12.284025+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/05/romano-free-agent-linked-to-leeds-lazio": {
+    "title": "Romano: Free agent linked to Leeds picks Lazio for career-defining move",
+    "normalized_title": "romano free agent linked to leeds picks lazio for career-defining move",
+    "source": "CaughtOffside",
+    "published": "2026-09-05T15:00:00+00:00",
+    "sent_at": "2026-09-05T15:28:46.883435+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/everton-david-moyes-and-the-balogun-imbroglio": {
+    "title": "Everton: David Moyes and the Balogun imbroglio",
+    "normalized_title": "everton david moyes and the balogun imbroglio",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T15:00:26+00:00",
+    "sent_at": "2026-09-05T15:29:02.360463+00:00"
+  },
+  "https://football-italia.net/serie-a-fiorentina-12-torino-mandragora-crisis": {
+    "title": "Serie A | Fiorentina 1-2 Torino: Mandragora plunges ex team into crisis",
+    "normalized_title": "serie a | fiorentina 1-2 torino mandragora plunges ex team into crisis",
+    "source": "Football Italia",
+    "published": "2026-09-05T15:01:54+00:00",
+    "sent_at": "2026-09-05T15:29:10.376379+00:00"
+  },
+  "https://football-italia.net/serie-a-liveblog-inter-napoli-roma-atalanta-2": {
+    "title": "Serie A Liveblog: Fiorentina vs. Torino, Inter vs. Napoli, Roma vs. Atalanta",
+    "normalized_title": "serie a liveblog fiorentina vs torino inter vs napoli roma vs atalanta",
+    "source": "Football Italia",
+    "published": "2026-09-05T15:02:35+00:00",
+    "sent_at": "2026-09-05T15:29:19.943347+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/05/enzo-fernandez-mistake-video-during-man-city-vs-coventry": {
+    "title": "Video: Chelsea fans will be sniggering as £125m Enzo Fernandez makes awful mistake on Man City debut",
+    "normalized_title": "video chelsea fans will be sniggering as £125m enzo fernandez makes awful mistake on man city debut",
+    "source": "CaughtOffside",
+    "published": "2026-09-05T15:05:57+00:00",
+    "sent_at": "2026-09-05T15:29:33.729436+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/liverpool-announces-the-departure-of-its-sporting-director-coveted-by-saudi-arabia": {
+    "title": "Liverpool announces the departure of its sporting director coveted by Saudi Arabia",
+    "normalized_title": "liverpool announces the departure of its sporting director coveted by saudi arabia",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T15:07:03+00:00",
+    "sent_at": "2026-09-05T15:29:44.015792+00:00"
+  },
+  "https://www.football365.com/news/manuel-ugarte-manchester-united-transfer-injury-latest": {
+    "title": "£50m Man Utd star is now a big problem for Sir Jim Ratcliffe",
+    "normalized_title": "£50m man utd star is now a big problem for sir jim ratcliffe",
+    "source": "Football365",
+    "published": "2026-09-05T15:08:11+00:00",
+    "sent_at": "2026-09-05T15:29:53.722322+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/goals-dont-matter-to-me-the-debut-of-goncalo-ramos-never-ceases-to-make-ac-milan-dream": {
+    "title": "“Goals don’t matter to me”: the debut of Gonçalo Ramos never ceases to make AC Milan dream",
+    "normalized_title": "goals dont matter to me the debut of gonçalo ramos never ceases to make ac milan dream",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T15:12:06+00:00",
+    "sent_at": "2026-09-05T15:30:03.134982+00:00"
+  },
+  "https://www.bbc.co.uk/sport/football/videos/cvgy1nvm5jko": {
+    "title": "Jaissle fumes at 'slapstick' goals as Newcastle rescue Bournemouth draw",
+    "normalized_title": "jaissle fumes at slapstick goals as newcastle rescue bournemouth draw",
+    "source": "BBC Sport",
+    "published": "2026-09-05T15:13:39+00:00",
+    "sent_at": "2026-09-05T15:30:15.697379+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/liverpool-jamie-carragher-already-warns-bradley-barcola": {
+    "title": "Liverpool: Jamie Carragher already warns Bradley Barcola",
+    "normalized_title": "liverpool jamie carragher already warns bradley barcola",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T15:14:06+00:00",
+    "sent_at": "2026-09-05T15:30:31.643335+00:00"
+  },
+  "https://www.theguardian.com/football/live/2026/sep/05/premier-league-manchester-city-coventry-nottingham-forest-v-tottenham-efl-clockwatch-live": {
+    "title": "Manchester City v Coventry, Nottingham Forest v Tottenham and more: football clockwatch – live",
+    "normalized_title": "manchester city v coventry nottingham forest v tottenham and more football clockwatch – live",
+    "source": "The Guardian",
+    "published": "2026-09-05T15:14:45+00:00",
+    "sent_at": "2026-09-05T15:30:40.402305+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/ligue-1-lens-lorient-live": {
+    "title": "Ligue 1: Lens-Lorient live",
+    "normalized_title": "ligue 1 lens-lorient live",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T15:17:13+00:00",
+    "sent_at": "2026-09-05T15:30:47.784216+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/05/manchester-city-enzo-maresca-reveals-his-4-captains": {
+    "title": "Manchester City: Enzo Maresca reveals his 4 captains",
+    "normalized_title": "manchester city enzo maresca reveals his 4 captains",
+    "source": "French Football Weekly",
+    "published": "2026-09-05T15:21:12+00:00",
+    "sent_at": "2026-09-05T15:31:01.781033+00:00"
   }
 }
