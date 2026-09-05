@@ -21,6 +21,8 @@ from images import get_best_image
 
 from formatter import format_telegram_post
 
+from filters import is_blocked_url
+
 
 # ============================================================
 # لاگ
@@ -260,6 +262,19 @@ def process_news(news):
 
         log(
             f"⚠️ خبر بدون لینک: {title}"
+        )
+
+        return False
+
+
+    # --------------------------------------------------------
+    # بررسی URLهای غیرقابل انتشار
+    # --------------------------------------------------------
+
+    if is_blocked_url(link):
+
+        log(
+            f"⛔ خبر فیلتر شد: {link}"
         )
 
         return False
