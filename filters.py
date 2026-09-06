@@ -7,12 +7,48 @@ import re
 
 BLOCKED_URL_PATTERNS = [
 
+    # ========================================================
     # 101GreatGoals
+    # ========================================================
+
+    # Match previews
     r"^https?://(?:www\.)?101greatgoals\.com/match-previews/",
+
+    # Live pages
     r"^https?://(?:www\.)?101greatgoals\.com/live/",
 
+    # Confirmed line-ups
+    r"^https?://(?:www\.)?101greatgoals\.com/.*/line-ups-confirmed(?:/|$)",
+
+    # Where to watch
+    r"^https?://(?:www\.)?101greatgoals\.com/.*/where-to-watch(?:/|$)",
+
+    # Prediction
+    r"^https?://(?:www\.)?101greatgoals\.com/.*/prediction(?:/|$)",
+
+
+    # ========================================================
     # Football Italia
+    # ========================================================
+
+    # Serie A live blog
     r"^https?://(?:www\.)?football-italia\.net/serie-a-week-\d+-liveblog-",
+
+
+    # ========================================================
+    # FourFourTwo
+    # ========================================================
+
+    # Watch / Streaming guides
+    r"^https?://(?:www\.)?fourfourtwo\.com/.*/watch-.*",
+
+
+    # ========================================================
+    # Bulinews
+    # ========================================================
+
+    # Confirmed lineups
+    r"^https?://(?:www\.)?bulinews\.com/confirmed-lineups-.*",
 
 ]
 
@@ -34,6 +70,8 @@ def is_blocked_url(url):
     for pattern in BLOCKED_URL_PATTERNS:
 
         if re.match(pattern, url):
+
+            print(f"⛔ Blocked URL: {url}")
 
             return True
 
