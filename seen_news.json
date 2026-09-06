@@ -1,53 +1,4 @@
 {
-  "https://bulinews.com/eintracht-frankfurt-bahoya-set-for-hull-city-medical": {
-    "title": "Eintracht Frankfurt's Bahoya set for Hull City medical",
-    "normalized_title": "eintracht frankfurts bahoya set for hull city medical",
-    "source": "Bulinews",
-    "published": "2026-08-30T05:48:00+00:00",
-    "sent_at": "2026-08-30T06:40:28.422616+00:00"
-  },
-  "https://www.fourfourtwo.com/quiz/pre-match-poser-no-42": {
-    "title": "Pre-Match Poser no.42: Can you answer this elite-level football quiz question?",
-    "normalized_title": "pre-match poser no42 can you answer this elite-level football quiz question",
-    "source": "FourFourTwo",
-    "published": "2026-08-30T06:00:00+00:00",
-    "sent_at": "2026-08-30T06:40:35.665269+00:00"
-  },
-  "https://www.caughtoffside.com/2026/08/30/sources-arsenal-explore-shock-move-for-generational-talent-to-boost-title-bid": {
-    "title": "Sources: Arsenal explore shock move for ‘generational talent’ to boost title bid",
-    "normalized_title": "sources arsenal explore shock move for generational talent to boost title bid",
-    "source": "CaughtOffside",
-    "published": "2026-08-30T06:00:04+00:00",
-    "sent_at": "2026-08-30T06:40:44.328702+00:00"
-  },
-  "https://www.footballfancast.com/leeds-could-seal-mudryk-transfer-to-upgrade-on-dan-james": {
-    "title": "The Premier League winger Leeds could sign to upgrade on Dan James",
-    "normalized_title": "the premier league winger leeds could sign to upgrade on dan james",
-    "source": "FootballFanCast",
-    "published": "2026-08-30T06:10:22+00:00",
-    "sent_at": "2026-08-30T06:40:51.775741+00:00"
-  },
-  "https://frenchfootballweekly.com/2026/08/30/europa-league-discover-the-calendars-of-om-ol-and-stade-rennais": {
-    "title": "Europa League: Discover the calendars of OM, OL and Stade Rennais",
-    "normalized_title": "europa league discover the calendars of om ol and stade rennais",
-    "source": "French Football Weekly",
-    "published": "2026-08-30T06:13:53+00:00",
-    "sent_at": "2026-08-30T06:40:59.910230+00:00"
-  },
-  "https://www.footballfancast.com/how-jaissle-can-upgrade-on-harvey-barnes-with-pardo-newcastle-signing": {
-    "title": "How Jaissle can upgrade on Harvey Barnes with £60m Newcastle signing",
-    "normalized_title": "how jaissle can upgrade on harvey barnes with £60m newcastle signing",
-    "source": "FootballFanCast",
-    "published": "2026-08-30T06:15:11+00:00",
-    "sent_at": "2026-08-30T06:41:07.273923+00:00"
-  },
-  "https://www.footballfancast.com/the-new-van-dijk-van-den-berg-ready-to-head-to-celtic-before-the-deadline": {
-    "title": "The new Virgil van Dijk looks ready to head to Celtic before the deadline",
-    "normalized_title": "the new virgil van dijk looks ready to head to celtic before the deadline",
-    "source": "FootballFanCast",
-    "published": "2026-08-30T06:16:16+00:00",
-    "sent_at": "2026-08-30T06:41:14.439427+00:00"
-  },
   "https://www.theguardian.com/football/2026/aug/30/mario-balotelli-interview-italy-saudi-arabia-maturity": {
     "title": "‘I’ve had a very hectic career’: Mario Balotelli on Italian football’s troubles and his future",
     "normalized_title": "ive had a very hectic career mario balotelli on italian footballs troubles and his future",
@@ -3204,5 +3155,68 @@
     "source": "French Football Weekly",
     "published": "2026-09-05T15:21:12+00:00",
     "sent_at": "2026-09-05T15:31:01.781033+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/06/luis-enrique-upgraded-is-he-one-of-the-highest-paid-coaches": {
+    "title": "Luis Enrique upgraded, is he one of the highest paid coaches?",
+    "normalized_title": "luis enrique upgraded is he one of the highest paid coaches",
+    "source": "French Football Weekly",
+    "published": "2026-09-06T06:33:32+00:00",
+    "sent_at": "2026-09-06T07:20:08.360373+00:00"
+  },
+  "https://bulinews.com/eintracht-frankfurt-receive-22m-fulham-larsson-move-becomes-permanent": {
+    "title": "Eintracht Frankfurt to receive €22m from Fulham as Larsson move becomes permanent",
+    "normalized_title": "eintracht frankfurt to receive €22m from fulham as larsson move becomes permanent",
+    "source": "Bulinews",
+    "published": "2026-09-06T06:38:00+00:00",
+    "sent_at": "2026-09-06T07:20:16.181463+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/06/arsenal-close-to-agreement-with-spaniard-statement": {
+    "title": "Arsenal close to agreement with Spaniard as Gunners prepare to make a statement",
+    "normalized_title": "arsenal close to agreement with spaniard as gunners prepare to make a statement",
+    "source": "CaughtOffside",
+    "published": "2026-09-06T06:42:20+00:00",
+    "sent_at": "2026-09-06T07:20:23.274220+00:00"
+  },
+  "https://www.football365.com/news/paul-merson-sends-arsenal-warning-60m-transfer-decision": {
+    "title": "‘That will cost them’ – Paul Merson sends Arsenal warning after £60m transfer decision",
+    "normalized_title": "that will cost them – paul merson sends arsenal warning after £60m transfer decision",
+    "source": "Football365",
+    "published": "2026-09-06T06:44:00+00:00",
+    "sent_at": "2026-09-06T07:20:35.272333+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/06/luka-modrics-response-to-the-ballon-dor": {
+    "title": "Luka Modric’s response to the Ballon d’Or",
+    "normalized_title": "luka modrics response to the ballon dor",
+    "source": "French Football Weekly",
+    "published": "2026-09-06T06:56:55+00:00",
+    "sent_at": "2026-09-06T07:20:42.180221+00:00"
+  },
+  "https://www.footballfancast.com/why-celtic-star-hassan-already-looks-like-another-nygren": {
+    "title": "Why £6m Celtic star already looks like another Nygren",
+    "normalized_title": "why £6m celtic star already looks like another nygren",
+    "source": "FootballFanCast",
+    "published": "2026-09-06T07:10:11+00:00",
+    "sent_at": "2026-09-06T07:20:49.249714+00:00"
+  },
+  "https://www.footballfancast.com/newcastle-new-saint-maximin-pardo-has-to-start-over-willock": {
+    "title": "Newcastle's new Saint-Maximin now has to start ahead of Joe Willock",
+    "normalized_title": "newcastles new saint-maximin now has to start ahead of joe willock",
+    "source": "FootballFanCast",
+    "published": "2026-09-06T07:10:11+00:00",
+    "sent_at": "2026-09-06T07:20:56.266116+00:00"
+  },
+  "https://www.football365.com/news/bruno-fernandes-reaches-decision-signing-new-man-utd-contract": {
+    "title": "Bruno Fernandes reaches decision on signing new Man Utd contract as accelerate claim emerges",
+    "normalized_title": "bruno fernandes reaches decision on signing new man utd contract as accelerate claim emerges",
+    "source": "Football365",
+    "published": "2026-09-06T07:13:49+00:00",
+    "sent_at": "2026-09-06T07:21:08.114672+00:00"
+  },
+  "https://www.caughtoffside.com/2026/09/06/enzo-maresca-highlights-man-city-midfield-depth": {
+    "title": "Enzo Maresca highlights Man City midfield depth in Arsenal title race",
+    "normalized_title": "enzo maresca highlights man city midfield depth in arsenal title race",
+    "source": "CaughtOffside",
+    "published": "2026-09-06T07:17:12+00:00",
+    "sent_at": "2026-09-06T07:21:16.245957+00:00"
   }
 }
