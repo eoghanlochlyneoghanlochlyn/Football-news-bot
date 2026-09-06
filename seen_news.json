@@ -3218,5 +3218,26 @@
     "source": "CaughtOffside",
     "published": "2026-09-06T07:17:12+00:00",
     "sent_at": "2026-09-06T07:21:16.245957+00:00"
+  },
+  "https://www.theguardian.com/football/live/2026/sep/06/arsenal-host-chelsea-and-manchester-united-travel-to-everton-matchday-live": {
+    "title": "Arsenal host Chelsea and Manchester United travel to Everton – matchday live",
+    "normalized_title": "arsenal host chelsea and manchester united travel to everton – matchday live",
+    "source": "The Guardian",
+    "published": "2026-09-06T07:14:51+00:00",
+    "sent_at": "2026-09-06T07:37:31.542667+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/06/bundesliga-bayern-hung-by-schalke-in-a-crazy-match": {
+    "title": "Bundesliga: Bayern hung by Schalke in a crazy match",
+    "normalized_title": "bundesliga bayern hung by schalke in a crazy match",
+    "source": "French Football Weekly",
+    "published": "2026-09-06T07:31:44+00:00",
+    "sent_at": "2026-09-06T07:37:39.221191+00:00"
+  },
+  "https://frenchfootballweekly.com/2026/09/06/real-madrid-jose-mourinho-already-has-a-huge-problem": {
+    "title": "Real Madrid: José Mourinho already has a huge problem",
+    "normalized_title": "real madrid josé mourinho already has a huge problem",
+    "source": "French Football Weekly",
+    "published": "2026-09-06T07:33:47+00:00",
+    "sent_at": "2026-09-06T07:37:45.827201+00:00"
   }
 }
