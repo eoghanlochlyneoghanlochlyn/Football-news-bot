@@ -1,18 +1,4 @@
 {
-  "https://www.bbc.co.uk/sport/football/articles/ceqewejnpr3o": {
-    "title": "Barcola - the 'grasshopper' who has overcome setbacks",
-    "normalized_title": "barcola - the grasshopper who has overcome setbacks",
-    "source": "BBC Sport",
-    "published": "2026-08-30T07:38:07+00:00",
-    "sent_at": "2026-08-30T07:47:47.033617+00:00"
-  },
-  "https://football-italia.net/todays-papers-juventuss-unwanted-stars-win-it": {
-    "title": "Today’s Papers: Juventus’s unwanted stars win it, Fiorentina’s anniversary nightmare",
-    "normalized_title": "todays papers juventuss unwanted stars win it fiorentinas anniversary nightmare",
-    "source": "Football Italia",
-    "published": "2026-08-30T07:49:44+00:00",
-    "sent_at": "2026-08-30T08:12:27.285773+00:00"
-  },
   "https://www.footballfancast.com/why-scott-arsenal-target-could-be-another-bruno-guimaraes": {
     "title": "Why £78m Arsenal target could be another Bruno Guimaraes in the making",
     "normalized_title": "why £78m arsenal target could be another bruno guimaraes in the making",
@@ -3204,5 +3190,47 @@
     "source": "French Football Weekly",
     "published": "2026-09-06T07:33:47+00:00",
     "sent_at": "2026-09-06T07:37:45.827201+00:00"
+  },
+  "https://bulinews.com/incredible-talent-arsenal-loanee-nwaneri-receives-glowing-praise-after-dortmund-debut": {
+    "title": "“An incredible talent” – Arsenal loanee Nwaneri receives glowing praise after Dortmund debut",
+    "normalized_title": "an incredible talent – arsenal loanee nwaneri receives glowing praise after dortmund debut",
+    "source": "Bulinews",
+    "published": "2026-09-06T07:46:00+00:00",
+    "sent_at": "2026-09-06T08:11:57.212340+00:00"
+  },
+  "https://football-italia.net/todays-papers-inter-roma-crazy-comebacks": {
+    "title": "Today’s Papers – Inter and Roma’s crazy comebacks, waiting for Juventus vs. Milan",
+    "normalized_title": "todays papers – inter and romas crazy comebacks waiting for juventus vs milan",
+    "source": "Football Italia",
+    "published": "2026-09-06T07:50:43+00:00",
+    "sent_at": "2026-09-06T08:12:59.117139+00:00"
+  },
+  "https://www.football365.com/news/liverpool-pundit-predicts-new-role-gakpo-iraola-masterplan-barcola": {
+    "title": "Liverpool: Pundit predicts new role for Gakpo as Iraola masterplan for Barcola mooted",
+    "normalized_title": "liverpool pundit predicts new role for gakpo as iraola masterplan for barcola mooted",
+    "source": "Football365",
+    "published": "2026-09-06T07:53:22+00:00",
+    "sent_at": "2026-09-06T08:13:06.652870+00:00"
+  },
+  "https://www.footballfancast.com/nottingham-forest-star-ndoye-needs-dropping-after-spurs-draw": {
+    "title": "Which Nottingham Forest star needs dropping after Spurs draw?",
+    "normalized_title": "which nottingham forest star needs dropping after spurs draw",
+    "source": "FootballFanCast",
+    "published": "2026-09-06T08:10:11+00:00",
+    "sent_at": "2026-09-06T08:13:20.556793+00:00"
+  },
+  "https://www.footballfancast.com/better-than-tanaka-leeds-new-pontus-jansson-muharemovic-undroppable": {
+    "title": "Better than Tanaka: Leeds' new Pontus Jansson is undroppable",
+    "normalized_title": "better than tanaka leeds new pontus jansson is undroppable",
+    "source": "FootballFanCast",
+    "published": "2026-09-06T08:10:11+00:00",
+    "sent_at": "2026-09-06T08:14:02.235212+00:00"
+  },
+  "https://www.footballfancast.com/moyes-must-drop-armstrong-with-everton-next-garner-hackney": {
+    "title": "Why Moyes must drop Everton star Harrison Armstrong",
+    "normalized_title": "why moyes must drop everton star harrison armstrong",
+    "source": "FootballFanCast",
+    "published": "2026-09-06T08:10:11+00:00",
+    "sent_at": "2026-09-06T08:14:18.711285+00:00"
   }
 }
