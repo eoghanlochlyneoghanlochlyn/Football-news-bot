@@ -62,6 +62,32 @@ MAX_REAL_DIMENSION_CHECKS = 2
 
 
 # ============================================================
+# تصاویر خاصی که نباید انتخاب شوند
+# ============================================================
+
+BLOCKED_IMAGE_URLS = {
+
+    # لوگوی French Football Weekly
+    "https://frenchfootballweekly.com/wp-content/uploads/2025/01/French-Football-Weekly-1024x1024-1.png",
+
+}
+
+
+# ============================================================
+# بررسی تصویر مسدودشده
+# ============================================================
+
+def is_blocked_image_url(url):
+
+    if not url:
+        return False
+
+    url = url.strip()
+
+    return url in BLOCKED_IMAGE_URLS
+
+
+# ============================================================
 # امتیازدهی تصویر صفحه
 # ============================================================
 
@@ -99,13 +125,41 @@ def score_article_image(candidate):
             "url": "",
             "width": 0,
             "height": 0,
+            "source": source,
         }
 
     original_url = unwrap_image_proxy_url(
         url
     )
 
+    original_url = original_url.strip()
+
     lower = original_url.lower()
+
+
+    # --------------------------------------------------------
+    # تصویر خاص مسدودشده
+    # --------------------------------------------------------
+
+    if is_blocked_image_url(
+        original_url
+    ):
+
+        print(
+            "⛔ تصویر مسدودشده نادیده گرفته شد:"
+        )
+
+        print(
+            original_url
+        )
+
+        return {
+            "score": -5000,
+            "url": original_url,
+            "width": width,
+            "height": height,
+            "source": source,
+        }
 
 
     # --------------------------------------------------------
@@ -121,6 +175,7 @@ def score_article_image(candidate):
             "url": original_url,
             "width": width,
             "height": height,
+            "source": source,
         }
 
     # --------------------------------------------------------
@@ -136,6 +191,7 @@ def score_article_image(candidate):
             "url": original_url,
             "width": width,
             "height": height,
+            "source": source,
         }
 
     score = priority
@@ -263,6 +319,7 @@ def score_article_image(candidate):
         "url": original_url,
         "width": width,
         "height": height,
+        "source": source,
     }
 
 
