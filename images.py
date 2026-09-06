@@ -62,6 +62,17 @@ MAX_REAL_DIMENSION_CHECKS = 2
 
 
 # ============================================================
+# سایت‌هایی که نباید از RSS آنها تصویر انتخاب شود
+# ============================================================
+
+RSS_IMAGE_BLOCKED_DOMAINS = {
+
+    "frenchfootballweekly.com",
+
+}
+
+
+# ============================================================
 # تصاویر خاصی که نباید انتخاب شوند
 # ============================================================
 
@@ -71,6 +82,38 @@ BLOCKED_IMAGE_URLS = {
     "https://frenchfootballweekly.com/wp-content/uploads/2025/01/French-Football-Weekly-1024x1024-1.png",
 
 }
+
+
+# ============================================================
+# بررسی سایت
+# ============================================================
+
+def is_rss_image_blocked_for_site(
+    article_url
+):
+
+    if not article_url:
+        return False
+
+    try:
+
+        hostname = urlsplit(
+            article_url
+        ).hostname
+
+    except Exception:
+
+        return False
+
+    if not hostname:
+        return False
+
+    hostname = hostname.lower().strip()
+
+    if hostname.startswith("www."):
+        hostname = hostname[4:]
+
+    return hostname in RSS_IMAGE_BLOCKED_DOMAINS
 
 
 # ============================================================
@@ -536,9 +579,11 @@ def get_best_image(
     4. OG کوچک دیگر به‌صورت خودکار بر تصویر بزرگ‌تر غلبه نمی‌کند.
     5. srcset با نسخهٔ بزرگ‌تر امتیاز بیشتری می‌گیرد.
     6. تصاویر لوگو و asset حذف می‌شوند.
-    7. French Football Weekly به‌صورت ویژه فیلتر می‌شود.
+    7. لوگوی مشخص French Football Weekly فیلتر می‌شود.
     8. حداکثر دو تصویر بدون ابعاد واقعاً بررسی می‌شوند.
-    9. در صورت شکست صفحه، RSS بررسی می‌شود.
+    9. برای French Football Weekly فقط صفحهٔ خبر بررسی می‌شود
+       و تصویر RSS استفاده نمی‌شود.
+    10. برای سایر سایت‌ها، در صورت شکست صفحه، RSS بررسی می‌شود.
     """
 
     article_image = ""
@@ -568,7 +613,33 @@ def get_best_image(
             return article_image
 
     # --------------------------------------------------------
-    # سپس RSS
+    # French Football Weekly
+    #
+    # این سایت اجازهٔ استفاده از تصویر RSS را ندارد.
+    # --------------------------------------------------------
+
+    if is_rss_image_blocked_for_site(
+        article_url
+    ):
+
+        print(
+            "⚠️ برای French Football Weekly "
+            "تصویر RSS استفاده نمی‌شود."
+        )
+
+        print(
+            "⚠️ فقط تصاویر استخراج‌شده از "
+            "صفحهٔ خود خبر قابل استفاده هستند."
+        )
+
+        print(
+            "⚠️ تصویر مناسبی از صفحه پیدا نشد."
+        )
+
+        return ""
+
+    # --------------------------------------------------------
+    # سپس RSS برای سایر سایت‌ها
     # --------------------------------------------------------
 
     rss_result = get_best_rss_image(
@@ -584,6 +655,24 @@ def get_best_image(
         "good_quality",
         False
     )
+
+    # --------------------------------------------------------
+    # بررسی تصویر RSS
+    # --------------------------------------------------------
+
+    if is_blocked_image_url(
+        rss_image
+    ):
+
+        print(
+            "⛔ تصویر RSS مسدودشده نادیده گرفته شد:"
+        )
+
+        print(
+            rss_image
+        )
+
+        rss_image = ""
 
     if (
         rss_image
